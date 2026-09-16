@@ -1,46 +1,85 @@
-# find-glasses
+# Find My Glasses
 
-**안경을 벗어서 안경이 보이지 않을 때, 스마트폰 카메라가 대신 안경을 찾아
-큰 방향표시·음성·진동으로 알려주는 온디바이스 앱.**
+<img src="docs/release/icon-512.png" alt="Find My Glasses icon" width="128" align="right">
 
-## 상태
+**Took your glasses off and now you can't see where you put them?**
+Slowly sweep your phone around the room. When the camera spots your glasses,
+a big box, arrows, voice guidance and vibration show you where they are.
 
-Phase 0 — 모델 기술검증 (Go/No-Go 판정 전)
+Korean name: **내 안경 찾기**
 
-전체 제품 개발은 아래 질문에 만족스러운 답이 나온 뒤에 진행한다.
+- Everything runs **on the device**. Camera video never leaves the phone.
+- No account, no sign-up, no server.
+- Designed for people who are *not* wearing their glasses: big markers,
+  high-contrast colors (yellow → green as confidence rises), voice and haptics.
+- Bonus (experimental): keys / car key, phone and remote control.
+- 17 languages.
 
-> 안경을 쓰지 않은 사용자가 스마트폰으로 방을 천천히 훑었을 때,
-> 15초 이내에 안경을 찾아내는 세션 성공률이 충분히 높은가?
+## Status
 
-## 핵심 제약
+| Platform | State |
+|---|---|
+| Android | 1.0, in Play Console testing |
+| iOS | Code written, not yet built (see [`ios/README.md`](ios/README.md)) |
 
-- custom training / 데이터셋 제작 없음 (pretrained zero-shot만 사용)
-- 서버 inference / API 없음, 100% on-device
-- 회원가입 없음
-- 무료 + 광고
-- UI는 사용자가 안경을 쓰지 않은 상태를 전제로 설계
+## How it works
 
-## 문서
+1. **Detection** — [YOLO-World v2 small](https://docs.ultralytics.com/models/yolo-world/)
+   (open-vocabulary, zero-shot). The prompt `"a pair of eyeglasses"` and a few
+   negative words are baked into an ONNX model, so no text encoder runs on the phone.
+   Runs with ONNX Runtime at 416 / 512 / 640 px, roughly 0.5–1.5 FPS on a mid-range phone.
+2. **Tracking between detections** — inference is slow, so the marker is kept in place by
+   - gyroscope rotation (the box is re-projected as the phone turns), and
+   - normalized cross-correlation patch tracking on a small grayscale frame
+     (handles movement and parallax at close range).
+3. **Temporal filter** — a detection must repeat before it counts, to avoid flicker.
+4. **Display** — a single target, smoothed with a One Euro filter, with an edge arrow
+   when it goes off-screen.
 
-- [제품/기술 기획서](docs/product-plan.md)
+No custom training or dataset: only pretrained, zero-shot models.
+Model selection and measurements are in [`docs/phase0-results.md`](docs/phase0-results.md).
 
-## 구조 (예정)
+## Repository layout
 
 ```
-docs/      기획·리서치 문서
-poc/       Phase 0 파이썬 벤치마크 (모델 비교)
-android/   Phase 1 Android Native PoC
+android/   Android app (Kotlin, CameraX, ONNX Runtime)
+ios/       iOS app (SwiftUI, AVFoundation, ONNX Runtime) — not yet built
+poc/       Python benchmarks used to choose the model, and export scripts
+docs/      Product plan, results, privacy policy, release notes (mostly Korean)
 ```
 
-## 라이선스
+## Building (Android)
 
-이 저장소의 코드는 [GNU AGPL-3.0](LICENSE) 으로 배포한다.
+Requirements: Android Studio (JDK 17), Android SDK 36.
 
-앱에 포함된 모델 가중치(YOLO-World v2, `yolov8s-worldv2`)는 Ultralytics 가
-AGPL-3.0 으로 배포한 것이다. 원 연구·가중치는 Tencent AI Lab (GPL-3.0).
-그 밖의 부품 고지는 앱 안의 "오픈소스 라이선스" 화면에 있다.
+1. **Model file** — not in git (≈50 MB). Export it with
+   `poc/scripts/export_android_model.py` and place it at
+   `android/app/src/main/assets/yolo-world-s-v2.onnx`.
+2. **Debug build**
+   ```
+   cd android
+   ./gradlew :app:assembleDebug
+   ```
+   Debug builds always use Google's test ad unit IDs.
+3. **Release build** — real AdMob IDs go in `android/local.properties`
+   (`admob.appId`, `admob.bannerId`, `admob.interstitialId`).
+   Signing is read from a file outside the repo only when
+   `FINDGLASSES_SIGNING_FILE` is set; see the comment in `android/app/build.gradle.kts`.
 
-### 추가 허가 (AGPL-3.0 제7조)
+## Privacy
+
+The app itself collects nothing. Ads are served by Google AdMob, which collects
+the data described in the [privacy policy](https://myaune.github.io/find-my-glasses/privacy/).
+
+## License
+
+The code in this repository is licensed under the [GNU AGPL-3.0](LICENSE).
+
+The bundled model weights (YOLO-World v2, `yolov8s-worldv2`) are distributed by
+Ultralytics under AGPL-3.0. The original research and weights are by Tencent AI Lab
+(GPL-3.0). Other third-party notices are shown in the app's "Open-source licenses" screen.
+
+### Additional permission (AGPL-3.0 section 7)
 
 As an additional permission under section 7 of the GNU AGPL-3.0, the copyright
 holders of this repository's own code give you permission to convey the
@@ -49,5 +88,5 @@ the Google User Messaging Platform SDK and the Google Play Billing Library
 (and their dependencies distributed by Google), without the corresponding
 source of those libraries being covered by this License.
 
-이 추가 허가는 **이 저장소의 저작권자가 작성한 코드에만** 적용된다.
-Ultralytics 가 배포한 모델 가중치에는 적용되지 않는다.
+This additional permission applies **only to code written by the copyright holders
+of this repository**. It does not apply to the model weights distributed by Ultralytics.
