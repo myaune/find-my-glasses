@@ -54,7 +54,7 @@ class LicensesActivity : AppCompatActivity() {
             R.raw.license_mit_onnxruntime,
         ),
         Component(
-            "AndroidX (CameraX, AppCompat, Core, Lifecycle, ConstraintLayout)",
+            "AndroidX (CameraX, AppCompat, Core, Lifecycle, ConstraintLayout, ViewPager2)",
             "The Android Open Source Project", "Apache-2.0",
             "https://developer.android.com/jetpack/androidx", R.raw.license_apache_2_0,
         ),
@@ -72,7 +72,7 @@ class LicensesActivity : AppCompatActivity() {
             R.raw.license_apache_2_0,
         ),
         Component(
-            "Google Mobile Ads SDK", "Google", "Google Mobile Ads SDK Terms",
+            "Google Mobile Ads SDK, User Messaging Platform", "Google", "Google Mobile Ads SDK Terms",
             "https://developers.google.com/admob/terms", null,
             "Proprietary. Not open source.",
         ),
@@ -174,7 +174,6 @@ class LicensesActivity : AppCompatActivity() {
 
         /**
          * 앱 소스 코드 위치. AGPL-3.0 의무.
-         * TODO(출시 전): 저장소를 공개로 전환해야 이 링크가 의미를 갖는다. docs/todo.md
          */
         private const val SOURCE_URL = "https://github.com/myaune/find-my-glasses"
     }

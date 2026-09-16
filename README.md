@@ -77,7 +77,8 @@ The code in this repository is licensed under the [GNU AGPL-3.0](LICENSE).
 
 The bundled model weights (YOLO-World v2, `yolov8s-worldv2`) are distributed by
 Ultralytics under AGPL-3.0. The original research and weights are by Tencent AI Lab
-(GPL-3.0). Other third-party notices are shown in the app's "Open-source licenses" screen.
+(GPL-3.0). All third-party components are listed in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)
+and in the app's "Open-source licenses" screen.
 
 ### Additional permission (AGPL-3.0 section 7)
 
