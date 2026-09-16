@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">找眼鏡</string>
+    <string name="tts_locale" translatable="false">zh-TW</string>
+    <string name="conf_low">是這個嗎？</string>
+    <string name="conf_medium">可能在這裡</string>
+    <string name="conf_high">在這裡！</string>
+    <string name="searching">慢慢環顧四周</string>
+    <string name="too_fast">再慢一點</string>
+    <string name="found_it">找到了！</string>
+    <string name="preparing">準備中…</string>
+    <string name="voice_low">好像看到了什麼</string>
+    <string name="voice_medium">可能在這裡</string>
+    <string name="voice_high">在這裡</string>
+    <string name="voice_too_fast">再慢一點</string>
+    <string name="voice_found">找到了！</string>
+    <string name="celebrate">找到了！</string>
+    <string name="tut_title">使用方法</string>
+    <string name="tut_step1_title">慢慢環顧四周</string>
+    <string name="tut_step1_body">把手機對準你覺得放眼鏡的地方，慢慢移動。</string>
+    <string name="tut_step2_title">找到後這樣提示你</string>
+    <string name="tut_step2_body">看到眼鏡時會用方框和箭頭指出來。越確定，顏色越從黃色變成綠色。</string>
+    <string name="tut_step3_title">對比度高更容易找到</string>
+    <string name="tut_step3_body">在素色的地面或桌面上容易找到。在花紋複雜或顏色和眼鏡相近的地方，請再靠近一點。</string>
+    <string name="tut_start">開始</string>
+    <string name="tut_help">使用方法</string>
+    <string name="quality_normal">中</string>
+    <string name="quality_high">高</string>
+    <string name="quality_max">最高</string>
+    <string name="licenses">開放原始碼授權</string>
+    <string name="licenses_intro">本應用程式使用以下開放原始碼軟體。本應用程式的原始碼以 AGPL-3.0 授權公開。</string>
+    <string name="source_code">原始碼</string>
+    <string name="view_license">查看授權</string>
+    <string name="hide_license">關閉</string>
+    <string name="tut_next">下一步</string>
+    <string name="tut_skip">略過</string>
+    <string name="settings">設定</string>
+    <string name="settings_voice">語音提示</string>
+    <string name="settings_vibration">震動</string>
+    <string name="settings_language">語言</string>
+    <string name="settings_done">完成</string>
+    <string name="support_title">移除廣告</string>
+    <string name="support_body">一次購買即可移除所有廣告，也算是對開發者的一點支持。</string>
+    <string name="support_buy" formatted="true">支持一下 · %1$s</string>
+    <string name="support_buy_noprice">支持一下</string>
+    <string name="support_thanks_title">謝謝！</string>
+    <string name="support_thanks_body">廣告已移除，感謝支持。</string>
+    <string name="restore_purchases">還原購買</string>
+    <string name="purchases_unavailable">尚未開放</string>
+    <string name="purchases_nothing">沒有可還原的購買</string>
+    <string name="target_other">其他物品</string>
+    <string name="target_title">找其他物品</string>
+    <string name="target_note">未經測試的附加功能，可能找不太準。</string>
+    <string name="target_glasses">眼鏡</string>
+    <string name="target_keys">鑰匙 · 車鑰匙</string>
+    <string name="target_phone">手機</string>
+    <string name="target_remote">遙控器</string>
+    <string name="privacy_policy">隱私權政策</string>
+    <string name="privacy_options">廣告隱私設定</string>
+</resources>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  기본 언어 = 영어. 기기 언어에 해당하는 values-xx 가 없으면 여기로 떨어진다.
+
+  tts_locale 은 "앱이 실제로 고른 언어" 를 음성 엔진에 알려주기 위한 값이다.
+  기기 언어로 말하면, 지원 안 되는 언어 기기에서 영어 문장을 엉뚱한 억양으로
+  읽게 된다. 번역을 추가할 때 이 값도 반드시 함께 바꾼다.
+
+  신뢰도 문구는 단정하지 않는 어투로 올라간다. 점수가 0.05~0.6 대라 확신을 줄
+  수 없는데 단정하면 오히려 헷갈린다.
+-->
+<resources>
+    <string name="app_name">Find My Glasses</string>
+    <string name="tts_locale" translatable="false">en-US</string>
+
+    <string name="conf_low">Is this it?</string>
+    <string name="conf_medium">This might be it</string>
+    <string name="conf_high">Here it is!</string>
+
+    <string name="searching">Slowly look around</string>
+    <string name="too_fast">A little slower</string>
+    <string name="found_it">Found it!</string>
+    <string name="preparing">Getting ready…</string>
+
+    <string name="voice_low">I think I see something</string>
+    <string name="voice_medium">It might be here</string>
+    <string name="voice_high">Here it is</string>
+    <string name="voice_too_fast">A little slower</string>
+    <string name="voice_found">Found it!</string>
+
+    <string name="celebrate">Found it!</string>
+
+    <string name="tut_title">How it works</string>
+    <string name="tut_step1_title">Look around slowly</string>
+    <string name="tut_step1_body">Point your phone at where you think you left them and move it slowly.</string>
+    <string name="tut_step2_title">We\'ll show you where</string>
+    <string name="tut_step2_body">When we spot glasses, a box and arrows point to them. The color turns from yellow to green as we get more sure.</string>
+    <string name="tut_step3_title">Contrast helps</string>
+    <string name="tut_step3_body">Glasses stand out on plain surfaces. On busy or similar-colored surfaces, move a bit closer.</string>
+    <string name="tut_start">Start</string>
+    <string name="tut_help">How it works</string>
+    <string name="quality_normal">Medium</string>
+    <string name="quality_high">High</string>
+    <string name="quality_max">Max</string>
+    <string name="licenses">Open-source licenses</string>
+    <string name="licenses_intro">This app is built with the open-source software below. Its source code is public under the AGPL-3.0 license.</string>
+    <string name="source_code">Source code</string>
+    <string name="view_license">View license</string>
+    <string name="hide_license">Hide</string>
+    <string name="tut_next">Next</string>
+    <string name="tut_skip">Skip</string>
+    <string name="settings">Settings</string>
+    <string name="settings_voice">Voice guidance</string>
+    <string name="settings_vibration">Vibration</string>
+    <string name="settings_language">Language</string>
+    <string name="settings_done">Done</string>
+    <string name="support_title">Remove ads</string>
+    <string name="support_body">A one-time purchase removes all ads. It also supports the developer.</string>
+    <string name="support_buy" formatted="true">Support · %1$s</string>
+    <string name="support_buy_noprice">Support</string>
+    <string name="support_thanks_title">Thanks!</string>
+    <string name="support_thanks_body">Ads are gone. Thanks for the support.</string>
+    <string name="restore_purchases">Restore purchase</string>
+    <string name="purchases_unavailable">Not available yet</string>
+    <string name="purchases_nothing">No purchase to restore</string>
+    <string name="target_other">Other items</string>
+    <string name="target_title">Find other items</string>
+    <string name="target_note">An extra, untested feature. It may not find them well.</string>
+    <string name="target_glasses">Glasses</string>
+    <string name="target_keys">Keys / car key</string>
+    <string name="target_phone">Phone</string>
+    <string name="target_remote">Remote control</string>
+    <string name="privacy_policy">Privacy policy</string>
+    <string name="privacy_options">Ad privacy settings</string>
+</resources>

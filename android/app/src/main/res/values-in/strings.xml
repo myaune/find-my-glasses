@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Bahasa Indonesia. Android memakai kode lama "in" untuk folder resource. -->
+<resources>
+    <string name="app_name">Cari Kacamata</string>
+    <string name="tts_locale" translatable="false">id-ID</string>
+    <string name="conf_low">Apakah ini?</string>
+    <string name="conf_medium">Mungkin di sini</string>
+    <string name="conf_high">Ini dia!</string>
+    <string name="searching">Lihat sekeliling pelan-pelan</string>
+    <string name="too_fast">Sedikit lebih pelan</string>
+    <string name="found_it">Ketemu!</string>
+    <string name="preparing">Menyiapkan…</string>
+    <string name="voice_low">Sepertinya ada sesuatu</string>
+    <string name="voice_medium">Mungkin di sini</string>
+    <string name="voice_high">Ini dia</string>
+    <string name="voice_too_fast">Sedikit lebih pelan</string>
+    <string name="voice_found">Ketemu!</string>
+    <string name="celebrate">Ketemu!</string>
+    <string name="tut_title">Cara pakai</string>
+    <string name="tut_step1_title">Lihat sekeliling pelan-pelan</string>
+    <string name="tut_step1_body">Arahkan ponsel ke tempat yang kamu kira kacamatanya ada, lalu gerakkan pelan-pelan.</string>
+    <string name="tut_step2_title">Kami tunjukkan tempatnya</string>
+    <string name="tut_step2_body">Saat kacamata terlihat, kotak dan panah akan menunjuknya. Makin yakin, warnanya makin berubah dari kuning ke hijau.</string>
+    <string name="tut_step3_title">Kontras membantu</string>
+    <string name="tut_step3_body">Kacamata mudah terlihat di permukaan polos. Di permukaan bermotif atau berwarna mirip, dekatkan sedikit lagi.</string>
+    <string name="tut_start">Mulai</string>
+    <string name="tut_help">Cara pakai</string>
+    <string name="quality_normal">Sedang</string>
+    <string name="quality_high">Tinggi</string>
+    <string name="quality_max">Maksimal</string>
+    <string name="licenses">Lisensi sumber terbuka</string>
+    <string name="licenses_intro">Aplikasi ini memakai perangkat lunak sumber terbuka di bawah. Kode sumber aplikasi ini terbuka dengan lisensi AGPL-3.0.</string>
+    <string name="source_code">Kode sumber</string>
+    <string name="view_license">Lihat lisensi</string>
+    <string name="hide_license">Tutup</string>
+    <string name="tut_next">Lanjut</string>
+    <string name="tut_skip">Lewati</string>
+    <string name="settings">Setelan</string>
+    <string name="settings_voice">Panduan suara</string>
+    <string name="settings_vibration">Getar</string>
+    <string name="settings_language">Bahasa</string>
+    <string name="settings_done">Selesai</string>
+    <string name="support_title">Hapus iklan</string>
+    <string name="support_body">Sekali beli, semua iklan hilang. Sekaligus mendukung pengembang.</string>
+    <string name="support_buy" formatted="true">Dukung · %1$s</string>
+    <string name="support_buy_noprice">Dukung</string>
+    <string name="support_thanks_title">Terima kasih!</string>
+    <string name="support_thanks_body">Iklan sudah hilang. Terima kasih atas dukungannya.</string>
+    <string name="restore_purchases">Pulihkan pembelian</string>
+    <string name="purchases_unavailable">Belum tersedia</string>
+    <string name="purchases_nothing">Tidak ada pembelian untuk dipulihkan</string>
+    <string name="target_other">Barang lain</string>
+    <string name="target_title">Cari barang lain</string>
+    <string name="target_note">Fitur tambahan yang belum diuji. Mungkin tidak menemukannya dengan baik.</string>
+    <string name="target_glasses">Kacamata</string>
+    <string name="target_keys">Kunci / kunci mobil</string>
+    <string name="target_phone">Ponsel</string>
+    <string name="target_remote">Remote</string>
+    <string name="privacy_policy">Kebijakan privasi</string>
+    <string name="privacy_options">Setelan privasi iklan</string>
+</resources>

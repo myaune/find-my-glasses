@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">メガネ探し</string>
+    <string name="tts_locale" translatable="false">ja-JP</string>
+
+    <string name="conf_low">これかな？</string>
+    <string name="conf_medium">ここっぽい</string>
+    <string name="conf_high">ここだよ！</string>
+
+    <string name="searching">ゆっくり周りを映してください</string>
+    <string name="too_fast">もう少しゆっくり</string>
+    <string name="found_it">見つけた！</string>
+    <string name="preparing">準備中…</string>
+
+    <string name="voice_low">何か見えます</string>
+    <string name="voice_medium">ここっぽいです</string>
+    <string name="voice_high">ここです</string>
+    <string name="voice_too_fast">もう少しゆっくり</string>
+    <string name="voice_found">見つけました！</string>
+
+    <string name="celebrate">見つけた！</string>
+
+    <string name="tut_title">使い方</string>
+    <string name="tut_step1_title">ゆっくり見回してください</string>
+    <string name="tut_step1_body">メガネを置いたと思う場所にスマホを向けて、ゆっくり動かしてください。</string>
+    <string name="tut_step2_title">見つけたらこう知らせます</string>
+    <string name="tut_step2_body">メガネが見えたら枠と矢印で示します。確かなほど色が黄→黄緑→緑に変わります。</string>
+    <string name="tut_step3_title">コントラストが強いと見つけやすい</string>
+    <string name="tut_step3_body">無地の床や机の上ではよく見つかります。柄が多い所やメガネと似た色の所では、少し近づいてください。</string>
+    <string name="tut_start">はじめる</string>
+    <string name="tut_help">使い方</string>
+    <string name="quality_normal">標準</string>
+    <string name="quality_high">高</string>
+    <string name="quality_max">最高</string>
+    <string name="licenses">オープンソースライセンス</string>
+    <string name="licenses_intro">このアプリは以下のオープンソースソフトウェアで作られています。アプリのソースコードはAGPL-3.0ライセンスで公開されています。</string>
+    <string name="source_code">ソースコード</string>
+    <string name="view_license">全文を見る</string>
+    <string name="hide_license">閉じる</string>
+    <string name="tut_next">次へ</string>
+    <string name="tut_skip">スキップ</string>
+    <string name="settings">設定</string>
+    <string name="settings_voice">音声ガイド</string>
+    <string name="settings_vibration">バイブレーション</string>
+    <string name="settings_language">言語</string>
+    <string name="settings_done">完了</string>
+    <string name="support_title">広告を消す</string>
+    <string name="support_body">一度の購入で広告がすべて消えます。開発者の応援にもなります。</string>
+    <string name="support_buy" formatted="true">応援する · %1$s</string>
+    <string name="support_buy_noprice">応援する</string>
+    <string name="support_thanks_title">ありがとう！</string>
+    <string name="support_thanks_body">広告が消えました。応援ありがとうございます。</string>
+    <string name="restore_purchases">購入を復元</string>
+    <string name="purchases_unavailable">まだ準備中です</string>
+    <string name="purchases_nothing">復元できる購入はありません</string>
+    <string name="target_other">ほかの物</string>
+    <string name="target_title">ほかの物を探す</string>
+    <string name="target_note">テストしていないおまけ機能です。うまく見つからないことがあります。</string>
+    <string name="target_glasses">メガネ</string>
+    <string name="target_keys">鍵・車のキー</string>
+    <string name="target_phone">スマホ</string>
+    <string name="target_remote">リモコン</string>
+    <string name="privacy_policy">プライバシーポリシー</string>
+    <string name="privacy_options">広告のプライバシー設定</string>
+</resources>

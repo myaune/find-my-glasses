@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">หาแว่นตา</string>
+    <string name="tts_locale" translatable="false">th-TH</string>
+    <string name="conf_low">ใช่อันนี้ไหม?</string>
+    <string name="conf_medium">อาจอยู่ตรงนี้</string>
+    <string name="conf_high">อยู่ตรงนี้!</string>
+    <string name="searching">ค่อยๆ มองไปรอบๆ</string>
+    <string name="too_fast">ช้าลงอีกนิด</string>
+    <string name="found_it">เจอแล้ว!</string>
+    <string name="preparing">กำลังเตรียม…</string>
+    <string name="voice_low">เหมือนจะเห็นอะไรบางอย่าง</string>
+    <string name="voice_medium">อาจอยู่ตรงนี้</string>
+    <string name="voice_high">อยู่ตรงนี้</string>
+    <string name="voice_too_fast">ช้าลงอีกนิด</string>
+    <string name="voice_found">เจอแล้ว!</string>
+    <string name="celebrate">เจอแล้ว!</string>
+    <string name="tut_title">วิธีใช้</string>
+    <string name="tut_step1_title">ค่อยๆ มองไปรอบๆ</string>
+    <string name="tut_step1_body">หันโทรศัพท์ไปยังที่ที่คิดว่าวางแว่นไว้ แล้วค่อยๆ ขยับ</string>
+    <string name="tut_step2_title">เราจะชี้ให้ดู</string>
+    <string name="tut_step2_body">เมื่อเห็นแว่น กรอบและลูกศรจะชี้ไปที่แว่น ยิ่งมั่นใจ สีจะยิ่งเปลี่ยนจากเหลืองเป็นเขียว</string>
+    <string name="tut_step3_title">ความต่างของสีช่วยได้</string>
+    <string name="tut_step3_body">บนพื้นผิวสีเรียบจะเห็นแว่นได้ง่าย ถ้าพื้นมีลวดลายหรือสีคล้ายแว่น ให้เข้าไปใกล้อีกนิด</string>
+    <string name="tut_start">เริ่มเลย</string>
+    <string name="tut_help">วิธีใช้</string>
+    <string name="quality_normal">กลาง</string>
+    <string name="quality_high">สูง</string>
+    <string name="quality_max">สูงสุด</string>
+    <string name="licenses">สัญญาอนุญาตโอเพนซอร์ส</string>
+    <string name="licenses_intro">แอปนี้ใช้ซอฟต์แวร์โอเพนซอร์สด้านล่าง ซอร์สโค้ดของแอปเปิดเผยภายใต้สัญญาอนุญาต AGPL-3.0</string>
+    <string name="source_code">ซอร์สโค้ด</string>
+    <string name="view_license">ดูสัญญาอนุญาต</string>
+    <string name="hide_license">ปิด</string>
+    <string name="tut_next">ถัดไป</string>
+    <string name="tut_skip">ข้าม</string>
+    <string name="settings">การตั้งค่า</string>
+    <string name="settings_voice">เสียงแนะนำ</string>
+    <string name="settings_vibration">การสั่น</string>
+    <string name="settings_language">ภาษา</string>
+    <string name="settings_done">เสร็จ</string>
+    <string name="support_title">ปิดโฆษณา</string>
+    <string name="support_body">ซื้อครั้งเดียวโฆษณาจะหายไปทั้งหมด และเป็นการสนับสนุนนักพัฒนาด้วย</string>
+    <string name="support_buy" formatted="true">สนับสนุน · %1$s</string>
+    <string name="support_buy_noprice">สนับสนุน</string>
+    <string name="support_thanks_title">ขอบคุณ!</string>
+    <string name="support_thanks_body">โฆษณาหายไปแล้ว ขอบคุณที่สนับสนุน</string>
+    <string name="restore_purchases">กู้คืนการซื้อ</string>
+    <string name="purchases_unavailable">ยังไม่พร้อมใช้งาน</string>
+    <string name="purchases_nothing">ไม่มีการซื้อให้กู้คืน</string>
+    <string name="target_other">ของอื่นๆ</string>
+    <string name="target_title">หาของอื่นๆ</string>
+    <string name="target_note">ฟีเจอร์เสริมที่ยังไม่ได้ทดสอบ อาจหาได้ไม่ดีนัก</string>
+    <string name="target_glasses">แว่นตา</string>
+    <string name="target_keys">กุญแจ / กุญแจรถ</string>
+    <string name="target_phone">โทรศัพท์</string>
+    <string name="target_remote">รีโมท</string>
+    <string name="privacy_policy">นโยบายความเป็นส่วนตัว</string>
+    <string name="privacy_options">ความเป็นส่วนตัวของโฆษณา</string>
+</resources>

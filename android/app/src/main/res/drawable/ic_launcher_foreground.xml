@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  앱 아이콘 전경 — 돋보기 속 동글 안경 (후보 E 그대로, 원 조금 크게 · 손잡이 조금 짧게, 반짝임 없음).
+  돋보기+손잡이가 눈으로 보기에 가운데 오게 렌즈를 왼쪽 위로 조금 옮겼다 (렌즈 중심 52,52).
+  이전 시안: ic_launcher_foreground_glasses.xml (안경만)
+-->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- 손잡이 -->
+    <path
+        android:strokeColor="#FF2B2B30"
+        android:strokeWidth="9"
+        android:strokeLineCap="round"
+        android:pathData="M68,68L79,79" />
+
+    <!-- 돋보기 (반지름 22) -->
+    <path
+        android:fillColor="#FFEAF6FF"
+        android:strokeColor="#FF2B2B30"
+        android:strokeWidth="6"
+        android:pathData="M52,30a22,22 0 1,1 0,44a22,22 0 1,1 0,-44" />
+
+    <!-- 안경 — 돋보기 가운데 -->
+    <group
+        android:scaleX="0.47"
+        android:scaleY="0.47"
+        android:pivotX="54"
+        android:pivotY="54.5"
+        android:translateX="-2"
+        android:translateY="-1.5">
+
+        <path
+            android:fillColor="#E6EAF6FF"
+            android:pathData="M35,45.5h8a8,8 0,0 1,8 8v2a8,8 0,0 1,-8 8h-8a8,8 0,0 1,-8 -8v-2a8,8 0,0 1,8 -8zM65,45.5h8a8,8 0,0 1,8 8v2a8,8 0,0 1,-8 8h-8a8,8 0,0 1,-8 -8v-2a8,8 0,0 1,8 -8z" />
+        <path
+            android:strokeColor="#FF2B2B30"
+            android:strokeWidth="4"
+            android:strokeLineJoin="round"
+            android:strokeLineCap="round"
+            android:pathData="M35,45.5h8a8,8 0,0 1,8 8v2a8,8 0,0 1,-8 8h-8a8,8 0,0 1,-8 -8v-2a8,8 0,0 1,8 -8zM65,45.5h8a8,8 0,0 1,8 8v2a8,8 0,0 1,-8 8h-8a8,8 0,0 1,-8 -8v-2a8,8 0,0 1,8 -8zM51,51.5Q54,47.5 57,51.5M27,50L23,48.5M81,50L85,48.5" />
+    </group>
+</vector>

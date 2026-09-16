@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Android 13+ 테마 아이콘용 단색 — 돋보기 + 안경. 색은 시스템이 입힌다. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <path
+        android:strokeColor="#FF000000"
+        android:strokeWidth="9"
+        android:strokeLineCap="round"
+        android:pathData="M68,68L79,79" />
+    <path
+        android:strokeColor="#FF000000"
+        android:strokeWidth="6"
+        android:pathData="M52,30a22,22 0 1,1 0,44a22,22 0 1,1 0,-44" />
+    <group
+        android:scaleX="0.47"
+        android:scaleY="0.47"
+        android:pivotX="54"
+        android:pivotY="54.5"
+        android:translateX="-2"
+        android:translateY="-1.5">
+        <path
+            android:strokeColor="#FF000000"
+            android:strokeWidth="4"
+            android:strokeLineJoin="round"
+            android:strokeLineCap="round"
+            android:pathData="M35,45.5h8a8,8 0,0 1,8 8v2a8,8 0,0 1,-8 8h-8a8,8 0,0 1,-8 -8v-2a8,8 0,0 1,8 -8zM65,45.5h8a8,8 0,0 1,8 8v2a8,8 0,0 1,-8 8h-8a8,8 0,0 1,-8 -8v-2a8,8 0,0 1,8 -8zM51,51.5Q54,47.5 57,51.5M27,50L23,48.5M81,50L85,48.5" />
+    </group>
+</vector>

@@ -1,0 +1,30 @@
+[project]
+name = "poc"
+version = "0.1.0"
+description = "Phase 0 — zero-shot glasses detection benchmark"
+requires-python = ">=3.11,<3.12"
+dependencies = [
+    "torch",
+    "torchvision",
+    "transformers",
+    "pillow",
+    "numpy",
+    "opencv-python",
+    "pandas",
+    "tqdm",
+    "onnx>=1.22.0",
+    "onnxruntime>=1.30.0",
+    "onnxconverter-common>=1.16.0",
+    "ultralytics>=8.4.149",
+    "clip",
+]
+
+[tool.uv.sources]
+torch = { index = "pytorch-cu128" }
+torchvision = { index = "pytorch-cu128" }
+clip = { git = "https://github.com/openai/CLIP.git" }
+
+[[tool.uv.index]]
+name = "pytorch-cu128"
+url = "https://download.pytorch.org/whl/cu128"
+explicit = true

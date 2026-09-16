@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Brille finden</string>
+    <string name="tts_locale" translatable="false">de-DE</string>
+    <string name="conf_low">Ist es das?</string>
+    <string name="conf_medium">Könnte es sein</string>
+    <string name="conf_high">Hier ist es!</string>
+    <string name="searching">Langsam umschauen</string>
+    <string name="too_fast">Etwas langsamer</string>
+    <string name="found_it">Gefunden!</string>
+    <string name="preparing">Wird vorbereitet…</string>
+    <string name="voice_low">Ich sehe vielleicht etwas</string>
+    <string name="voice_medium">Es könnte hier sein</string>
+    <string name="voice_high">Hier ist es</string>
+    <string name="voice_too_fast">Etwas langsamer</string>
+    <string name="voice_found">Gefunden!</string>
+    <string name="celebrate">Gefunden!</string>
+    <string name="tut_title">So funktioniert’s</string>
+    <string name="tut_step1_title">Langsam umschauen</string>
+    <string name="tut_step1_body">Richte dein Handy dorthin, wo du die Brille vermutest, und bewege es langsam.</string>
+    <string name="tut_step2_title">Wir zeigen dir, wo</string>
+    <string name="tut_step2_body">Sehen wir eine Brille, zeigen ein Rahmen und Pfeile darauf. Je sicherer wir sind, desto mehr wechselt die Farbe von Gelb zu Grün.</string>
+    <string name="tut_step3_title">Kontrast hilft</string>
+    <string name="tut_step3_body">Auf einfarbigen Flächen ist die Brille gut zu sehen. Auf gemusterten oder ähnlich farbigen Flächen geh etwas näher heran.</string>
+    <string name="tut_start">Los geht’s</string>
+    <string name="tut_help">So funktioniert’s</string>
+    <string name="quality_normal">Mittel</string>
+    <string name="quality_high">Hoch</string>
+    <string name="quality_max">Maximal</string>
+    <string name="licenses">Open-Source-Lizenzen</string>
+    <string name="licenses_intro">Diese App verwendet die folgende Open-Source-Software. Ihr Quellcode ist unter der AGPL-3.0-Lizenz öffentlich.</string>
+    <string name="source_code">Quellcode</string>
+    <string name="view_license">Lizenz anzeigen</string>
+    <string name="hide_license">Schließen</string>
+    <string name="tut_next">Weiter</string>
+    <string name="tut_skip">Überspringen</string>
+    <string name="settings">Einstellungen</string>
+    <string name="settings_voice">Sprachansage</string>
+    <string name="settings_vibration">Vibration</string>
+    <string name="settings_language">Sprache</string>
+    <string name="settings_done">Fertig</string>
+    <string name="support_title">Werbung entfernen</string>
+    <string name="support_body">Ein einmaliger Kauf entfernt alle Werbung und unterstützt auch den Entwickler.</string>
+    <string name="support_buy" formatted="true">Unterstützen · %1$s</string>
+    <string name="support_buy_noprice">Unterstützen</string>
+    <string name="support_thanks_title">Danke!</string>
+    <string name="support_thanks_body">Die Werbung ist weg. Danke für die Unterstützung.</string>
+    <string name="restore_purchases">Kauf wiederherstellen</string>
+    <string name="purchases_unavailable">Noch nicht verfügbar</string>
+    <string name="purchases_nothing">Kein Kauf zum Wiederherstellen</string>
+    <string name="target_other">Andere Dinge</string>
+    <string name="target_title">Andere Dinge finden</string>
+    <string name="target_note">Ungetestete Zusatzfunktion. Findet sie womöglich nicht gut.</string>
+    <string name="target_glasses">Brille</string>
+    <string name="target_keys">Schlüssel / Autoschlüssel</string>
+    <string name="target_phone">Handy</string>
+    <string name="target_remote">Fernbedienung</string>
+    <string name="privacy_policy">Datenschutzerklärung</string>
+    <string name="privacy_options">Werbe-Datenschutz</string>
+</resources>

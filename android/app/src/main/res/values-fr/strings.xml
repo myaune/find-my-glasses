@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Trouver mes lunettes</string>
+    <string name="tts_locale" translatable="false">fr-FR</string>
+    <string name="conf_low">C’est ça ?</string>
+    <string name="conf_medium">C’est peut-être ça</string>
+    <string name="conf_high">C’est ici !</string>
+    <string name="searching">Regardez autour de vous lentement</string>
+    <string name="too_fast">Un peu plus lentement</string>
+    <string name="found_it">Trouvé !</string>
+    <string name="preparing">Préparation…</string>
+    <string name="voice_low">Je vois peut-être quelque chose</string>
+    <string name="voice_medium">C’est peut-être ici</string>
+    <string name="voice_high">C’est ici</string>
+    <string name="voice_too_fast">Un peu plus lentement</string>
+    <string name="voice_found">Trouvé !</string>
+    <string name="celebrate">Trouvé !</string>
+    <string name="tut_title">Mode d’emploi</string>
+    <string name="tut_step1_title">Regardez lentement</string>
+    <string name="tut_step1_body">Pointez le téléphone vers l’endroit où vous pensez les avoir laissées et déplacez-le lentement.</string>
+    <string name="tut_step2_title">On vous montre où</string>
+    <string name="tut_step2_body">Quand on repère des lunettes, un cadre et des flèches les montrent. Plus on est sûr, plus la couleur passe du jaune au vert.</string>
+    <string name="tut_step3_title">Le contraste aide</string>
+    <string name="tut_step3_body">Les lunettes se voient bien sur une surface unie. Sur un motif chargé ou une couleur proche, approchez-vous un peu.</string>
+    <string name="tut_start">Commencer</string>
+    <string name="tut_help">Mode d’emploi</string>
+    <string name="quality_normal">Moyenne</string>
+    <string name="quality_high">Haute</string>
+    <string name="quality_max">Max</string>
+    <string name="licenses">Licences open source</string>
+    <string name="licenses_intro">Cette application utilise les logiciels open source ci-dessous. Son code source est public sous licence AGPL-3.0.</string>
+    <string name="source_code">Code source</string>
+    <string name="view_license">Voir la licence</string>
+    <string name="hide_license">Fermer</string>
+    <string name="tut_next">Suivant</string>
+    <string name="tut_skip">Passer</string>
+    <string name="settings">Réglages</string>
+    <string name="settings_voice">Guidage vocal</string>
+    <string name="settings_vibration">Vibration</string>
+    <string name="settings_language">Langue</string>
+    <string name="settings_done">OK</string>
+    <string name="support_title">Retirer les pubs</string>
+    <string name="support_body">Un achat unique retire toutes les pubs. Il soutient aussi le développeur.</string>
+    <string name="support_buy" formatted="true">Soutenir · %1$s</string>
+    <string name="support_buy_noprice">Soutenir</string>
+    <string name="support_thanks_title">Merci !</string>
+    <string name="support_thanks_body">Les pubs ont disparu. Merci pour votre soutien.</string>
+    <string name="restore_purchases">Restaurer l’achat</string>
+    <string name="purchases_unavailable">Pas encore disponible</string>
+    <string name="purchases_nothing">Aucun achat à restaurer</string>
+    <string name="target_other">Autres objets</string>
+    <string name="target_title">Trouver d’autres objets</string>
+    <string name="target_note">Fonction bonus non testée. Elle peut mal les trouver.</string>
+    <string name="target_glasses">Lunettes</string>
+    <string name="target_keys">Clés / clé de voiture</string>
+    <string name="target_phone">Téléphone</string>
+    <string name="target_remote">Télécommande</string>
+    <string name="privacy_policy">Politique de confidentialité</string>
+    <string name="privacy_options">Confidentialité des pubs</string>
+</resources>

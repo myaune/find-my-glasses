@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Buscar gafas</string>
+    <string name="tts_locale" translatable="false">es-ES</string>
+
+    <string name="conf_low">¿Es esto?</string>
+    <string name="conf_medium">Podría ser esto</string>
+    <string name="conf_high">¡Aquí está!</string>
+
+    <string name="searching">Mira alrededor despacio</string>
+    <string name="too_fast">Un poco más despacio</string>
+    <string name="found_it">¡Encontrado!</string>
+    <string name="preparing">Preparando…</string>
+
+    <string name="voice_low">Creo que veo algo</string>
+    <string name="voice_medium">Podría estar aquí</string>
+    <string name="voice_high">Aquí está</string>
+    <string name="voice_too_fast">Un poco más despacio</string>
+    <string name="voice_found">¡Encontrado!</string>
+
+    <string name="celebrate">¡Encontrado!</string>
+
+    <string name="tut_title">Cómo funciona</string>
+    <string name="tut_step1_title">Mira alrededor despacio</string>
+    <string name="tut_step1_body">Apunta el teléfono hacia donde crees que las dejaste y muévelo despacio.</string>
+    <string name="tut_step2_title">Te mostramos dónde están</string>
+    <string name="tut_step2_body">Cuando vemos unas gafas, un recuadro y flechas las señalan. El color pasa de amarillo a verde cuanto más seguros estamos.</string>
+    <string name="tut_step3_title">El contraste ayuda</string>
+    <string name="tut_step3_body">Se ven bien sobre superficies lisas. Sobre estampados o colores parecidos, acércate un poco más.</string>
+    <string name="tut_start">Empezar</string>
+    <string name="tut_help">Cómo funciona</string>
+    <string name="quality_normal">Media</string>
+    <string name="quality_high">Alta</string>
+    <string name="quality_max">Máxima</string>
+    <string name="licenses">Licencias de código abierto</string>
+    <string name="licenses_intro">Esta app usa el software de código abierto que aparece abajo. Su código fuente se publica bajo la licencia AGPL-3.0.</string>
+    <string name="source_code">Código fuente</string>
+    <string name="view_license">Ver licencia</string>
+    <string name="hide_license">Ocultar</string>
+    <string name="tut_next">Siguiente</string>
+    <string name="tut_skip">Omitir</string>
+    <string name="settings">Ajustes</string>
+    <string name="settings_voice">Guía por voz</string>
+    <string name="settings_vibration">Vibración</string>
+    <string name="settings_language">Idioma</string>
+    <string name="settings_done">Listo</string>
+    <string name="support_title">Quitar anuncios</string>
+    <string name="support_body">Una compra única quita todos los anuncios. También apoya al desarrollador.</string>
+    <string name="support_buy" formatted="true">Apoyar · %1$s</string>
+    <string name="support_buy_noprice">Apoyar</string>
+    <string name="support_thanks_title">¡Gracias!</string>
+    <string name="support_thanks_body">Ya no hay anuncios. Gracias por tu apoyo.</string>
+    <string name="restore_purchases">Restaurar compra</string>
+    <string name="purchases_unavailable">Aún no disponible</string>
+    <string name="purchases_nothing">No hay compras que restaurar</string>
+    <string name="target_other">Otros objetos</string>
+    <string name="target_title">Buscar otros objetos</string>
+    <string name="target_note">Función extra sin probar. Puede que no los encuentre bien.</string>
+    <string name="target_glasses">Gafas</string>
+    <string name="target_keys">Llaves / llave del coche</string>
+    <string name="target_phone">Teléfono</string>
+    <string name="target_remote">Mando a distancia</string>
+    <string name="privacy_policy">Política de privacidad</string>
+    <string name="privacy_options">Privacidad de anuncios</string>
+</resources>

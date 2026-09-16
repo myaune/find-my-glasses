@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">找眼镜</string>
+    <string name="tts_locale" translatable="false">zh-CN</string>
+
+    <string name="conf_low">是这个吗？</string>
+    <string name="conf_medium">可能在这里</string>
+    <string name="conf_high">在这里！</string>
+
+    <string name="searching">请慢慢环顾四周</string>
+    <string name="too_fast">慢一点</string>
+    <string name="found_it">找到了！</string>
+    <string name="preparing">准备中…</string>
+
+    <string name="voice_low">好像看到了什么</string>
+    <string name="voice_medium">可能在这里</string>
+    <string name="voice_high">在这里</string>
+    <string name="voice_too_fast">慢一点</string>
+    <string name="voice_found">找到了！</string>
+
+    <string name="celebrate">找到了！</string>
+
+    <string name="tut_title">使用方法</string>
+    <string name="tut_step1_title">慢慢环顾四周</string>
+    <string name="tut_step1_body">把手机对准你觉得放眼镜的地方，慢慢移动。</string>
+    <string name="tut_step2_title">找到后这样提示你</string>
+    <string name="tut_step2_body">看到眼镜时会用方框和箭头指出来。越确定，颜色越从黄变成绿。</string>
+    <string name="tut_step3_title">对比度高更容易找到</string>
+    <string name="tut_step3_body">在纯色的地面或桌面上容易找到。在花纹复杂或颜色和眼镜相近的地方，请再靠近一点。</string>
+    <string name="tut_start">开始</string>
+    <string name="tut_help">使用方法</string>
+    <string name="quality_normal">中</string>
+    <string name="quality_high">高</string>
+    <string name="quality_max">最高</string>
+    <string name="licenses">开源许可</string>
+    <string name="licenses_intro">本应用使用了下列开源软件。应用源代码以 AGPL-3.0 许可证公开。</string>
+    <string name="source_code">源代码</string>
+    <string name="view_license">查看许可证</string>
+    <string name="hide_license">收起</string>
+    <string name="tut_next">下一步</string>
+    <string name="tut_skip">跳过</string>
+    <string name="settings">设置</string>
+    <string name="settings_voice">语音提示</string>
+    <string name="settings_vibration">振动</string>
+    <string name="settings_language">语言</string>
+    <string name="settings_done">完成</string>
+    <string name="support_title">去除广告</string>
+    <string name="support_body">一次购买即可去除所有广告，也算是对开发者的一点支持。</string>
+    <string name="support_buy" formatted="true">支持一下 · %1$s</string>
+    <string name="support_buy_noprice">支持一下</string>
+    <string name="support_thanks_title">谢谢！</string>
+    <string name="support_thanks_body">广告已去除，感谢支持。</string>
+    <string name="restore_purchases">恢复购买</string>
+    <string name="purchases_unavailable">暂未开放</string>
+    <string name="purchases_nothing">没有可恢复的购买</string>
+    <string name="target_other">其他物品</string>
+    <string name="target_title">找其他物品</string>
+    <string name="target_note">未经测试的附加功能，可能找不太准。</string>
+    <string name="target_glasses">眼镜</string>
+    <string name="target_keys">钥匙 · 车钥匙</string>
+    <string name="target_phone">手机</string>
+    <string name="target_remote">遥控器</string>
+    <string name="privacy_policy">隐私政策</string>
+    <string name="privacy_options">广告隐私设置</string>
+</resources>

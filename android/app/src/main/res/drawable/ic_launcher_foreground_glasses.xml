@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  앱 아이콘 전경 — 튜토리얼 그림과 같은 톤의 동글동글한 안경.
+  적응형 아이콘은 108×108 중 가운데 지름 66 원만 항상 보인다 (54,54 중심, 반지름 33).
+  안경 전체가 그 안에 들어가게 잡았다.
+-->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- 렌즈 (살짝 푸른 유리) -->
+    <path
+        android:fillColor="#D9EAF6FF"
+        android:pathData="M35,45.5h8a8,8 0,0 1,8 8v2a8,8 0,0 1,-8 8h-8a8,8 0,0 1,-8 -8v-2a8,8 0,0 1,8 -8z" />
+    <path
+        android:fillColor="#D9EAF6FF"
+        android:pathData="M65,45.5h8a8,8 0,0 1,8 8v2a8,8 0,0 1,-8 8h-8a8,8 0,0 1,-8 -8v-2a8,8 0,0 1,8 -8z" />
+
+    <!-- 테 -->
+    <path
+        android:strokeColor="#FF2B2B30"
+        android:strokeWidth="4"
+        android:strokeLineJoin="round"
+        android:pathData="M35,45.5h8a8,8 0,0 1,8 8v2a8,8 0,0 1,-8 8h-8a8,8 0,0 1,-8 -8v-2a8,8 0,0 1,8 -8z" />
+    <path
+        android:strokeColor="#FF2B2B30"
+        android:strokeWidth="4"
+        android:strokeLineJoin="round"
+        android:pathData="M65,45.5h8a8,8 0,0 1,8 8v2a8,8 0,0 1,-8 8h-8a8,8 0,0 1,-8 -8v-2a8,8 0,0 1,8 -8z" />
+
+    <!-- 브릿지 -->
+    <path
+        android:strokeColor="#FF2B2B30"
+        android:strokeWidth="4"
+        android:strokeLineCap="round"
+        android:pathData="M51,51.5Q54,47.5 57,51.5" />
+
+    <!-- 다리 (짧게) -->
+    <path
+        android:strokeColor="#FF2B2B30"
+        android:strokeWidth="4"
+        android:strokeLineCap="round"
+        android:pathData="M27,50L23,48.5M81,50L85,48.5" />
+
+    <!-- 반짝 -->
+    <path
+        android:strokeColor="#FFFFFFFF"
+        android:strokeWidth="2.6"
+        android:strokeLineCap="round"
+        android:pathData="M32.5,54Q33,49.5 37.5,49M62.5,54Q63,49.5 67.5,49" />
+
+    <!-- 볼터치 같은 작은 반짝이 별 (오른쪽 위) -->
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M79,34.5l1.2,3.3 3.3,1.2 -3.3,1.2 -1.2,3.3 -1.2,-3.3 -3.3,-1.2 3.3,-1.2z" />
+</vector>

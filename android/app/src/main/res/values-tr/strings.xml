@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Gözlüğümü Bul</string>
+    <string name="tts_locale" translatable="false">tr-TR</string>
+    <string name="conf_low">Bu mu?</string>
+    <string name="conf_medium">Burada olabilir</string>
+    <string name="conf_high">İşte burada!</string>
+    <string name="searching">Yavaşça etrafına bak</string>
+    <string name="too_fast">Biraz daha yavaş</string>
+    <string name="found_it">Buldum!</string>
+    <string name="preparing">Hazırlanıyor…</string>
+    <string name="voice_low">Bir şey görüyor gibiyim</string>
+    <string name="voice_medium">Burada olabilir</string>
+    <string name="voice_high">İşte burada</string>
+    <string name="voice_too_fast">Biraz daha yavaş</string>
+    <string name="voice_found">Buldum!</string>
+    <string name="celebrate">Buldum!</string>
+    <string name="tut_title">Nasıl kullanılır</string>
+    <string name="tut_step1_title">Yavaşça etrafına bak</string>
+    <string name="tut_step1_body">Telefonu gözlüğü bıraktığını düşündüğün yere doğru tut ve yavaşça hareket ettir.</string>
+    <string name="tut_step2_title">Nerede olduğunu gösteririz</string>
+    <string name="tut_step2_body">Gözlük gördüğümüzde bir çerçeve ve oklar onu gösterir. Ne kadar eminsek renk o kadar sarıdan yeşile döner.</string>
+    <string name="tut_step3_title">Kontrast yardımcı olur</string>
+    <string name="tut_step3_body">Düz renkli yüzeylerde gözlük kolay görünür. Desenli ya da benzer renkli yüzeylerde biraz daha yaklaş.</string>
+    <string name="tut_start">Başla</string>
+    <string name="tut_help">Nasıl kullanılır</string>
+    <string name="quality_normal">Orta</string>
+    <string name="quality_high">Yüksek</string>
+    <string name="quality_max">En yüksek</string>
+    <string name="licenses">Açık kaynak lisansları</string>
+    <string name="licenses_intro">Bu uygulama aşağıdaki açık kaynak yazılımları kullanır. Uygulamanın kaynak kodu AGPL-3.0 lisansıyla herkese açıktır.</string>
+    <string name="source_code">Kaynak kodu</string>
+    <string name="view_license">Lisansı göster</string>
+    <string name="hide_license">Kapat</string>
+    <string name="tut_next">İleri</string>
+    <string name="tut_skip">Geç</string>
+    <string name="settings">Ayarlar</string>
+    <string name="settings_voice">Sesli rehber</string>
+    <string name="settings_vibration">Titreşim</string>
+    <string name="settings_language">Dil</string>
+    <string name="settings_done">Tamam</string>
+    <string name="support_title">Reklamları kaldır</string>
+    <string name="support_body">Tek seferlik satın alma tüm reklamları kaldırır ve geliştiriciye de destek olur.</string>
+    <string name="support_buy" formatted="true">Destekle · %1$s</string>
+    <string name="support_buy_noprice">Destekle</string>
+    <string name="support_thanks_title">Teşekkürler!</string>
+    <string name="support_thanks_body">Reklamlar kalktı. Desteğin için teşekkürler.</string>
+    <string name="restore_purchases">Satın almayı geri yükle</string>
+    <string name="purchases_unavailable">Henüz kullanılamıyor</string>
+    <string name="purchases_nothing">Geri yüklenecek satın alma yok</string>
+    <string name="target_other">Diğer eşyalar</string>
+    <string name="target_title">Diğer eşyaları bul</string>
+    <string name="target_note">Test edilmemiş ek özellik. İyi bulamayabilir.</string>
+    <string name="target_glasses">Gözlük</string>
+    <string name="target_keys">Anahtar / araba anahtarı</string>
+    <string name="target_phone">Telefon</string>
+    <string name="target_remote">Kumanda</string>
+    <string name="privacy_policy">Gizlilik politikası</string>
+    <string name="privacy_options">Reklam gizlilik ayarları</string>
+</resources>

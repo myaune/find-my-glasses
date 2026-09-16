@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Tìm kính</string>
+    <string name="tts_locale" translatable="false">vi-VN</string>
+    <string name="conf_low">Có phải cái này không?</string>
+    <string name="conf_medium">Có thể ở đây</string>
+    <string name="conf_high">Đây rồi!</string>
+    <string name="searching">Nhìn quanh thật chậm</string>
+    <string name="too_fast">Chậm lại một chút</string>
+    <string name="found_it">Tìm thấy rồi!</string>
+    <string name="preparing">Đang chuẩn bị…</string>
+    <string name="voice_low">Hình như có gì đó</string>
+    <string name="voice_medium">Có thể ở đây</string>
+    <string name="voice_high">Đây rồi</string>
+    <string name="voice_too_fast">Chậm lại một chút</string>
+    <string name="voice_found">Tìm thấy rồi!</string>
+    <string name="celebrate">Tìm thấy rồi!</string>
+    <string name="tut_title">Cách dùng</string>
+    <string name="tut_step1_title">Nhìn quanh thật chậm</string>
+    <string name="tut_step1_body">Hướng điện thoại về nơi bạn nghĩ đã để kính và di chuyển thật chậm.</string>
+    <string name="tut_step2_title">Chúng tôi chỉ chỗ cho bạn</string>
+    <string name="tut_step2_body">Khi thấy kính, một khung và các mũi tên sẽ chỉ vào đó. Càng chắc chắn, màu càng chuyển từ vàng sang xanh lá.</string>
+    <string name="tut_step3_title">Độ tương phản giúp ích</string>
+    <string name="tut_step3_body">Kính dễ thấy trên bề mặt một màu. Trên bề mặt nhiều hoa văn hoặc cùng màu, hãy lại gần hơn một chút.</string>
+    <string name="tut_start">Bắt đầu</string>
+    <string name="tut_help">Cách dùng</string>
+    <string name="quality_normal">Trung bình</string>
+    <string name="quality_high">Cao</string>
+    <string name="quality_max">Tối đa</string>
+    <string name="licenses">Giấy phép mã nguồn mở</string>
+    <string name="licenses_intro">Ứng dụng này dùng các phần mềm mã nguồn mở dưới đây. Mã nguồn của ứng dụng được công khai theo giấy phép AGPL-3.0.</string>
+    <string name="source_code">Mã nguồn</string>
+    <string name="view_license">Xem giấy phép</string>
+    <string name="hide_license">Đóng</string>
+    <string name="tut_next">Tiếp</string>
+    <string name="tut_skip">Bỏ qua</string>
+    <string name="settings">Cài đặt</string>
+    <string name="settings_voice">Hướng dẫn bằng giọng nói</string>
+    <string name="settings_vibration">Rung</string>
+    <string name="settings_language">Ngôn ngữ</string>
+    <string name="settings_done">Xong</string>
+    <string name="support_title">Gỡ quảng cáo</string>
+    <string name="support_body">Mua một lần là gỡ hết quảng cáo, đồng thời ủng hộ nhà phát triển.</string>
+    <string name="support_buy" formatted="true">Ủng hộ · %1$s</string>
+    <string name="support_buy_noprice">Ủng hộ</string>
+    <string name="support_thanks_title">Cảm ơn bạn!</string>
+    <string name="support_thanks_body">Quảng cáo đã được gỡ. Cảm ơn bạn đã ủng hộ.</string>
+    <string name="restore_purchases">Khôi phục giao dịch</string>
+    <string name="purchases_unavailable">Chưa có sẵn</string>
+    <string name="purchases_nothing">Không có giao dịch để khôi phục</string>
+    <string name="target_other">Đồ khác</string>
+    <string name="target_title">Tìm đồ khác</string>
+    <string name="target_note">Tính năng phụ chưa được thử. Có thể tìm không tốt.</string>
+    <string name="target_glasses">Kính</string>
+    <string name="target_keys">Chìa khóa / chìa khóa xe</string>
+    <string name="target_phone">Điện thoại</string>
+    <string name="target_remote">Điều khiển</string>
+    <string name="privacy_policy">Chính sách quyền riêng tư</string>
+    <string name="privacy_options">Quyền riêng tư quảng cáo</string>
+</resources>

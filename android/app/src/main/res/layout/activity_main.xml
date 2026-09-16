@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  제품 화면 (기획서 4절).
+    전체 라이브 프리뷰 + 위치 표시 오버레이 + 하단 배너
+-->
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000">
+
+    <androidx.camera.view.PreviewView
+        android:id="@+id/previewView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/bottomBar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <com.myaune.findglasses.OverlayView
+        android:id="@+id/overlay"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="@id/previewView"
+        app:layout_constraintBottom_toBottomOf="@id/previewView"
+        app:layout_constraintStart_toStartOf="@id/previewView"
+        app:layout_constraintEnd_toEndOf="@id/previewView" />
+
+    <!-- 안내 문구. 안경을 안 쓴 상태를 전제로 크게. 상단 버튼 줄과 겹치지 않게 그 아래에. -->
+    <TextView
+        android:id="@+id/hint"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="14dp"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF"
+        android:shadowColor="#000000"
+        android:shadowRadius="8"
+        android:text="@string/searching"
+        app:layout_constraintTop_toBottomOf="@id/helpButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- 사용법 다시 보기 -->
+    <TextView
+        android:id="@+id/helpButton"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:layout_margin="10dp"
+        android:gravity="center"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF"
+        android:background="@drawable/help_circle"
+        android:contentDescription="@string/tut_help"
+        android:text="\?"
+        app:layout_constraintTop_toTopOf="@id/previewView"
+        app:layout_constraintStart_toStartOf="@id/previewView" />
+
+    <!-- 화질 선택. 폰 성능이 제각각이라 사용자가 고른다.
+         올리면 작은 안경을 더 잘 잡지만 프레임이 떨어진다. -->
+    <Spinner
+        android:id="@+id/spQuality"
+        android:layout_width="wrap_content"
+        android:layout_height="44dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="6dp"
+        android:background="@drawable/quality_pill"
+        android:popupBackground="#FF202124"
+        app:layout_constraintTop_toTopOf="@id/previewView"
+        app:layout_constraintStart_toEndOf="@id/helpButton" />
+
+    <!-- 설정 (음성 / 진동 / 언어) -->
+    <TextView
+        android:id="@+id/settingsButton"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:textSize="22sp"
+        android:textColor="#FFFFFF"
+        android:background="@drawable/help_circle"
+        android:contentDescription="@string/settings"
+        android:text="⚙"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintTop_toTopOf="@id/previewView"
+        app:layout_constraintEnd_toEndOf="@id/previewView" />
+
+    <!-- 찾았다! 태스크 완료 직후 전면 광고가 걸린다 (기획서 14절) -->
+    <Button
+        android:id="@+id/btnFound"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="16dp"
+        android:paddingTop="14dp"
+        android:paddingBottom="14dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:text="@string/found_it"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/targetButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- 다른 물건 찾기 (테스트 안 된 부가 기능). 구석에 작게. -->
+    <TextView
+        android:id="@+id/targetButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:paddingTop="6dp"
+        android:paddingBottom="6dp"
+        android:textSize="13sp"
+        android:textColor="#FFFFFF"
+        android:background="@drawable/quality_pill"
+        android:text="@string/target_other"
+        app:layout_constraintBottom_toTopOf="@id/bottomBar"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- 하단 배너 고정 (기획서 4·14절) -->
+    <FrameLayout
+        android:id="@+id/bottomBar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:minHeight="50dp"
+        android:background="#FF101010"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- ── 찾았어요! 축하 화면 ─────────────────────────────────────────
+         찾은 순간의 안경 사진을 가운데 띄우고 양옆에서 폭죽을 터뜨린 뒤,
+         몇 초 있다가 전면 광고로 넘어간다 (기획서 14절). -->
+    <FrameLayout
+        android:id="@+id/celebration"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#D9000000"
+        android:clickable="true"
+        android:focusable="true"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="32dp">
+
+            <TextView
+                android:id="@+id/celebrateTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                android:textSize="40sp"
+                android:textStyle="bold"
+                android:textColor="#FFD600"
+                android:shadowColor="#000000"
+                android:shadowRadius="12"
+                android:text="@string/celebrate" />
+
+            <ImageView
+                android:id="@+id/celebrateImage"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:maxHeight="420dp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                android:background="@drawable/snapshot_frame"
+                android:padding="6dp"
+                android:contentDescription="@string/celebrate" />
+        </LinearLayout>
+
+        <com.myaune.findglasses.ConfettiView
+            android:id="@+id/confetti"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </FrameLayout>
+
+    <!-- ── 튜토리얼 (첫 실행) ──────────────────────────────────────────
+         게임 튜토리얼처럼 한 장씩 넘긴다. 스와이프와 버튼 둘 다 된다.
+         안경을 안 쓴 사용자가 읽는다. 글씨를 크게. -->
+    <LinearLayout
+        android:id="@+id/tutorial"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:background="#FF121212"
+        android:clickable="true"
+        android:focusable="true"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:id="@+id/tutSkip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:padding="18dp"
+            android:textSize="17sp"
+            android:textColor="#FF9AA0A6"
+            android:text="@string/tut_skip" />
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/tutPager"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <!-- 페이지 점 -->
+        <LinearLayout
+            android:id="@+id/tutDots"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal" />
+
+        <Button
+            android:id="@+id/tutStart"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="28dp"
+            android:layout_marginEnd="28dp"
+            android:layout_marginTop="18dp"
+            android:paddingTop="18dp"
+            android:paddingBottom="18dp"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:text="@string/tut_next" />
+
+        <!-- 오픈소스 라이선스 (AGPL-3.0 의무 포함) -->
+        <TextView
+            android:id="@+id/tutLicenses"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="14dp"
+            android:padding="12dp"
+            android:textSize="15sp"
+            android:textColor="#FF9AA0A6"
+            android:text="@string/licenses" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/loadingText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:textSize="14sp"
+            android:textColor="#FFFFFF"
+            android:text="@string/preparing" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,69 @@
+# macOS
+.DS_Store
+
+# Python (Phase 0 리서치/벤치마크)
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.ipynb_checkpoints/
+
+# 모델 가중치 / 대용량 산출물
+*.pt
+*.pth
+*.onnx
+*.tflite
+weights/
+checkpoints/
+
+# PoC 데이터셋 (안경 사진 — 개인 공간 사진이라 커밋 금지)
+data/
+datasets/
+*.mp4
+*.mov
+
+# 벤치마크 결과물
+runs/
+outputs/
+results/
+
+# Android
+*.iml
+.gradle/
+local.properties
+.idea/
+build/
+captures/
+.externalNativeBuild/
+.cxx/
+*.apk
+*.aab
+*.keystore
+key.properties
+
+# 환경변수 / 비밀값
+.env
+.env.*
+
+# Android assets — 빌드 때 복사해 넣는 산출물이라 커밋하지 않는다.
+# 모델(124MB)과 자체검증용 기준 사진(집 내부 사진)이 들어간다.
+android/app/src/main/assets/
+
+# ultralytics 가 YOLOE 실행 시 자동으로 받는 MobileCLIP 텍스트 인코더 (600MB)
+poc/*.ts
+
+# 서명 키는 절대 올리지 않는다
+*.jks
+*.keystore
+
+# iOS — 생성물·비밀·큰 모델은 올리지 않는다
+ios/*.xcodeproj
+ios/FindGlasses/Info.plist
+ios/Config/Secrets.xcconfig
+ios/FindGlasses/Resources/*.onnx
+ios/build/
+ios/DerivedData/
+xcuserdata/
+
+# Claude Code 개인 설정 (서명 키 폴더 접근 차단 규칙)
+.claude/settings.local.json

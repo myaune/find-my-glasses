@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">चश्मा ढूंढें</string>
+    <string name="tts_locale" translatable="false">hi-IN</string>
+    <string name="conf_low">क्या यही है?</string>
+    <string name="conf_medium">शायद यहीं है</string>
+    <string name="conf_high">यहाँ है!</string>
+    <string name="searching">धीरे-धीरे आसपास देखें</string>
+    <string name="too_fast">थोड़ा धीरे</string>
+    <string name="found_it">मिल गया!</string>
+    <string name="preparing">तैयारी हो रही है…</string>
+    <string name="voice_low">शायद कुछ दिख रहा है</string>
+    <string name="voice_medium">शायद यहीं है</string>
+    <string name="voice_high">यहाँ है</string>
+    <string name="voice_too_fast">थोड़ा धीरे</string>
+    <string name="voice_found">मिल गया!</string>
+    <string name="celebrate">मिल गया!</string>
+    <string name="tut_title">कैसे इस्तेमाल करें</string>
+    <string name="tut_step1_title">धीरे-धीरे आसपास देखें</string>
+    <string name="tut_step1_body">फ़ोन को उस जगह की ओर करें जहाँ आपको लगता है कि चश्मा रखा था, और धीरे-धीरे घुमाएँ।</string>
+    <string name="tut_step2_title">हम बताएँगे कहाँ है</string>
+    <string name="tut_step2_body">चश्मा दिखने पर एक फ्रेम और तीर उसकी ओर इशारा करते हैं। जितना ज़्यादा भरोसा, रंग उतना पीले से हरा होता जाता है।</string>
+    <string name="tut_step3_title">कंट्रास्ट से मदद मिलती है</string>
+    <string name="tut_step3_body">सादी सतह पर चश्मा आसानी से दिखता है। डिज़ाइन वाली या मिलते-जुलते रंग की सतह पर थोड़ा पास जाएँ।</string>
+    <string name="tut_start">शुरू करें</string>
+    <string name="tut_help">कैसे इस्तेमाल करें</string>
+    <string name="quality_normal">मध्यम</string>
+    <string name="quality_high">उच्च</string>
+    <string name="quality_max">अधिकतम</string>
+    <string name="licenses">ओपन-सोर्स लाइसेंस</string>
+    <string name="licenses_intro">यह ऐप नीचे दिए गए ओपन-सोर्स सॉफ़्टवेयर से बना है। ऐप का सोर्स कोड AGPL-3.0 लाइसेंस के तहत सार्वजनिक है।</string>
+    <string name="source_code">सोर्स कोड</string>
+    <string name="view_license">लाइसेंस देखें</string>
+    <string name="hide_license">बंद करें</string>
+    <string name="tut_next">आगे</string>
+    <string name="tut_skip">छोड़ें</string>
+    <string name="settings">सेटिंग्स</string>
+    <string name="settings_voice">आवाज़ से मार्गदर्शन</string>
+    <string name="settings_vibration">वाइब्रेशन</string>
+    <string name="settings_language">भाषा</string>
+    <string name="settings_done">हो गया</string>
+    <string name="support_title">विज्ञापन हटाएँ</string>
+    <string name="support_body">एक बार की खरीद से सारे विज्ञापन हट जाते हैं। इससे डेवलपर का भी साथ होता है।</string>
+    <string name="support_buy" formatted="true">साथ दें · %1$s</string>
+    <string name="support_buy_noprice">साथ दें</string>
+    <string name="support_thanks_title">धन्यवाद!</string>
+    <string name="support_thanks_body">विज्ञापन हट गए। साथ देने के लिए धन्यवाद।</string>
+    <string name="restore_purchases">खरीद वापस लाएँ</string>
+    <string name="purchases_unavailable">अभी उपलब्ध नहीं</string>
+    <string name="purchases_nothing">वापस लाने के लिए कोई खरीद नहीं</string>
+    <string name="target_other">दूसरी चीज़ें</string>
+    <string name="target_title">दूसरी चीज़ें ढूंढें</string>
+    <string name="target_note">बिना परखा गया अतिरिक्त फ़ीचर। शायद ठीक से न ढूंढ पाए।</string>
+    <string name="target_glasses">चश्मा</string>
+    <string name="target_keys">चाबी / कार की चाबी</string>
+    <string name="target_phone">फ़ोन</string>
+    <string name="target_remote">रिमोट</string>
+    <string name="privacy_policy">गोपनीयता नीति</string>
+    <string name="privacy_options">विज्ञापन गोपनीयता सेटिंग</string>
+</resources>

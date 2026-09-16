@@ -1,0 +1,7 @@
+// 공통 설정. Debug / Release 가 이 파일을 포함한다.
+// xcconfig 에서 // 는 주석이라 URL 을 적을 수 없다. 광고 ID 에는 // 가 없어서 괜찮다.
+
+// 구글 공개 테스트 ID (iOS). 개발 중에는 이것만 쓴다 — 실제 광고를 누르면 계정이 제재될 수 있다.
+ADMOB_APP_ID = ca-app-pub-3940256099942544~1458002511
+ADMOB_BANNER_ID = ca-app-pub-3940256099942544/2934735716
+ADMOB_INTERSTITIAL_ID = ca-app-pub-3940256099942544/4411468910

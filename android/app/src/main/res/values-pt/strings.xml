@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Português do Brasil. Portugal também cai aqui. -->
+<resources>
+    <string name="app_name">Achar meus óculos</string>
+    <string name="tts_locale" translatable="false">pt-BR</string>
+    <string name="conf_low">É isto?</string>
+    <string name="conf_medium">Talvez seja isto</string>
+    <string name="conf_high">Aqui está!</string>
+    <string name="searching">Olhe ao redor devagar</string>
+    <string name="too_fast">Um pouco mais devagar</string>
+    <string name="found_it">Achei!</string>
+    <string name="preparing">Preparando…</string>
+    <string name="voice_low">Acho que vejo algo</string>
+    <string name="voice_medium">Talvez esteja aqui</string>
+    <string name="voice_high">Aqui está</string>
+    <string name="voice_too_fast">Um pouco mais devagar</string>
+    <string name="voice_found">Achei!</string>
+    <string name="celebrate">Achei!</string>
+    <string name="tut_title">Como funciona</string>
+    <string name="tut_step1_title">Olhe ao redor devagar</string>
+    <string name="tut_step1_body">Aponte o celular para onde você acha que deixou os óculos e mova devagar.</string>
+    <string name="tut_step2_title">Mostramos onde estão</string>
+    <string name="tut_step2_body">Quando vemos óculos, um quadro e setas apontam para eles. Quanto mais certeza, mais a cor muda de amarelo para verde.</string>
+    <string name="tut_step3_title">Contraste ajuda</string>
+    <string name="tut_step3_body">Os óculos aparecem bem em superfícies lisas. Em estampas ou cores parecidas, chegue um pouco mais perto.</string>
+    <string name="tut_start">Começar</string>
+    <string name="tut_help">Como funciona</string>
+    <string name="quality_normal">Média</string>
+    <string name="quality_high">Alta</string>
+    <string name="quality_max">Máxima</string>
+    <string name="licenses">Licenças de código aberto</string>
+    <string name="licenses_intro">Este app usa o software de código aberto abaixo. O código-fonte é público sob a licença AGPL-3.0.</string>
+    <string name="source_code">Código-fonte</string>
+    <string name="view_license">Ver licença</string>
+    <string name="hide_license">Fechar</string>
+    <string name="tut_next">Próximo</string>
+    <string name="tut_skip">Pular</string>
+    <string name="settings">Configurações</string>
+    <string name="settings_voice">Guia por voz</string>
+    <string name="settings_vibration">Vibração</string>
+    <string name="settings_language">Idioma</string>
+    <string name="settings_done">Concluir</string>
+    <string name="support_title">Remover anúncios</string>
+    <string name="support_body">Uma compra única remove todos os anúncios. Também apoia o desenvolvedor.</string>
+    <string name="support_buy" formatted="true">Apoiar · %1$s</string>
+    <string name="support_buy_noprice">Apoiar</string>
+    <string name="support_thanks_title">Obrigado!</string>
+    <string name="support_thanks_body">Os anúncios sumiram. Obrigado pelo apoio.</string>
+    <string name="restore_purchases">Restaurar compra</string>
+    <string name="purchases_unavailable">Ainda não disponível</string>
+    <string name="purchases_nothing">Nenhuma compra para restaurar</string>
+    <string name="target_other">Outros objetos</string>
+    <string name="target_title">Achar outros objetos</string>
+    <string name="target_note">Recurso extra não testado. Pode não encontrar bem.</string>
+    <string name="target_glasses">Óculos</string>
+    <string name="target_keys">Chaves / chave do carro</string>
+    <string name="target_phone">Celular</string>
+    <string name="target_remote">Controle remoto</string>
+    <string name="privacy_policy">Política de privacidade</string>
+    <string name="privacy_options">Privacidade dos anúncios</string>
+</resources>

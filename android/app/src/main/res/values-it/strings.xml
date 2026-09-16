@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Trova occhiali</string>
+    <string name="tts_locale" translatable="false">it-IT</string>
+    <string name="conf_low">È questo?</string>
+    <string name="conf_medium">Forse è questo</string>
+    <string name="conf_high">È qui!</string>
+    <string name="searching">Guardati intorno lentamente</string>
+    <string name="too_fast">Un po’ più piano</string>
+    <string name="found_it">Trovato!</string>
+    <string name="preparing">Preparazione…</string>
+    <string name="voice_low">Forse vedo qualcosa</string>
+    <string name="voice_medium">Forse è qui</string>
+    <string name="voice_high">È qui</string>
+    <string name="voice_too_fast">Un po’ più piano</string>
+    <string name="voice_found">Trovato!</string>
+    <string name="celebrate">Trovato!</string>
+    <string name="tut_title">Come funziona</string>
+    <string name="tut_step1_title">Guardati intorno lentamente</string>
+    <string name="tut_step1_body">Punta il telefono dove pensi di averli lasciati e muovilo lentamente.</string>
+    <string name="tut_step2_title">Ti mostriamo dove</string>
+    <string name="tut_step2_body">Quando vediamo degli occhiali, un riquadro e delle frecce li indicano. Più siamo sicuri, più il colore passa dal giallo al verde.</string>
+    <string name="tut_step3_title">Il contrasto aiuta</string>
+    <string name="tut_step3_body">Gli occhiali si vedono bene su superfici a tinta unita. Su fantasie o colori simili, avvicinati un po’.</string>
+    <string name="tut_start">Inizia</string>
+    <string name="tut_help">Come funziona</string>
+    <string name="quality_normal">Media</string>
+    <string name="quality_high">Alta</string>
+    <string name="quality_max">Massima</string>
+    <string name="licenses">Licenze open source</string>
+    <string name="licenses_intro">Questa app usa il software open source elencato qui sotto. Il suo codice sorgente è pubblico con licenza AGPL-3.0.</string>
+    <string name="source_code">Codice sorgente</string>
+    <string name="view_license">Vedi licenza</string>
+    <string name="hide_license">Chiudi</string>
+    <string name="tut_next">Avanti</string>
+    <string name="tut_skip">Salta</string>
+    <string name="settings">Impostazioni</string>
+    <string name="settings_voice">Guida vocale</string>
+    <string name="settings_vibration">Vibrazione</string>
+    <string name="settings_language">Lingua</string>
+    <string name="settings_done">Fatto</string>
+    <string name="support_title">Rimuovi la pubblicità</string>
+    <string name="support_body">Un acquisto unico rimuove tutta la pubblicità e sostiene anche lo sviluppatore.</string>
+    <string name="support_buy" formatted="true">Sostieni · %1$s</string>
+    <string name="support_buy_noprice">Sostieni</string>
+    <string name="support_thanks_title">Grazie!</string>
+    <string name="support_thanks_body">La pubblicità è sparita. Grazie per il sostegno.</string>
+    <string name="restore_purchases">Ripristina acquisto</string>
+    <string name="purchases_unavailable">Non ancora disponibile</string>
+    <string name="purchases_nothing">Nessun acquisto da ripristinare</string>
+    <string name="target_other">Altri oggetti</string>
+    <string name="target_title">Trova altri oggetti</string>
+    <string name="target_note">Funzione extra non testata. Potrebbe non trovarli bene.</string>
+    <string name="target_glasses">Occhiali</string>
+    <string name="target_keys">Chiavi / chiave dell’auto</string>
+    <string name="target_phone">Telefono</string>
+    <string name="target_remote">Telecomando</string>
+    <string name="privacy_policy">Informativa sulla privacy</string>
+    <string name="privacy_options">Privacy degli annunci</string>
+</resources>

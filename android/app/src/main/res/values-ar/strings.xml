@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ابحث عن نظارتي</string>
+    <string name="tts_locale" translatable="false">ar</string>
+    <string name="conf_low">هل هذا هو؟</string>
+    <string name="conf_medium">ربما هنا</string>
+    <string name="conf_high">هنا!</string>
+    <string name="searching">انظر حولك ببطء</string>
+    <string name="too_fast">أبطأ قليلاً</string>
+    <string name="found_it">وجدته!</string>
+    <string name="preparing">جارٍ التحضير…</string>
+    <string name="voice_low">أظن أنني أرى شيئاً</string>
+    <string name="voice_medium">ربما هي هنا</string>
+    <string name="voice_high">هنا</string>
+    <string name="voice_too_fast">أبطأ قليلاً</string>
+    <string name="voice_found">وجدته!</string>
+    <string name="celebrate">وجدته!</string>
+    <string name="tut_title">طريقة الاستخدام</string>
+    <string name="tut_step1_title">انظر حولك ببطء</string>
+    <string name="tut_step1_body">وجّه الهاتف نحو المكان الذي تظن أنك تركت فيه النظارة وحرّكه ببطء.</string>
+    <string name="tut_step2_title">سنريك مكانها</string>
+    <string name="tut_step2_body">عندما نرى نظارة، يشير إليها إطار وأسهم. كلما زاد تأكدنا تغيّر اللون من الأصفر إلى الأخضر.</string>
+    <string name="tut_step3_title">التباين يساعد</string>
+    <string name="tut_step3_body">تظهر النظارة بسهولة على الأسطح السادة. على الأسطح المزخرفة أو ذات اللون المشابه، اقترب قليلاً.</string>
+    <string name="tut_start">ابدأ</string>
+    <string name="tut_help">طريقة الاستخدام</string>
+    <string name="quality_normal">متوسطة</string>
+    <string name="quality_high">عالية</string>
+    <string name="quality_max">قصوى</string>
+    <string name="licenses">تراخيص المصادر المفتوحة</string>
+    <string name="licenses_intro">يستخدم هذا التطبيق البرمجيات مفتوحة المصدر أدناه. شيفرة التطبيق المصدرية متاحة للعموم بترخيص AGPL-3.0.</string>
+    <string name="source_code">الشيفرة المصدرية</string>
+    <string name="view_license">عرض الترخيص</string>
+    <string name="hide_license">إغلاق</string>
+    <string name="tut_next">التالي</string>
+    <string name="tut_skip">تخطٍّ</string>
+    <string name="settings">الإعدادات</string>
+    <string name="settings_voice">الإرشاد الصوتي</string>
+    <string name="settings_vibration">الاهتزاز</string>
+    <string name="settings_language">اللغة</string>
+    <string name="settings_done">تم</string>
+    <string name="support_title">إزالة الإعلانات</string>
+    <string name="support_body">شراء لمرة واحدة يزيل كل الإعلانات، وهو أيضاً دعم للمطوّر.</string>
+    <string name="support_buy" formatted="true">ادعم · %1$s</string>
+    <string name="support_buy_noprice">ادعم</string>
+    <string name="support_thanks_title">شكراً!</string>
+    <string name="support_thanks_body">اختفت الإعلانات. شكراً على دعمك.</string>
+    <string name="restore_purchases">استعادة الشراء</string>
+    <string name="purchases_unavailable">غير متاح بعد</string>
+    <string name="purchases_nothing">لا توجد مشتريات لاستعادتها</string>
+    <string name="target_other">أشياء أخرى</string>
+    <string name="target_title">ابحث عن أشياء أخرى</string>
+    <string name="target_note">ميزة إضافية لم تُختبر. قد لا تجدها جيداً.</string>
+    <string name="target_glasses">نظارة</string>
+    <string name="target_keys">مفاتيح / مفتاح السيارة</string>
+    <string name="target_phone">هاتف</string>
+    <string name="target_remote">جهاز التحكم</string>
+    <string name="privacy_policy">سياسة الخصوصية</string>
+    <string name="privacy_options">إعدادات خصوصية الإعلانات</string>
+</resources>

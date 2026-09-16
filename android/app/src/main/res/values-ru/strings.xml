@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Найти очки</string>
+    <string name="tts_locale" translatable="false">ru-RU</string>
+    <string name="conf_low">Это оно?</string>
+    <string name="conf_medium">Возможно, здесь</string>
+    <string name="conf_high">Вот здесь!</string>
+    <string name="searching">Медленно осмотритесь</string>
+    <string name="too_fast">Чуть медленнее</string>
+    <string name="found_it">Нашлось!</string>
+    <string name="preparing">Подготовка…</string>
+    <string name="voice_low">Кажется, что-то вижу</string>
+    <string name="voice_medium">Возможно, они здесь</string>
+    <string name="voice_high">Вот здесь</string>
+    <string name="voice_too_fast">Чуть медленнее</string>
+    <string name="voice_found">Нашлось!</string>
+    <string name="celebrate">Нашлось!</string>
+    <string name="tut_title">Как пользоваться</string>
+    <string name="tut_step1_title">Медленно осмотритесь</string>
+    <string name="tut_step1_body">Направьте телефон туда, где, как вам кажется, лежат очки, и медленно ведите его.</string>
+    <string name="tut_step2_title">Мы покажем, где они</string>
+    <string name="tut_step2_body">Когда мы видим очки, рамка и стрелки указывают на них. Чем увереннее, тем больше цвет меняется с жёлтого на зелёный.</string>
+    <string name="tut_step3_title">Контраст помогает</string>
+    <string name="tut_step3_body">На однотонной поверхности очки видно хорошо. На пёстрой или похожей по цвету подойдите чуть ближе.</string>
+    <string name="tut_start">Начать</string>
+    <string name="tut_help">Как пользоваться</string>
+    <string name="quality_normal">Среднее</string>
+    <string name="quality_high">Высокое</string>
+    <string name="quality_max">Максимум</string>
+    <string name="licenses">Лицензии открытого ПО</string>
+    <string name="licenses_intro">Приложение использует открытое ПО, указанное ниже. Исходный код приложения открыт под лицензией AGPL-3.0.</string>
+    <string name="source_code">Исходный код</string>
+    <string name="view_license">Показать лицензию</string>
+    <string name="hide_license">Закрыть</string>
+    <string name="tut_next">Далее</string>
+    <string name="tut_skip">Пропустить</string>
+    <string name="settings">Настройки</string>
+    <string name="settings_voice">Голосовые подсказки</string>
+    <string name="settings_vibration">Вибрация</string>
+    <string name="settings_language">Язык</string>
+    <string name="settings_done">Готово</string>
+    <string name="support_title">Убрать рекламу</string>
+    <string name="support_body">Одна покупка убирает всю рекламу и немного поддерживает разработчика.</string>
+    <string name="support_buy" formatted="true">Поддержать · %1$s</string>
+    <string name="support_buy_noprice">Поддержать</string>
+    <string name="support_thanks_title">Спасибо!</string>
+    <string name="support_thanks_body">Рекламы больше нет. Спасибо за поддержку.</string>
+    <string name="restore_purchases">Восстановить покупку</string>
+    <string name="purchases_unavailable">Пока недоступно</string>
+    <string name="purchases_nothing">Нет покупок для восстановления</string>
+    <string name="target_other">Другие вещи</string>
+    <string name="target_title">Найти другие вещи</string>
+    <string name="target_note">Непроверенная дополнительная функция. Может находить плохо.</string>
+    <string name="target_glasses">Очки</string>
+    <string name="target_keys">Ключи / ключ от машины</string>
+    <string name="target_phone">Телефон</string>
+    <string name="target_remote">Пульт</string>
+    <string name="privacy_policy">Политика конфиденциальности</string>
+    <string name="privacy_options">Конфиденциальность рекламы</string>
+</resources>
