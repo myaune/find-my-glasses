@@ -1,81 +1,91 @@
-"""Play 스토어 그래픽 이미지(1024×500) — 아이콘 + 앱 이름만, 가운데 정렬.
+"""Play 스토어 그래픽 이미지(1024×500) — 글자 없이 그림만.
 
-아이콘은 render_store_icon.py 로 만든 512px 이미지에서 배경을 뺀 실제 그림 영역만 잘라 쓴다.
-아이콘과 글자를 한 덩어리로 보고, 눈에 보이는 가장자리 기준으로 좌우·상하 여백을 같게 둔다.
-글꼴은 Noto Sans KR (SIL Open Font License, 상업 이용 가능). 글자는 이미지에 그려 넣는다.
+돋보기 렌즈 중심을 이미지 정중앙에 두고, 렌즈에서 퍼지는 옅은 동심원("찾는 중")으로
+가로로 긴 화면을 채운다. 모든 요소가 한 중심을 공유해서 좌우·상하 균형이 맞는다.
+언어와 무관해서 한 장으로 모든 언어에 쓴다.
 
-    uv run python scripts/render_store_icon.py
+도형은 render_store_icon.py 와 같은 108 격자 좌표를 쓴다 (돋보기 렌즈 중심 52,52).
+
     uv run python scripts/render_feature_graphic.py
 """
 from __future__ import annotations
 
 from pathlib import Path
 
-from PIL import Image, ImageChops, ImageDraw, ImageFont
+from PIL import Image, ImageDraw
 
 ROOT = Path(__file__).resolve().parents[2]
-OUT = ROOT / "docs" / "release"
-ICON = OUT / "icon-512.png"
-FONT = Path("C:/Windows/Fonts/NotoSansKR-VF.ttf")
+OUT = ROOT / "docs" / "release" / "feature-graphic.png"
 
 W, H = 1024, 500
-BG = (255, 217, 90)  # #FFD95A — 아이콘 배경과 같은 색
+SS = 4  # 4배로 그린 뒤 줄여 계단을 없앤다
+
+BG = (255, 217, 90)
+RING = (240, 190, 40)
 INK = (43, 43, 48)
+GLASS = (234, 246, 255)
+LENS = (234, 246, 255)
 
-ICON_H = 260   # 아이콘 그림 높이
-GAP = 44       # 아이콘과 글자 사이
-TITLE_PX = 92
-MIN_SIDE = 110 # 좌우 최소 여백
-
-TITLES = {
-    "ko": "내 안경 찾기",
-    "en": "Find My Glasses",
-}
+# 돋보기 크기: 108 격자 1 단위 = K 픽셀. 렌즈(반지름 22) 가 화면 높이의 약 1/3.
+K = 4.0 * SS
+CX, CY = W * SS / 2, H * SS / 2  # 렌즈 중심 = 화면 중심
 
 
-def icon_art() -> Image.Image:
-    """배경을 뺀 실제 그림 영역만 잘라낸다"""
-    im = Image.open(ICON).convert("RGB")
-    diff = ImageChops.difference(im, Image.new("RGB", im.size, BG)).convert("L")
-    bbox = diff.point(lambda v: 255 if v > 24 else 0).getbbox()
-    art = im.crop(bbox)
-    s = ICON_H / art.height
-    return art.resize((round(art.width * s), ICON_H), Image.LANCZOS)
+def P(x: float, y: float) -> tuple[float, float]:
+    """108 격자 좌표 → 픽셀. 렌즈 중심 (52,52) 가 화면 중심에 온다."""
+    return CX + (x - 52) * K, CY + (y - 52) * K
+
+
+def quad(p0, c, p1, n=24):
+    return [((1 - t) ** 2 * p0[0] + 2 * (1 - t) * t * c[0] + t ** 2 * p1[0],
+             (1 - t) ** 2 * p0[1] + 2 * (1 - t) * t * c[1] + t ** 2 * p1[1])
+            for t in (i / n for i in range(n + 1))]
+
+
+def stroke(d, pts, width, color):
+    px = [P(*p) for p in pts]
+    w = width * K
+    d.line(px, fill=color, width=round(w), joint="curve")
+    for x, y in (px[0], px[-1]):
+        d.ellipse([x - w / 2, y - w / 2, x + w / 2, y + w / 2], fill=color)
 
 
 def main() -> None:
-    art = icon_art()
+    img = Image.new("RGB", (W * SS, H * SS), BG)
+    d = ImageDraw.Draw(img, "RGBA")
 
-    for lang, title in TITLES.items():
-        img = Image.new("RGB", (W, H), BG)
-        d = ImageDraw.Draw(img)
+    # 찾는 중 — 렌즈에서 퍼지는 동심원. 바깥으로 갈수록 옅게.
+    for i, r in enumerate((170, 270, 370, 470)):
+        rr = r * SS
+        a = 150 - i * 32
+        d.ellipse([CX - rr, CY - rr, CX + rr, CY + rr], outline=RING + (a,), width=7 * SS)
 
-        # 좌우 여백이 MIN_SIDE 보다 작아지면 글자를 줄인다 (영어 이름이 길다)
-        size = TITLE_PX
-        while True:
-            font = ImageFont.truetype(str(FONT), size)
-            font.set_variation_by_axes([800])
-            l, t, r, b = d.textbbox((0, 0), title, font=font)
-            if art.width + GAP + (r - l) <= W - 2 * MIN_SIDE or size <= 40:
-                break
-            size -= 2
+    # 손잡이
+    stroke(d, [(68, 68), (79, 79)], 9, INK)
 
-        # 글자의 실제 잉크 영역 (여백 없이)
-        l, t, r, b = d.textbbox((0, 0), title, font=font)
-        tw, th = r - l, b - t
+    # 돋보기
+    r, sw = 22, 6
+    d.ellipse([*P(52 - r - sw / 2, 52 - r - sw / 2), *P(52 + r + sw / 2, 52 + r + sw / 2)], fill=INK)
+    d.ellipse([*P(52 - r + sw / 2, 52 - r + sw / 2), *P(52 + r - sw / 2, 52 + r - sw / 2)], fill=GLASS)
 
-        total = art.width + GAP + tw
-        x0 = (W - total) // 2
-        img.paste(art, (x0, (H - art.height) // 2))
+    # 안경 (앱 아이콘과 같은 모양, 0.47 배, 렌즈 가운데)
+    s, tx, ty, lw = 0.47, -2, -1.5, 4
 
-        tx = x0 + art.width + GAP
-        # 글자는 돋보기 렌즈 높이(그림 위쪽 약 45%)에 맞춘다
-        lens_cy = (H - art.height) // 2 + round(art.height * 0.43)
-        d.text((tx - l, lens_cy - th // 2 - t), title, font=font, fill=INK)
+    def T(x, y):
+        return (54 + (x - 54) * s + tx, 54.5 + (y - 54.5) * s + ty)
 
-        out = OUT / f"feature-graphic-{lang}.png"
-        img.save(out)
-        print(out, f"left={x0} right={W - (tx + tw)}")
+    for x0 in (27, 57):
+        a, b = T(x0, 45.5), T(x0 + 24, 63.5)
+        d.rounded_rectangle([*P(*a), *P(*b)], radius=8 * s * K, fill=LENS)
+        h = lw * s / 2
+        d.rounded_rectangle([*P(a[0] - h, a[1] - h), *P(b[0] + h, b[1] + h)],
+                            radius=(8 * s + h) * K, outline=INK, width=round(lw * s * K))
+    stroke(d, [T(*p) for p in quad((51, 51.5), (54, 47.5), (57, 51.5))], lw * s, INK)
+    stroke(d, [T(27, 50), T(23, 48.5)], lw * s, INK)
+    stroke(d, [T(81, 50), T(85, 48.5)], lw * s, INK)
+
+    img.resize((W, H), Image.LANCZOS).save(OUT)
+    print(OUT)
 
 
 if __name__ == "__main__":
