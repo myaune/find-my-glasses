@@ -1,7 +1,7 @@
 """Play 스토어 그래픽 이미지(1024×500) — 글자·장식 없이 앱 아이콘 그림만, 정중앙에.
 언어와 무관해서 한 장으로 모든 언어에 쓴다.
 
-도형은 render_store_icon.py 와 같은 108 격자 좌표를 쓴다 (돋보기 렌즈 중심 52,52).
+도형은 render_store_icon.py 와 같은 108 격자 좌표를 쓴다 (렌즈 중심 54,54, 손잡이 길이는 render_store_icon.geometry()).
 
     uv run python scripts/render_feature_graphic.py
 """
@@ -10,6 +10,8 @@ from __future__ import annotations
 from pathlib import Path
 
 from PIL import Image, ImageDraw
+
+from render_store_icon import CX as LX, CY as LY, HANDLE_W, R_LENS, SW_LENS, geometry
 
 ROOT = Path(__file__).resolve().parents[2]
 OUT = ROOT / "docs" / "release" / "feature-graphic.png"
@@ -28,8 +30,8 @@ CX, CY = W * SS / 2, H * SS / 2
 
 
 def P(x: float, y: float) -> tuple[float, float]:
-    """108 격자 좌표 → 픽셀. 돋보기+손잡이 전체 영역(27~82.2)의 가운데가 화면 중심에 온다."""
-    return CX + (x - 54.6) * K, CY + (y - 54.6) * K
+    """108 격자 좌표 → 픽셀. 렌즈 원 중심(= 기준 둥근 네모 중심)이 화면 중심에 온다."""
+    return CX + (x - LX) * K, CY + (y - LY) * K
 
 
 def quad(p0, c, p1, n=24):
@@ -51,15 +53,16 @@ def main() -> None:
     d = ImageDraw.Draw(img, "RGBA")
 
     # 손잡이
-    stroke(d, [(68, 68), (79, 79)], 9, INK)
+    g = geometry()
+    stroke(d, [g["handle_start"], g["handle_end"]], HANDLE_W, INK)
 
     # 돋보기
-    r, sw = 22, 6
-    d.ellipse([*P(52 - r - sw / 2, 52 - r - sw / 2), *P(52 + r + sw / 2, 52 + r + sw / 2)], fill=INK)
-    d.ellipse([*P(52 - r + sw / 2, 52 - r + sw / 2), *P(52 + r - sw / 2, 52 + r - sw / 2)], fill=GLASS)
+    r, sw = R_LENS, SW_LENS
+    d.ellipse([*P(LX - r - sw / 2, LY - r - sw / 2), *P(LX + r + sw / 2, LY + r + sw / 2)], fill=INK)
+    d.ellipse([*P(LX - r + sw / 2, LY - r + sw / 2), *P(LX + r - sw / 2, LY + r - sw / 2)], fill=GLASS)
 
     # 안경 (앱 아이콘과 같은 모양, 0.47 배, 렌즈 가운데)
-    s, tx, ty, lw = 0.47, -2, -1.5, 4
+    s, tx, ty, lw = 0.47, 0, -0.5, 4
 
     def T(x, y):
         return (54 + (x - 54) * s + tx, 54.5 + (y - 54.5) * s + ty)

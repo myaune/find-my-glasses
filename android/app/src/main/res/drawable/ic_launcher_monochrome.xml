@@ -9,18 +9,18 @@
         android:strokeColor="#FF000000"
         android:strokeWidth="9"
         android:strokeLineCap="round"
-        android:pathData="M68,68L79,79" />
+        android:pathData="M66.02,66.02L72.54,72.54" />
     <path
         android:strokeColor="#FF000000"
         android:strokeWidth="6"
-        android:pathData="M52,30a22,22 0 1,1 0,44a22,22 0 1,1 0,-44" />
+        android:pathData="M54,32a22,22 0 1,1 0,44a22,22 0 1,1 0,-44" />
     <group
         android:scaleX="0.47"
         android:scaleY="0.47"
         android:pivotX="54"
         android:pivotY="54.5"
-        android:translateX="-2"
-        android:translateY="-1.5">
+        android:translateX="0"
+        android:translateY="-0.5">
         <path
             android:strokeColor="#FF000000"
             android:strokeWidth="4"
