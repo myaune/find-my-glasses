@@ -46,8 +46,6 @@
     <string name="settings_done">Listo</string>
     <string name="support_title">Quitar anuncios</string>
     <string name="support_body">Una compra única quita todos los anuncios. También apoya al desarrollador.</string>
-    <string name="support_buy" formatted="true">Apoyar · %1$s</string>
-    <string name="support_buy_noprice">Apoyar</string>
     <string name="support_thanks_title">¡Gracias!</string>
     <string name="support_thanks_body">Ya no hay anuncios. Gracias por tu apoyo.</string>
     <string name="restore_purchases">Restaurar compra</string>

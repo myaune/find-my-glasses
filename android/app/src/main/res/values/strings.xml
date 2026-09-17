@@ -56,8 +56,6 @@
     <string name="settings_done">Done</string>
     <string name="support_title">Remove ads</string>
     <string name="support_body">A one-time purchase removes all ads. It also supports the developer.</string>
-    <string name="support_buy" formatted="true">Support · %1$s</string>
-    <string name="support_buy_noprice">Support</string>
     <string name="support_thanks_title">Thanks!</string>
     <string name="support_thanks_body">Ads are gone. Thanks for the support.</string>
     <string name="restore_purchases">Restore purchase</string>

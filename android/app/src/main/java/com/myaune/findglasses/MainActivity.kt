@@ -181,7 +181,6 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         snapshotScore = 0f
         snapshot = null
         runOnUiThread {
-            binding.btnFound.visibility = View.GONE
             binding.overlay.setTarget(null, Confidence.LOW, "")
         }
     }
@@ -230,7 +229,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         val b = binding.targetButton
         if (target == ModelCatalog.Target.GLASSES) {
             b.text = getString(R.string.target_other)
-            b.alpha = 0.55f
+            b.alpha = 0.9f
         } else {
             b.text = "${target.emoji} ${getString(target.labelRes)}"
             b.alpha = 1f
@@ -276,9 +275,13 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         v.btnPrivacyOptions.visibility = if (consent.privacyOptionsRequired) View.VISIBLE else View.GONE
         v.btnPrivacyOptions.setOnClickListener { consent.showPrivacyOptions() }
 
+        val inset = (8 * resources.displayMetrics.density).toInt()
         MaterialAlertDialogBuilder(this)
             .setTitle(R.string.settings)
             .setView(v.root)
+            // 기본 좌우 여백(24dp)과 최대 폭 제한을 줄여 가로로 넓게 쓴다
+            .setBackgroundInsetStart(inset)
+            .setBackgroundInsetEnd(inset)
             .setPositiveButton(R.string.settings_done) { _, _ ->
                 val pick = v.spLanguage.selectedItemPosition
                 if (pick != currentIndex) {
@@ -288,6 +291,10 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
                 }
             }
             .show()
+            .window?.setLayout(
+                (resources.displayMetrics.widthPixels * 0.96f).toInt(),
+                android.view.ViewGroup.LayoutParams.WRAP_CONTENT,
+            )
     }
 
     /**
@@ -300,13 +307,17 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
             v.supportBody.setText(R.string.support_thanks_body)
             v.btnSupport.visibility = View.GONE
             v.btnRestore.visibility = View.GONE
+            // 버튼이 빠지면 카드 아래가 글자에 붙는다
+            val pad = (14 * resources.displayMetrics.density).toInt()
+            v.supportCard.setPadding(v.supportCard.paddingLeft, v.supportCard.paddingTop, v.supportCard.paddingRight, pad)
         }
         if (purchases.adFree || !ads.enabled) { showBought(); return }
 
         purchases.removeAdsPrice { price ->
             runOnUiThread {
-                v.btnSupport.text = if (price == null) getString(R.string.support_buy_noprice)
-                else getString(R.string.support_buy, price)
+                // 제목과 같은 말을 쓴다 ("광고 없애기 · ₩2,000")
+                val title = getString(R.string.support_title)
+                v.btnSupport.text = if (price == null) title else "$title · $price"
             }
         }
 
@@ -395,6 +406,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
                 binding.celebration.visibility = View.GONE
                 binding.celebrateImage.setImageDrawable(null)
                 resetSession()
+                binding.btnFound.visibility = View.VISIBLE
                 celebrating = false
                 if (!tutorialOpen) feedback.muted = false
             }
@@ -656,10 +668,6 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         // 검출이 나온 자리로 추적 템플릿을 다시 심는다. 추적 오차가 쌓이는
         // 구간이 추론 한 주기로 제한된다. 실제 seed 는 분석 스레드에서 한다.
         needsReseed = true
-
-        if (fired != null && !celebrating) {
-            runOnUiThread { binding.btnFound.visibility = View.VISIBLE }
-        }
     }
 
     /** 화면 갱신. 추론과 무관하게 자주 불린다. */

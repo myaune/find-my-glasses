@@ -41,8 +41,6 @@
     <string name="settings_done">Fertig</string>
     <string name="support_title">Werbung entfernen</string>
     <string name="support_body">Ein einmaliger Kauf entfernt alle Werbung und unterstützt auch den Entwickler.</string>
-    <string name="support_buy" formatted="true">Unterstützen · %1$s</string>
-    <string name="support_buy_noprice">Unterstützen</string>
     <string name="support_thanks_title">Danke!</string>
     <string name="support_thanks_body">Die Werbung ist weg. Danke für die Unterstützung.</string>
     <string name="restore_purchases">Kauf wiederherstellen</string>

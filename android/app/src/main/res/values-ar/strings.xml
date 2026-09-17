@@ -41,8 +41,6 @@
     <string name="settings_done">تم</string>
     <string name="support_title">إزالة الإعلانات</string>
     <string name="support_body">شراء لمرة واحدة يزيل كل الإعلانات، وهو أيضاً دعم للمطوّر.</string>
-    <string name="support_buy" formatted="true">ادعم · %1$s</string>
-    <string name="support_buy_noprice">ادعم</string>
     <string name="support_thanks_title">شكراً!</string>
     <string name="support_thanks_body">اختفت الإعلانات. شكراً على دعمك.</string>
     <string name="restore_purchases">استعادة الشراء</string>

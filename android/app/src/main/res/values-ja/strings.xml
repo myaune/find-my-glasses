@@ -46,8 +46,6 @@
     <string name="settings_done">完了</string>
     <string name="support_title">広告を消す</string>
     <string name="support_body">一度の購入で広告がすべて消えます。開発者の応援にもなります。</string>
-    <string name="support_buy" formatted="true">応援する · %1$s</string>
-    <string name="support_buy_noprice">応援する</string>
     <string name="support_thanks_title">ありがとう！</string>
     <string name="support_thanks_body">広告が消えました。応援ありがとうございます。</string>
     <string name="restore_purchases">購入を復元</string>

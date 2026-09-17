@@ -41,8 +41,6 @@
     <string name="settings_done">完成</string>
     <string name="support_title">移除廣告</string>
     <string name="support_body">一次購買即可移除所有廣告，也算是對開發者的一點支持。</string>
-    <string name="support_buy" formatted="true">支持一下 · %1$s</string>
-    <string name="support_buy_noprice">支持一下</string>
     <string name="support_thanks_title">謝謝！</string>
     <string name="support_thanks_body">廣告已移除，感謝支持。</string>
     <string name="restore_purchases">還原購買</string>

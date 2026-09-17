@@ -41,8 +41,6 @@
     <string name="settings_done">OK</string>
     <string name="support_title">Retirer les pubs</string>
     <string name="support_body">Un achat unique retire toutes les pubs. Il soutient aussi le développeur.</string>
-    <string name="support_buy" formatted="true">Soutenir · %1$s</string>
-    <string name="support_buy_noprice">Soutenir</string>
     <string name="support_thanks_title">Merci !</string>
     <string name="support_thanks_body">Les pubs ont disparu. Merci pour votre soutien.</string>
     <string name="restore_purchases">Restaurer l’achat</string>

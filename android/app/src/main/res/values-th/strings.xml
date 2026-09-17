@@ -41,8 +41,6 @@
     <string name="settings_done">เสร็จ</string>
     <string name="support_title">ปิดโฆษณา</string>
     <string name="support_body">ซื้อครั้งเดียวโฆษณาจะหายไปทั้งหมด และเป็นการสนับสนุนนักพัฒนาด้วย</string>
-    <string name="support_buy" formatted="true">สนับสนุน · %1$s</string>
-    <string name="support_buy_noprice">สนับสนุน</string>
     <string name="support_thanks_title">ขอบคุณ!</string>
     <string name="support_thanks_body">โฆษณาหายไปแล้ว ขอบคุณที่สนับสนุน</string>
     <string name="restore_purchases">กู้คืนการซื้อ</string>

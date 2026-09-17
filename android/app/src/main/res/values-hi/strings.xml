@@ -41,8 +41,6 @@
     <string name="settings_done">हो गया</string>
     <string name="support_title">विज्ञापन हटाएँ</string>
     <string name="support_body">एक बार की खरीद से सारे विज्ञापन हट जाते हैं। इससे डेवलपर का भी साथ होता है।</string>
-    <string name="support_buy" formatted="true">साथ दें · %1$s</string>
-    <string name="support_buy_noprice">साथ दें</string>
     <string name="support_thanks_title">धन्यवाद!</string>
     <string name="support_thanks_body">विज्ञापन हट गए। साथ देने के लिए धन्यवाद।</string>
     <string name="restore_purchases">खरीद वापस लाएँ</string>

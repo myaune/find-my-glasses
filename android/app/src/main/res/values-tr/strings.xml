@@ -41,8 +41,6 @@
     <string name="settings_done">Tamam</string>
     <string name="support_title">Reklamları kaldır</string>
     <string name="support_body">Tek seferlik satın alma tüm reklamları kaldırır ve geliştiriciye de destek olur.</string>
-    <string name="support_buy" formatted="true">Destekle · %1$s</string>
-    <string name="support_buy_noprice">Destekle</string>
     <string name="support_thanks_title">Teşekkürler!</string>
     <string name="support_thanks_body">Reklamlar kalktı. Desteğin için teşekkürler.</string>
     <string name="restore_purchases">Satın almayı geri yükle</string>

@@ -41,8 +41,6 @@
     <string name="settings_done">Готово</string>
     <string name="support_title">Убрать рекламу</string>
     <string name="support_body">Одна покупка убирает всю рекламу и немного поддерживает разработчика.</string>
-    <string name="support_buy" formatted="true">Поддержать · %1$s</string>
-    <string name="support_buy_noprice">Поддержать</string>
     <string name="support_thanks_title">Спасибо!</string>
     <string name="support_thanks_body">Рекламы больше нет. Спасибо за поддержку.</string>
     <string name="restore_purchases">Восстановить покупку</string>

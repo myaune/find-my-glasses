@@ -41,8 +41,6 @@
     <string name="settings_done">Xong</string>
     <string name="support_title">Gỡ quảng cáo</string>
     <string name="support_body">Mua một lần là gỡ hết quảng cáo, đồng thời ủng hộ nhà phát triển.</string>
-    <string name="support_buy" formatted="true">Ủng hộ · %1$s</string>
-    <string name="support_buy_noprice">Ủng hộ</string>
     <string name="support_thanks_title">Cảm ơn bạn!</string>
     <string name="support_thanks_body">Quảng cáo đã được gỡ. Cảm ơn bạn đã ủng hộ.</string>
     <string name="restore_purchases">Khôi phục giao dịch</string>

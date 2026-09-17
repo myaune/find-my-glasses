@@ -105,26 +105,28 @@
         android:textSize="20sp"
         android:textStyle="bold"
         android:text="@string/found_it"
-        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@id/targetButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- 다른 물건 찾기 (테스트 안 된 부가 기능). 구석에 작게. -->
+    <!-- 다른 물건 찾기 (테스트 안 된 부가 기능). 찾았어요 버튼 아래 가운데. -->
     <TextView
         android:id="@+id/targetButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:paddingStart="12dp"
-        android:paddingEnd="12dp"
-        android:paddingTop="6dp"
-        android:paddingBottom="6dp"
-        android:textSize="13sp"
+        android:layout_marginBottom="12dp"
+        android:minHeight="44dp"
+        android:gravity="center"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:textSize="16sp"
         android:textColor="#FFFFFF"
         android:background="@drawable/quality_pill"
         android:text="@string/target_other"
         app:layout_constraintBottom_toTopOf="@id/bottomBar"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <!-- 하단 배너 고정 (기획서 4·14절) -->

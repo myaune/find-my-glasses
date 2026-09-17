@@ -41,8 +41,6 @@
     <string name="settings_done">Fatto</string>
     <string name="support_title">Rimuovi la pubblicità</string>
     <string name="support_body">Un acquisto unico rimuove tutta la pubblicità e sostiene anche lo sviluppatore.</string>
-    <string name="support_buy" formatted="true">Sostieni · %1$s</string>
-    <string name="support_buy_noprice">Sostieni</string>
     <string name="support_thanks_title">Grazie!</string>
     <string name="support_thanks_body">La pubblicità è sparita. Grazie per il sostegno.</string>
     <string name="restore_purchases">Ripristina acquisto</string>

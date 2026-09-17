@@ -42,8 +42,6 @@
     <string name="settings_done">Selesai</string>
     <string name="support_title">Hapus iklan</string>
     <string name="support_body">Sekali beli, semua iklan hilang. Sekaligus mendukung pengembang.</string>
-    <string name="support_buy" formatted="true">Dukung · %1$s</string>
-    <string name="support_buy_noprice">Dukung</string>
     <string name="support_thanks_title">Terima kasih!</string>
     <string name="support_thanks_body">Iklan sudah hilang. Terima kasih atas dukungannya.</string>
     <string name="restore_purchases">Pulihkan pembelian</string>
