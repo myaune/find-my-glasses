@@ -17,7 +17,7 @@
         android:icon="@mipmap/ic_launcher"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Material3.Dark.NoActionBar">
+        android:theme="@style/Theme.FindGlasses">
 
         <activity
             android:name=".MainActivity"
@@ -39,7 +39,7 @@
             android:name=".LicensesActivity"
             android:exported="false"
             android:label="@string/licenses"
-            android:theme="@style/Theme.Material3.Dark" />
+            android:theme="@style/Theme.FindGlasses.Licenses" />
 
         <!-- Android 12 이하에서 앱 언어 선택을 저장한다 (AppCompat) -->
         <service

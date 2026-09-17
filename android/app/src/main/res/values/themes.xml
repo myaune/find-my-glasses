@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  앱 테마. Material3 기본 보라색 대신 무채색 어두운 면 + 앱의 노란색 하나만 강조색으로 쓴다.
+  노란색은 검출 박스·튜토리얼과 같은 색이다.
+-->
+<resources>
+    <style name="Theme.FindGlasses" parent="Theme.Material3.Dark.NoActionBar">
+        <item name="colorPrimary">#FFFFD600</item>
+        <item name="colorOnPrimary">#FF1A1A1A</item>
+        <item name="colorPrimaryContainer">#FF3A3310</item>
+        <item name="colorOnPrimaryContainer">#FFFFE88A</item>
+        <item name="colorSecondary">#FFFFD600</item>
+        <item name="colorOnSecondary">#FF1A1A1A</item>
+        <item name="colorSecondaryContainer">#FF3A3310</item>
+        <item name="colorOnSecondaryContainer">#FFFFE88A</item>
+        <item name="colorTertiary">#FFFFD600</item>
+        <item name="colorOnTertiary">#FF1A1A1A</item>
+        <item name="android:colorBackground">#FF121212</item>
+        <item name="colorSurface">#FF1C1C1E</item>
+        <item name="colorOnSurface">#FFF2F2F2</item>
+        <item name="colorOnSurfaceVariant">#FFB8B8B8</item>
+        <item name="colorOutline">#FF6E6E6E</item>
+        <item name="colorSurfaceContainerLowest">#FF121212</item>
+        <item name="colorSurfaceContainerLow">#FF1A1A1C</item>
+        <item name="colorSurfaceContainer">#FF1F1F21</item>
+        <item name="colorSurfaceContainerHigh">#FF242426</item>
+        <item name="colorSurfaceContainerHighest">#FF2E2E30</item>
+    </style>
+
+    <style name="Theme.FindGlasses.Licenses" parent="Theme.FindGlasses">
+        <item name="android:windowActionBar">true</item>
+        <item name="windowActionBar">true</item>
+        <item name="windowNoTitle">false</item>
+    </style>
+</resources>
