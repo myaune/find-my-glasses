@@ -1,7 +1,7 @@
 """Play 스토어 그래픽 이미지(1024×500) — 글자·장식 없이 앱 아이콘 그림만, 정중앙에.
 언어와 무관해서 한 장으로 모든 언어에 쓴다.
 
-도형은 render_store_icon.py 와 같은 108 격자 좌표를 쓴다 (렌즈 중심 54,54, 손잡이 길이는 render_store_icon.geometry()).
+도형은 render_store_icon.py 와 같은 108 격자 좌표를 쓴다 (렌즈 중심 52,52, 손잡이 길이는 render_store_icon.geometry()).
 
     uv run python scripts/render_feature_graphic.py
 """
@@ -11,7 +11,7 @@ from pathlib import Path
 
 from PIL import Image, ImageDraw
 
-from render_store_icon import CX as LX, CY as LY, HANDLE_W, R_LENS, SW_LENS, geometry
+from render_store_icon import CX as LX, CY as LY, ICON_C, HANDLE_W, R_LENS, SW_LENS, geometry
 
 ROOT = Path(__file__).resolve().parents[2]
 OUT = ROOT / "docs" / "release" / "feature-graphic.png"
@@ -30,8 +30,8 @@ CX, CY = W * SS / 2, H * SS / 2
 
 
 def P(x: float, y: float) -> tuple[float, float]:
-    """108 격자 좌표 → 픽셀. 렌즈 원 중심(= 기준 둥근 네모 중심)이 화면 중심에 온다."""
-    return CX + (x - LX) * K, CY + (y - LY) * K
+    """108 격자 좌표 → 픽셀. 아이콘 가운데(= 기준 둥근 네모 중심)가 화면 중심에 온다."""
+    return CX + (x - ICON_C) * K, CY + (y - ICON_C) * K
 
 
 def quad(p0, c, p1, n=24):
@@ -62,7 +62,7 @@ def main() -> None:
     d.ellipse([*P(LX - r + sw / 2, LY - r + sw / 2), *P(LX + r - sw / 2, LY + r - sw / 2)], fill=GLASS)
 
     # 안경 (앱 아이콘과 같은 모양, 0.47 배, 렌즈 가운데)
-    s, tx, ty, lw = 0.47, 0, -0.5, 4
+    s, tx, ty, lw = 0.47, -2, -1.5, 4
 
     def T(x, y):
         return (54 + (x - 54) * s + tx, 54.5 + (y - 54.5) * s + ty)
