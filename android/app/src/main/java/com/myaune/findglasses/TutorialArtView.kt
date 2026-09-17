@@ -46,7 +46,7 @@ class TutorialArtView @JvmOverloads constructor(
         when (mode) {
             Mode.SWEEP -> drawSweep(canvas)
             Mode.GLASSES -> drawGlasses(canvas, width / 2f, height * 0.58f,
-                width * 0.26f, Color.rgb(40, 40, 40), Color.rgb(235, 235, 235))
+                width * 0.26f, Color.rgb(245, 245, 245), Color.rgb(140, 200, 255))
             Mode.CONTRAST -> drawContrast(canvas)
         }
         if (mode == Mode.SWEEP) postInvalidateOnAnimation()
@@ -57,11 +57,11 @@ class TutorialArtView @JvmOverloads constructor(
         val h = height.toFloat()
 
         // 바닥과 안경
-        fill.color = Color.rgb(48, 48, 52)
+        fill.color = Color.rgb(78, 78, 84)
         rect.set(0f, h * 0.72f, w, h)
         canvas.drawRect(rect, fill)
         drawGlasses(canvas, w * 0.66f, h * 0.84f, w * 0.12f,
-            Color.rgb(60, 60, 60), Color.rgb(220, 220, 220))
+            Color.rgb(245, 245, 245), Color.rgb(140, 200, 255))
 
         // 폰이 좌우로 천천히 흔들린다 (4초 주기)
         val t = (System.currentTimeMillis() % 4000L) / 4000f
