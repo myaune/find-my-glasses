@@ -27,10 +27,10 @@ plugins {
     id("org.jetbrains.kotlin.android")
 }
 
-// 출시 파일 이름에 버전을 넣는다 (예: FindMyGlasses-1.0.1-vc3-release.aab). 덮어쓰지 않게.
+// 출시 파일 이름에 버전을 넣는다 (예: FindMyGlasses-1.0.2-vc4-release.aab). 덮어쓰지 않게.
 // versionCode / versionName 을 올리면 여기도 같이 바꾼다.
 base {
-    archivesName.set("FindMyGlasses-1.0.1-vc3")
+    archivesName.set("FindMyGlasses-1.0.2-vc4")
 }
 
 android {
@@ -42,8 +42,8 @@ android {
         minSdk = 26
         // 2026-08-31 부터 새 앱은 API 36 이상을 타깃해야 Play 에 올라간다
         targetSdk = 36
-        versionCode = 3
-        versionName = "1.0.1"
+        versionCode = 4
+        versionName = "1.0.2"
 
         // 어느 빌드를 설치했는지 화면에서 확인할 수 있게 시각을 박는다.
         // "빌드가 된 거 맞아?" 를 눌러보고 알 수 있어야 한다.
