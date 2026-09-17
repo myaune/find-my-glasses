@@ -31,7 +31,7 @@ CX = CY = 52.0    # 렌즈 원 중심 (그대로 둔다)
 R_LENS = 22.0      # 렌즈 테 선 중심 반지름
 SW_LENS = 6.0      # 렌즈 테 굵기
 HANDLE_W = 9.0     # 손잡이 굵기
-CORNER_RATIO = 0.2237  # 둥근 네모 모서리 반지름 / 변 길이 (앱 아이콘 모서리 비율)
+CORNER_RATIO = 0.15    # 둥근 네모 모서리 반지름 / 변 길이 (시안 A~F 중 눈으로 골랐다)
 
 
 def geometry() -> dict:
@@ -81,8 +81,12 @@ def main() -> None:
     ap.add_argument("--size", type=int, default=512)
     ap.add_argument("--out", type=Path)
     ap.add_argument("--guide", action="store_true", help="기준 둥근 네모를 겹쳐 그린다 (확인용)")
+    ap.add_argument("--corner", type=float, help="모서리 반지름 / 변 길이 (시안 비교용)")
     args = ap.parse_args()
     SIZE = args.size
+    if args.corner is not None:
+        global CORNER_RATIO
+        CORNER_RATIO = args.corner
     K = SIZE * SS / 108 * ZOOM
 
     img = Image.new("RGBA", (SIZE * SS, SIZE * SS), BG)

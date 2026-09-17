@@ -2,7 +2,7 @@
 <!--
   앱 아이콘 전경 — 돋보기 속 동글 안경 (후보 E 그대로, 원 조금 크게 · 손잡이 조금 짧게, 반짝임 없음).
   렌즈 원은 원래 자리 (52,52). 아이콘 가운데 (54,54) 를 중심으로 렌즈 원이 전부 들어가는 둥근 네모
-  (반변 27, 모서리 반지름 = 변의 22.37%) 를 기준으로
+  (반변 27, 모서리 반지름 = 변의 15%) 를 기준으로
   손잡이의 둥근 끝이 그 네모 모서리에 정확히 닿게 한다. 계산은 poc/scripts/render_store_icon.py geometry().
   이전 시안: ic_launcher_foreground_glasses.xml (안경만)
 -->
@@ -17,7 +17,7 @@
         android:strokeColor="#FF2B2B30"
         android:strokeWidth="9"
         android:strokeLineCap="round"
-        android:pathData="M64.02,64.02L74.28,74.28" />
+        android:pathData="M64.02,64.02L75.45,75.45" />
 
     <!-- 돋보기 (반지름 22) -->
     <path
