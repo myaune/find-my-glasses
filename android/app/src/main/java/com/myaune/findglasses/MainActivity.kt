@@ -56,7 +56,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
     private lateinit var inferExecutor: ExecutorService
     private lateinit var feedback: Feedback
     private lateinit var ads: Ads
-    private val purchases: Purchases = PlaceholderPurchases()
+    private lateinit var purchases: Purchases
     private lateinit var consent: Consent
     private var adsStarted = false
 
@@ -126,8 +126,13 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         analysisExecutor = Executors.newSingleThreadExecutor()
         inferExecutor = Executors.newSingleThreadExecutor()
         feedback = Feedback(this)
+        purchases = GooglePlayPurchases(this)
         ads = Ads(this)
+        // 마지막으로 확인한 구매 상태로 먼저 정하고, 스토어 확인 결과로 다시 맞춘다
         ads.enabled = !purchases.adFree
+        purchases.start { adFree ->
+            if (adFree) ads.disable(binding.bottomBar)
+        }
         consent = Consent(this)
         // 광고는 동의 확인이 끝난 뒤에만 초기화한다 (유럽 등)
         if (ads.enabled) consent.gather { runOnUiThread { startAds() } }
@@ -734,6 +739,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         detector?.close()
         feedback.shutdown()
         ads.destroy()
+        purchases.end()
     }
 
     companion object {

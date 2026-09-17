@@ -23,8 +23,10 @@ call .\gradlew.bat :app:clean :app:bundleRelease --console=plain > "%KEYS%\build
 set EXITCODE=%ERRORLEVEL%
 
 if "%EXITCODE%"=="0" (
+  if not exist "%~dp0releases" mkdir "%~dp0releases"
+  copy /Y "%~dp0app\build\outputs\bundle\release\*.aab" "%~dp0releases\" > nul
   echo BUILD OK
-  echo %~dp0app\build\outputs\bundle\release\app-release.aab
+  for %%f in ("%~dp0app\build\outputs\bundle\release\*.aab") do echo %~dp0releases\%%~nxf
 ) else (
   echo BUILD FAILED - see log in %KEYS%
 )

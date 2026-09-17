@@ -27,6 +27,12 @@ plugins {
     id("org.jetbrains.kotlin.android")
 }
 
+// 출시 파일 이름에 버전을 넣는다 (예: FindMyGlasses-1.0.1-vc3-release.aab). 덮어쓰지 않게.
+// versionCode / versionName 을 올리면 여기도 같이 바꾼다.
+base {
+    archivesName.set("FindMyGlasses-1.0.1-vc3")
+}
+
 android {
     namespace = "com.myaune.findglasses"
     compileSdk = 36
@@ -36,8 +42,8 @@ android {
         minSdk = 26
         // 2026-08-31 부터 새 앱은 API 36 이상을 타깃해야 Play 에 올라간다
         targetSdk = 36
-        versionCode = 2
-        versionName = "1.0"
+        versionCode = 3
+        versionName = "1.0.1"
 
         // 어느 빌드를 설치했는지 화면에서 확인할 수 있게 시각을 박는다.
         // "빌드가 된 거 맞아?" 를 눌러보고 알 수 있어야 한다.
@@ -60,7 +66,7 @@ android {
      * 비밀번호는 저장소 밖 파일(D:/AppCompany/keys/signing.properties)에만 두고,
      * 환경변수 FINDGLASSES_SIGNING_FILE 이 그 파일을 가리킬 때만 연다.
      * 평소 빌드(개발·테스트·AI 도구가 돌리는 빌드)에는 이 변수가 없어서 파일을
-     * 아예 열지 않고 서명 없이 빌드된다. 서명 빌드는 keys/build-signed.bat 로만 한다.
+     * 아예 열지 않고 서명 없이 빌드된다. 서명 빌드는 android/build-signed.bat 로만 한다.
      *
      * signing.properties 형식
      *   storeFile=D:/AppCompany/keys/upload-key.jks   (역슬래시 대신 / 를 쓴다)
@@ -150,5 +156,7 @@ dependencies {
     implementation("com.google.android.gms:play-services-ads:23.3.0")
     // 광고 동의 (유럽 GDPR 등). AdMob 이 요구한다.
     implementation("com.google.android.ump:user-messaging-platform:4.0.0")
+    // 광고 제거 결제. 2026-08-31 부터 Play 에 올리는 앱은 Billing Library 8 이상이어야 한다.
+    implementation("com.android.billingclient:billing:9.1.0")
     implementation("com.google.guava:guava:33.3.1-android")
 }

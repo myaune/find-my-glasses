@@ -67,3 +67,6 @@ xcuserdata/
 
 # Claude Code 개인 설정 (서명 키 폴더 접근 차단 규칙)
 .claude/settings.local.json
+
+# 출시 파일 모음 (android/build-signed.bat 이 복사)
+android/releases/
