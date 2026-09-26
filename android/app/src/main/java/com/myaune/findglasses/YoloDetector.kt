@@ -69,9 +69,19 @@ class YoloDetector private constructor(
         )
     }
 
-    override fun classScores(src: Bitmap, rotationDegrees: Int): FloatArray {
-        val (buffer, _) = preprocess.run(src, rotationDegrees)
-        val s = inputSize.toLong()
+    /**
+     * 확대 재검사용 전처리. 모델을 dynamic 으로 익스포트해서 입력 크기를 달리 넣을 수 있다.
+     * 확대본은 이미 크게 보이므로 320 으로 충분했다 (416 과 판별력 같고 시간은 절반).
+     */
+    private var verifyPreprocess: Preprocess? = null
+
+    override fun classScores(src: Bitmap, rotationDegrees: Int, size: Int): FloatArray {
+        val pre = if (size == inputSize) preprocess else {
+            verifyPreprocess?.takeIf { it.size == size }
+                ?: Preprocess(size, ModelCatalog.PAD_GRAY, null, null).also { verifyPreprocess = it }
+        }
+        val (buffer, _) = pre.run(src, rotationDegrees)
+        val s = size.toLong()
         val tensor = OnnxTensor.createTensor(env, buffer, longArrayOf(1, 3, s, s))
         val out = tensor.use { session.run(mapOf(inputName to it)) }
         return out.use {

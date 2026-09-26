@@ -174,6 +174,8 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
     }
 
     private fun resetSession() {
+        rejected.clear()
+        accepted.clear()
         tracker.reset()
         patch.clear()
         sweep.reset()
@@ -684,6 +686,9 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
 
     private val rejected = ArrayList<Rejected>()
 
+    /** 검사에서 통과한 자리. 같은 것을 계속 다시 검사하지 않는다. */
+    private val accepted = ArrayList<Rejected>()
+
     @Volatile
     private var frameSizeLogged = false
     private var lastVerifyMs = 0L
@@ -704,13 +709,20 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         rejected.removeAll { now - it.atMs > REJECT_TTL_MS || !sameView(it.r, captureR) }
         if (rejected.any { overlaps(it.box, top.box) }) return emptyList()
 
+        // 노란색(낮은 신뢰도)까지 검사하면 추론이 계속 두 번씩 돈다. 앱이 "여기예요" 라고
+        // 말하기 시작하는 단계부터만 검사한다. 그 아래는 어차피 확신하지 않는다.
+        if (top.score < Confidence.MEDIUM.minScore) return dets
+
+        accepted.removeAll { now - it.atMs > ACCEPT_TTL_MS || !sameView(it.r, captureR) }
+        if (accepted.any { overlaps(it.box, top.box) }) return dets
+
         if (now - lastVerifyMs < VERIFY_GAP_MS) return dets
         lastVerifyMs = now
 
         val crop = SnapshotCrop.crop(bmp, rotation, top.box, padRatio = 0.75f, maxSide = 640)
             ?: return dets
         val scores = try {
-            detector?.classScores(crop, 0)
+            detector?.classScores(crop, 0, VERIFY_SIZE)
         } catch (e: Throwable) {
             Log.e(TAG, "확대 재검사 실패", e); null
         } finally {
@@ -719,7 +731,11 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
 
         val mine = target.classes.maxOf { scores[it] }
         val against = ModelCatalog.REJECT_ON_ZOOM.maxOf { scores[it] }
-        if (against <= mine * ModelCatalog.REJECT_RATIO) return dets
+        if (against <= mine * ModelCatalog.REJECT_RATIO) {
+            accepted.add(Rejected(RectF(top.box), captureR, now))
+            if (accepted.size > MAX_REJECTED) accepted.removeAt(0)
+            return dets
+        }
 
         Log.i(TAG, "확대 재검사에서 버림: 대상 %.3f, 거름어휘 %.3f".format(mine, against))
         rejected.add(Rejected(RectF(top.box), captureR, now))
@@ -838,6 +854,15 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
 
         /** 확대 재검사 간격. 후보가 계속 보여도 이 간격보다 자주 하지 않는다 */
         private const val VERIFY_GAP_MS = 700L
+
+        /**
+         * 확대 재검사 입력 크기. 확대본은 크게 보이므로 작아도 된다.
+         * 사진 비교에서 320 은 416 과 판별력이 같고 시간은 절반이었다.
+         */
+        private const val VERIFY_SIZE = 320
+
+        /** 통과한 자리를 다시 검사하지 않는 시간 */
+        private const val ACCEPT_TTL_MS = 5000L
 
         /** 버린 자리를 기억하는 시간 */
         private const val REJECT_TTL_MS = 8000L

@@ -19,7 +19,7 @@ import java.nio.FloatBuffer
  *   YOLO-World      패딩 114, /255 만
  */
 class Preprocess(
-    private val size: Int,
+    val size: Int,
     private val padGray: Int = 0,
     private val mean: FloatArray? = null,
     private val std: FloatArray? = null,

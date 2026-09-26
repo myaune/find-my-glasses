@@ -32,6 +32,6 @@ interface Detector {
      * 클래스마다 이 그림 안에서의 최고 점수. 박스는 내지 않는다.
      * 확대 재검사(후보를 오려 키워서 다시 묻기)에 쓴다.
      */
-    fun classScores(src: Bitmap, rotationDegrees: Int): FloatArray
+    fun classScores(src: Bitmap, rotationDegrees: Int, size: Int): FloatArray
     fun close()
 }
