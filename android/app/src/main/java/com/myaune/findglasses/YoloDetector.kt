@@ -69,6 +69,26 @@ class YoloDetector private constructor(
         )
     }
 
+    override fun classScores(src: Bitmap, rotationDegrees: Int): FloatArray {
+        val (buffer, _) = preprocess.run(src, rotationDegrees)
+        val s = inputSize.toLong()
+        val tensor = OnnxTensor.createTensor(env, buffer, longArrayOf(1, 3, s, s))
+        val out = tensor.use { session.run(mapOf(inputName to it)) }
+        return out.use {
+            val t = it[0] as OnnxTensor
+            val anchors = t.info.shape[2].toInt()
+            val buf = t.floatBuffer
+            FloatArray(nc) { c ->
+                var best = 0f
+                for (i in 0 until anchors) {
+                    val v = buf.get((4 + c) * anchors + i)
+                    if (v > best) best = v
+                }
+                best
+            }
+        }
+    }
+
     private fun parse(
         out: OrtSession.Result,
         fit: Preprocess.Fit,

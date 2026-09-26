@@ -27,5 +27,11 @@ interface Detector {
     /** 찾을 대상의 클래스 번호들 (ModelCatalog.CLASSES). 나머지는 네거티브 */
     var targetClasses: IntArray
     fun detect(src: Bitmap, rotationDegrees: Int, threshold: Float): DetectResult
+
+    /**
+     * 클래스마다 이 그림 안에서의 최고 점수. 박스는 내지 않는다.
+     * 확대 재검사(후보를 오려 키워서 다시 묻기)에 쓴다.
+     */
+    fun classScores(src: Bitmap, rotationDegrees: Int): FloatArray
     fun close()
 }

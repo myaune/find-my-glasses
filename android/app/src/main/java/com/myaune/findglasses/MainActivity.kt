@@ -587,6 +587,10 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
             val fw = if (rotation % 180 == 0) iw else ih
             val fh = if (rotation % 180 == 0) ih else iw
             val captureR = latestR
+            if (!frameSizeLogged) {
+                frameSizeLogged = true
+                Log.i(TAG, "분석 프레임 ${iw}x${ih} (모델 입력 ${selectedSize})")
+            }
 
             // 추적용 흑백 축소본. 비트맵을 거치지 않아 싸다.
             val grayOk = gray.fill(image, rotation)
@@ -643,9 +647,13 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
             return
         }
 
+        // 신발 오탐 거르기. 후보가 뜨면 그 자리만 원본 프레임에서 크게 오려
+        // 다시 묻는다. 작게 보일 때는 헷갈리지만 크게 보면 신발이라고 말한다.
+        val detections = screenOut(result.detections, bmp, rotation, captureR)
+
         // 세션 최고점을 갱신하면 그 순간의 안경 사진을 잘라둔다. 찾았을 때
         // 가운데 띄운다. 전체 프레임 회전이 들어가므로 갱신할 때만 한다.
-        result.detections.maxByOrNull { it.score }?.let { top ->
+        detections.maxByOrNull { it.score }?.let { top ->
             if (top.score > snapshotScore) {
                 SnapshotCrop.crop(bmp, rotation, top.box)?.let { cut ->
                     snapshotScore = top.score
@@ -656,7 +664,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         bmp.recycle()
 
         val now = System.currentTimeMillis()
-        val fired = tracker.update(result.detections, now, captureR, latestR)
+        val fired = tracker.update(detections, now, captureR, latestR)
 
         val interval = result.inferenceMs + result.preprocessMs + result.postprocessMs
         tracker.setFrameIntervalMs(interval)
@@ -668,6 +676,78 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         // 검출이 나온 자리로 추적 템플릿을 다시 심는다. 추적 오차가 쌓이는
         // 구간이 추론 한 주기로 제한된다. 실제 seed 는 분석 스레드에서 한다.
         needsReseed = true
+    }
+
+    // ── 확대 재검사 (신발 오탐 거르기) ──────────────────────────────────────
+    /** 버린 후보 하나. 같은 자리를 계속 다시 검사하지 않으려고 잠깐 기억한다. */
+    private class Rejected(val box: RectF, val r: FloatArray?, val atMs: Long)
+
+    private val rejected = ArrayList<Rejected>()
+
+    @Volatile
+    private var frameSizeLogged = false
+    private var lastVerifyMs = 0L
+
+    /**
+     * 후보를 오려 키워서 한 번 더 묻고, 신발이라고 하면 버린다.
+     *
+     * 추론 한 번이 더 들어가므로 후보가 있을 때만, 그리고 [VERIFY_GAP_MS] 간격으로만
+     * 한다. 한 번 버린 자리는 [REJECT_TTL_MS] 동안, 그리고 폰이 그쪽을 계속 보고 있는
+     * 동안만 기억한다. 걸어서 이동하면 자이로만으로는 자리를 알 수 없어 곧 잊는다.
+     */
+    private fun screenOut(
+        dets: List<Detection>, bmp: android.graphics.Bitmap, rotation: Int, captureR: FloatArray?,
+    ): List<Detection> {
+        val top = dets.maxByOrNull { it.score } ?: return dets
+        val now = System.currentTimeMillis()
+
+        rejected.removeAll { now - it.atMs > REJECT_TTL_MS || !sameView(it.r, captureR) }
+        if (rejected.any { overlaps(it.box, top.box) }) return emptyList()
+
+        if (now - lastVerifyMs < VERIFY_GAP_MS) return dets
+        lastVerifyMs = now
+
+        val crop = SnapshotCrop.crop(bmp, rotation, top.box, padRatio = 0.75f, maxSide = 640)
+            ?: return dets
+        val scores = try {
+            detector?.classScores(crop, 0)
+        } catch (e: Throwable) {
+            Log.e(TAG, "확대 재검사 실패", e); null
+        } finally {
+            crop.recycle()
+        } ?: return dets
+
+        val mine = target.classes.maxOf { scores[it] }
+        val against = ModelCatalog.REJECT_ON_ZOOM.maxOf { scores[it] }
+        if (against <= mine * ModelCatalog.REJECT_RATIO) return dets
+
+        Log.i(TAG, "확대 재검사에서 버림: 대상 %.3f, 거름어휘 %.3f".format(mine, against))
+        rejected.add(Rejected(RectF(top.box), captureR, now))
+        if (rejected.size > MAX_REJECTED) rejected.removeAt(0)
+        return emptyList()
+    }
+
+    private fun overlaps(a: RectF, b: RectF): Boolean {
+        val ix = kotlin.math.max(0f, kotlin.math.min(a.right, b.right) - kotlin.math.max(a.left, b.left))
+        val iy = kotlin.math.max(0f, kotlin.math.min(a.bottom, b.bottom) - kotlin.math.max(a.top, b.top))
+        val inter = ix * iy
+        if (inter <= 0f) return false
+        val union = a.width() * a.height() + b.width() * b.height() - inter
+        return union > 0f && inter / union > 0.2f
+    }
+
+    /** 두 회전행렬이 거의 같은 곳을 보고 있는가 (기억한 자리를 아직 믿어도 되는가) */
+    private fun sameView(a: FloatArray?, b: FloatArray?): Boolean {
+        if (a == null || b == null) return false
+        var trace = 0f
+        for (i in 0..2) {
+            var v = 0f
+            for (k in 0..2) v += a[k * 3 + i] * b[k * 3 + i]
+            trace += v
+        }
+        // 회전각 = acos((trace-1)/2)
+        val c = ((trace - 1f) / 2f).coerceIn(-1f, 1f)
+        return Math.toDegrees(kotlin.math.acos(c).toDouble()) < SAME_VIEW_DEG
     }
 
     /** 화면 갱신. 추론과 무관하게 자주 불린다. */
@@ -755,6 +835,17 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
 
         /** 검출 임계값. 실기기에서 0.05 가 맞았다 — 낮은 점수는 신뢰도 단계와 temporal filter 가 거른다 */
         private const val THRESHOLD = 0.05f
+
+        /** 확대 재검사 간격. 후보가 계속 보여도 이 간격보다 자주 하지 않는다 */
+        private const val VERIFY_GAP_MS = 700L
+
+        /** 버린 자리를 기억하는 시간 */
+        private const val REJECT_TTL_MS = 8000L
+
+        /** 기억한 자리를 믿는 회전 범위. 더 돌리면 잊는다 */
+        private const val SAME_VIEW_DEG = 12.0
+
+        private const val MAX_REJECTED = 4
 
         /** docs/privacy/index.html 을 GitHub Pages 로 공개한 주소 (저장소 공개 후 유효) */
         private const val PRIVACY_POLICY_URL = "https://myaune.github.io/find-my-glasses/privacy/"

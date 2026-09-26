@@ -34,6 +34,12 @@ CLASSES = [
     "remote control",        # 5 — 부가 기능: 리모컨
     "cup",
     "car key",               # 7 — 부가 기능: 열쇠 (차 스마트키). 2026-09-13 추가
+    # 8~11 — 거름 전용 어휘 (2026-09-26 추가). 화면에 띄우지 않는다.
+    # 신발을 안경으로 잡는 오탐이 있었다. 확대 재검사에서 이 단어들이 이기면 버린다.
+    "shoe",
+    "sneaker",
+    "slipper",
+    "sandal",
 ]
 
 
@@ -87,7 +93,10 @@ def main() -> None:
         for i, c in enumerate(CLASSES):
             print(f"  {c:22s} {new[i]:.4f}")
         if args.compare and args.compare.exists():
-            old_n = len(CLASSES) - 1
+            # 기존 모델의 클래스 수는 출력 채널에서 읽는다 (박스 4채널을 뺀다)
+            import onnx
+            shape = onnx.load(str(args.compare)).graph.output[0].type.tensor_type.shape.dim
+            old_n = shape[1].dim_value - 4
             old = top_scores(args.compare, x, old_n)
             diff = float(np.abs(old - new[:old_n]).max())
             print(f"\n기존 모델과 최대 점수차 {diff:.6f} (기존 클래스 {old_n}개)")
