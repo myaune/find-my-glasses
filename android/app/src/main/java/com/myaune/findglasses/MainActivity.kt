@@ -12,6 +12,7 @@ import android.os.Bundle
 import android.os.Looper
 import android.util.Log
 import android.view.View
+import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
@@ -122,6 +123,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        applySystemBarInsets()
 
         analysisExecutor = Executors.newSingleThreadExecutor()
         inferExecutor = Executors.newSingleThreadExecutor()
@@ -172,6 +174,32 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         ads.init()
         ads.attachBanner(binding.bottomBar)
         ads.preloadInterstitial()
+    }
+
+    /**
+     * 상태표시줄·내비게이션바에 가리지 않게 위아래 버튼을 밀어 넣는다.
+     *
+     * targetSdk 35 부터 앱이 시스템 바 아래까지 그린다. 카메라 화면은 화면 끝까지
+     * 채워야 하므로 화면 전체가 아니라 버튼만 민다.
+     */
+    private fun applySystemBarInsets() {
+        val top = listOf(binding.helpButton, binding.spQuality, binding.settingsButton)
+        val baseTop = top.map { (it.layoutParams as ViewGroup.MarginLayoutParams).topMargin }
+        val baseBottom = (binding.bottomBar.layoutParams as ViewGroup.MarginLayoutParams).bottomMargin
+        androidx.core.view.ViewCompat.setOnApplyWindowInsetsListener(binding.root) { _, insets ->
+            val bars = insets.getInsets(androidx.core.view.WindowInsetsCompat.Type.systemBars())
+            top.forEachIndexed { i, v ->
+                (v.layoutParams as ViewGroup.MarginLayoutParams).let {
+                    it.topMargin = baseTop[i] + bars.top
+                    v.layoutParams = it
+                }
+            }
+            (binding.bottomBar.layoutParams as ViewGroup.MarginLayoutParams).let {
+                it.bottomMargin = baseBottom + bars.bottom
+                binding.bottomBar.layoutParams = it
+            }
+            insets
+        }
     }
 
     private fun resetSession() {
