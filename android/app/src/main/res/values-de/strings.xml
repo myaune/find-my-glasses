@@ -55,4 +55,5 @@
     <string name="target_remote">Fernbedienung</string>
     <string name="privacy_policy">Datenschutzerklärung</string>
     <string name="privacy_options">Werbe-Datenschutz</string>
+    <string name="not_this">Das ist es nicht</string>
 </resources>

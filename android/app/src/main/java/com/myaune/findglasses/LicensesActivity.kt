@@ -170,7 +170,7 @@ class LicensesActivity : AppCompatActivity() {
     private fun dp(v: Int) = (v * resources.displayMetrics.density).toInt()
 
     companion object {
-        private val YELLOW = Color.rgb(255, 214, 0)
+        private val YELLOW = Color.rgb(168, 199, 250)   // 강조색 (res/values/colors.xml accent)
 
         /**
          * 앱 소스 코드 위치. AGPL-3.0 의무.

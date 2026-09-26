@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  강조색. 무채색 화면에 이 색 하나만 쓴다 (2026-09-26, 노란색에서 바꿈).
+  검출 박스의 노랑·연두·초록은 신뢰도를 뜻하는 기능색이라 Confidence.kt 에 따로 있다.
+-->
+<resources>
+    <color name="accent">#FFA8C7FA</color>
+    <color name="on_accent">#FF0F1C2E</color>
+</resources>

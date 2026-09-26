@@ -109,6 +109,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
+    <!-- 이거 아니에요 — 헛것을 잡았을 때 사용자가 치운다. 테두리 없이 작게. -->
+    <Button
+        android:id="@+id/btnNotThis"
+        style="@style/Widget.Material3.Button.TextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="2dp"
+        android:textSize="15sp"
+        android:textColor="#D8FFFFFF"
+        android:visibility="gone"
+        android:text="@string/not_this"
+        app:layout_constraintBottom_toTopOf="@id/btnFound"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
     <!-- 다른 물건 찾기 (테스트 안 된 부가 기능). 찾았어요 버튼 아래 가운데. -->
     <TextView
         android:id="@+id/targetButton"
@@ -170,7 +185,7 @@
                 android:layout_marginBottom="24dp"
                 android:textSize="40sp"
                 android:textStyle="bold"
-                android:textColor="#FFD600"
+                android:textColor="@color/accent"
                 android:shadowColor="#000000"
                 android:shadowRadius="12"
                 android:text="@string/celebrate" />

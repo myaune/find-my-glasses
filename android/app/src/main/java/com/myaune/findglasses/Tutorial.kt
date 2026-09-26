@@ -118,7 +118,7 @@ class Tutorial(
 
     private fun dot(active: Boolean) = GradientDrawable().apply {
         shape = GradientDrawable.OVAL
-        setColor(if (active) Color.rgb(255, 214, 0) else Color.rgb(90, 90, 90))
+        setColor(if (active) Color.rgb(168, 199, 250) else Color.rgb(90, 90, 90))
     }
 
     private fun dp(v: Int) = (v * ctx.resources.displayMetrics.density).toInt()
@@ -169,7 +169,7 @@ class Tutorial(
                 setText(p.titleRes)
                 setTextSize(TypedValue.COMPLEX_UNIT_SP, 30f)
                 setTypeface(typeface, android.graphics.Typeface.BOLD)
-                setTextColor(Color.rgb(255, 214, 0))
+                setTextColor(Color.rgb(168, 199, 250))
                 gravity = Gravity.CENTER
             })
             root.addView(TextView(ctx).apply {

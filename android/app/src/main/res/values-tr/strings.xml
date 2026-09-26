@@ -55,4 +55,5 @@
     <string name="target_remote">Kumanda</string>
     <string name="privacy_policy">Gizlilik politikası</string>
     <string name="privacy_options">Reklam gizlilik ayarları</string>
+    <string name="not_this">Bu değil</string>
 </resources>

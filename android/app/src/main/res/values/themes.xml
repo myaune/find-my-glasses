@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  앱 테마. Material3 기본 보라색 대신 무채색 어두운 면 + 앱의 노란색 하나만 강조색으로 쓴다.
-  노란색은 검출 박스·튜토리얼과 같은 색이다.
+  앱 테마. Material3 기본 보라색 대신 무채색 어두운 면 + 은은한 연파랑 하나만 강조색으로 쓴다.
+  검출 박스의 노랑·초록은 신뢰도를 뜻하므로 그대로 두고, 장식용 색만 바꾼다.
 -->
 <resources>
     <style name="Theme.FindGlasses" parent="Theme.Material3.Dark.NoActionBar">
-        <item name="colorPrimary">#FFFFD600</item>
-        <item name="colorOnPrimary">#FF1A1A1A</item>
-        <item name="colorPrimaryContainer">#FF3A3310</item>
-        <item name="colorOnPrimaryContainer">#FFFFE88A</item>
-        <item name="colorSecondary">#FFFFD600</item>
-        <item name="colorOnSecondary">#FF1A1A1A</item>
-        <item name="colorSecondaryContainer">#FF3A3310</item>
-        <item name="colorOnSecondaryContainer">#FFFFE88A</item>
-        <item name="colorTertiary">#FFFFD600</item>
-        <item name="colorOnTertiary">#FF1A1A1A</item>
+        <item name="colorPrimary">#FFA8C7FA</item>
+        <item name="colorOnPrimary">#FF0F1C2E</item>
+        <item name="colorPrimaryContainer">#FF1E2A3C</item>
+        <item name="colorOnPrimaryContainer">#FFCFE0FF</item>
+        <item name="colorSecondary">#FFA8C7FA</item>
+        <item name="colorOnSecondary">#FF0F1C2E</item>
+        <item name="colorSecondaryContainer">#FF1E2A3C</item>
+        <item name="colorOnSecondaryContainer">#FFCFE0FF</item>
+        <item name="colorTertiary">#FFA8C7FA</item>
+        <item name="colorOnTertiary">#FF0F1C2E</item>
         <item name="android:colorBackground">#FF121212</item>
         <item name="colorSurface">#FF1C1C1E</item>
         <item name="colorOnSurface">#FFF2F2F2</item>

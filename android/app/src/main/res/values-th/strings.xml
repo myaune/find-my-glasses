@@ -55,4 +55,5 @@
     <string name="target_remote">รีโมท</string>
     <string name="privacy_policy">นโยบายความเป็นส่วนตัว</string>
     <string name="privacy_options">ความเป็นส่วนตัวของโฆษณา</string>
+    <string name="not_this">ไม่ใช่อันนี้</string>
 </resources>

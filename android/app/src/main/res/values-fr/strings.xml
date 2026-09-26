@@ -55,4 +55,5 @@
     <string name="target_remote">Télécommande</string>
     <string name="privacy_policy">Politique de confidentialité</string>
     <string name="privacy_options">Confidentialité des pubs</string>
+    <string name="not_this">Ce n’est pas ça</string>
 </resources>

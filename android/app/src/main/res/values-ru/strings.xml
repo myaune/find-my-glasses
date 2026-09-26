@@ -55,4 +55,5 @@
     <string name="target_remote">Пульт</string>
     <string name="privacy_policy">Политика конфиденциальности</string>
     <string name="privacy_options">Конфиденциальность рекламы</string>
+    <string name="not_this">Это не то</string>
 </resources>

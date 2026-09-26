@@ -60,4 +60,5 @@
     <string name="target_remote">Mando a distancia</string>
     <string name="privacy_policy">Política de privacidad</string>
     <string name="privacy_options">Privacidad de anuncios</string>
+    <string name="not_this">No es esto</string>
 </resources>

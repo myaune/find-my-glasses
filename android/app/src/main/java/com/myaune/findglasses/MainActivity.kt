@@ -138,6 +138,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         if (ads.enabled) consent.gather { runOnUiThread { startAds() } }
 
         binding.btnFound.setOnClickListener { onFound() }
+        binding.btnNotThis.setOnClickListener { dismissCurrent() }
 
         feedback.voiceEnabled = prefs().getBoolean(PREF_VOICE, true)
         feedback.vibrationEnabled = prefs().getBoolean(PREF_VIBRATION, true)
@@ -387,6 +388,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         feedback.muted = true
 
         binding.btnFound.visibility = View.GONE
+        binding.btnNotThis.visibility = View.GONE
         binding.overlay.setTarget(null, Confidence.LOW, "")
 
         val img = snapshot
@@ -743,6 +745,24 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         return emptyList()
     }
 
+    /**
+     * 사용자가 "이거 아니에요" 를 눌렀다. 지금 보고 있는 자리를 치우고 계속 찾는다.
+     *
+     * 확대 재검사가 놓친 오탐을 사람이 치운다. 자동으로 버린 자리보다 오래 기억한다 —
+     * 사람이 직접 아니라고 한 것이라 더 믿을 만하다.
+     */
+    private fun dismissCurrent() {
+        val now = System.currentTimeMillis()
+        val t = tracker.primary(now) ?: return
+        rejected.add(Rejected(RectF(t.box), latestR, now + MANUAL_EXTRA_MS))
+        if (rejected.size > MAX_REJECTED) rejected.removeAt(0)
+        tracker.reset()
+        patch.clear()
+        feedback.reset()
+        binding.btnNotThis.visibility = View.GONE
+        binding.overlay.setTarget(null, Confidence.LOW, "")
+    }
+
     private fun overlaps(a: RectF, b: RectF): Boolean {
         val ix = kotlin.math.max(0f, kotlin.math.min(a.right, b.right) - kotlin.math.max(a.left, b.left))
         val iy = kotlin.math.max(0f, kotlin.math.min(a.bottom, b.bottom) - kotlin.math.max(a.top, b.top))
@@ -773,6 +793,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         val t = tracker.primary(now)
         runOnUiThread {
             binding.overlay.setFrameSize(fw, fh)
+            binding.btnNotThis.visibility = if (t == null) View.GONE else View.VISIBLE
             if (t == null) {
                 binding.overlay.setTarget(null, Confidence.LOW, "")
                 binding.hint.visibility = View.VISIBLE
@@ -866,6 +887,9 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
 
         /** 버린 자리를 기억하는 시간 */
         private const val REJECT_TTL_MS = 8000L
+
+        /** 사람이 직접 치운 자리는 더 오래 기억한다 */
+        private const val MANUAL_EXTRA_MS = 20000L
 
         /** 기억한 자리를 믿는 회전 범위. 더 돌리면 잊는다 */
         private const val SAME_VIEW_DEG = 12.0
