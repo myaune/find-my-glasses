@@ -37,8 +37,18 @@ def screen(name: str) -> Image.Image:
     """두 화면의 비율을 맞춘다 (900x1760). 짧은 쪽은 아래를 검게 채운다 (내비게이션 자리)."""
     im = Image.open(REL / name).convert("RGB")
     if im.height < 1760:
-        pad = Image.new("RGB", (900, 1760), (0, 0, 0))
+        # 검게 채우면 폰 아래에 띠가 생긴다. 맨 아래 버튼 밑 바닥 줄(26px)만 거울로
+        # 번갈아 이어 붙인다. 버튼까지 비추면 거꾸로 된 버튼이 보인다.
+        extra = 1760 - im.height
+        band = im.crop((0, im.height - 26, 900, im.height))
+        flip = band.transpose(Image.FLIP_TOP_BOTTOM)
+        pad = Image.new("RGB", (900, 1760))
         pad.paste(im, (0, 0))
+        y, k = im.height, 0
+        while y < 1760:
+            pad.paste(flip if k % 2 == 0 else band, (0, y))
+            y += band.height
+            k += 1
         im = pad
     return im
 
