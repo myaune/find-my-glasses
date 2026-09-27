@@ -1,8 +1,9 @@
-"""스토어 스크린샷 두 장 (1080x1920) — 폰 한 대를 크게 비스듬히 눕혀 두 장에 걸치게 한다.
+"""스토어 파노라마 스크린샷 두 장 (1080x1920).
 
-2160x1920 한 판에 그린 뒤 반으로 자른다. 스토어에서 두 장을 나란히 넘겨 보면
-폰 한 대가 이어져 보인다. 폰은 왼쪽 아래에서 오른쪽 위로 눕힌다.
-문구는 비는 자리에 둔다: 1장은 위, 2장은 아래.
+폰 한 대가 두 장의 경계선을 걸치고 서서 각 장에 거의 절반씩 보인다. 1장에서 반쪽을
+보고, 넘기면 나머지가 보인다. 2160x1920 한 판에 그린 뒤 반으로 자른다.
+문구는 장마다 위에 따로 둔다 (한 장만 봐도 말이 되게).
+경계선이 안경 박스를 자르지 않게, 폰을 1장 쪽으로 조금 치우친다.
 
     uv run python scripts/render_store_split.py
 """
@@ -18,12 +19,12 @@ from render_store_marketing import (
 )
 
 SCREEN = "screenshot-2-search.png"
-PHONE_H = 1720          # 폰 긴 변 (px, 1080 폭 기준)
-ANGLE = -38.0           # 시계 방향으로 눕힌다 (위가 오른쪽)
-CENTER = (800, 1070)    # 안경 박스가 1장 안에 온전히 들어오게 이음새 왼쪽에
+PHONE_H = 1560          # 폰 긴 변 (px, 1080 폭 기준)
+ANGLE = -24.0           # 시계 방향으로 기울인다 (위가 오른쪽)
+CENTER = (820, 1250)    # 경계선(1080) 조금 왼쪽 — 안경 박스가 1장 안에 들어온다
 
-TOP_LINES = ("Can’t see", "your glasses?")        # 1장 위 왼쪽
-BOTTOM_LINES = ("Your phone", "can.")             # 2장 아래 오른쪽 (둘째 줄 강조색)
+LINES = [("Can’t see", "your glasses?"),         # 1장 (둘째 줄 강조색)
+         ("Your phone", "can.")]                  # 2장
 
 random.seed(5)
 
@@ -54,9 +55,7 @@ def main() -> None:
     placed = 0
     while placed < 44:
         x, y = random.uniform(40, 2120), random.uniform(60, 1880)
-        if x < 1000 and y < 520:            # 1장 문구 자리
-            continue
-        if x > 1160 and y > 1400:           # 2장 문구 자리
+        if y < 400:                          # 문구 자리
             continue
         placed += 1
         x, y = x * SS, y * SS
@@ -76,14 +75,11 @@ def main() -> None:
     place(canvas, phone(screen(SCREEN), PHONE_H * SS), CENTER[0] * SS, CENTER[1] * SS, ANGLE)
 
     d = ImageDraw.Draw(canvas)
-    f = ImageFont.truetype(FONT_B, 104 * SS)
-    lh = 124 * SS
-    x0, y0 = 90 * SS, 150 * SS
-    d.text((x0, y0), TOP_LINES[0], font=f, fill=WHITE, anchor="ls")
-    d.text((x0, y0 + lh), TOP_LINES[1], font=f, fill=WHITE, anchor="ls")
-    x1, y1 = (2 * W - 90) * SS, (H - 150) * SS
-    d.text((x1, y1 - lh), BOTTOM_LINES[0], font=f, fill=WHITE, anchor="rs")
-    d.text((x1, y1), BOTTOM_LINES[1], font=f, fill=ACCENT, anchor="rs")
+    f = ImageFont.truetype(FONT_B, 92 * SS)
+    for i, (l1, l2) in enumerate(LINES):
+        cx = (i * W + W // 2) * SS
+        d.text((cx, 185 * SS), l1, font=f, fill=WHITE, anchor="ms")
+        d.text((cx, 295 * SS), l2, font=f, fill=ACCENT, anchor="ms")
 
     full = canvas.convert("RGB").resize((W * 2, H), Image.LANCZOS)
     full.save(REL / "store-split-spread.png")
