@@ -19,9 +19,9 @@ from render_store_marketing import (
 )
 
 SCREEN = "screenshot-2-search.png"
-PHONE_H = 1560          # 폰 긴 변 (px, 1080 폭 기준)
-ANGLE = -24.0           # 시계 방향으로 기울인다 (위가 오른쪽)
-CENTER = (820, 1250)    # 경계선(1080) 조금 왼쪽 — 안경 박스가 1장 안에 들어온다
+PHONE_H = 1900          # 폰 긴 변 (px, 1080 폭 기준) — 두 장 폭을 거의 다 쓴다
+ANGLE = -60.0           # 크게 눕힌다 (위가 오른쪽 위)
+CENTER = (1310, 1230)   # 경계선이 폰 길이의 약 64% 지점 — 안경 박스는 2장, 버튼 쪽은 1장
 
 LINES = [("Can’t see", "your glasses?"),         # 1장 (둘째 줄 강조색)
          ("Your phone", "can.")]                  # 2장
