@@ -171,11 +171,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
+        <!-- 사진 뒤로 도는 햇살 -->
+        <com.myaune.findglasses.RaysView
+            android:id="@+id/rays"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:alpha="0" />
+
         <LinearLayout
+            android:id="@+id/celebrateContent"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
             android:orientation="vertical"
+            android:clipChildren="false"
+            android:clipToPadding="false"
             android:padding="32dp">
 
             <TextView
@@ -183,11 +193,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="24dp"
-                android:textSize="40sp"
+                android:textSize="44sp"
                 android:textStyle="bold"
-                android:textColor="@color/accent"
-                android:shadowColor="#000000"
-                android:shadowRadius="12"
+                android:textColor="#FFFFFFFF"
+                android:shadowColor="@color/accent"
+                android:shadowRadius="28"
                 android:text="@string/celebrate" />
 
             <ImageView
@@ -207,6 +217,14 @@
             android:id="@+id/confetti"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
+
+        <!-- 찾은 순간 번쩍 -->
+        <View
+            android:id="@+id/flash"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#FFFFFFFF"
+            android:alpha="0" />
     </FrameLayout>
 
     <!-- ── 튜토리얼 (첫 실행) ──────────────────────────────────────────

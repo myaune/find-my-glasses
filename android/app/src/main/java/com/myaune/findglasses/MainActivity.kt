@@ -428,13 +428,13 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         }
         binding.celebration.visibility = View.VISIBLE
         binding.celebration.alpha = 0f
-        binding.celebration.animate().alpha(1f).setDuration(220).start()
-        binding.confetti.post { binding.confetti.burst() }
-        // 한 번 더 — 첫 폭죽이 떨어질 즈음
-        uiHandler.postDelayed({ binding.confetti.burst() }, 1100)
+        binding.celebration.animate().alpha(1f).setDuration(160).start()
+        // 크기를 재야 하므로 한 번 그려진 뒤에 시작한다
+        binding.celebration.post { playCelebration() }
 
         uiHandler.postDelayed({
             ads.showInterstitial {
+                stopCelebration()
                 binding.celebration.visibility = View.GONE
                 binding.celebrateImage.setImageDrawable(null)
                 resetSession()
@@ -443,6 +443,105 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
                 if (!tutorialOpen) feedback.muted = false
             }
         }, CELEBRATE_MS)
+    }
+
+    private val celebrationAnims = ArrayList<android.animation.Animator>()
+
+    /**
+     * 찾았어요 연출. 0.1초 안에 "팡" 하고, 1초 뒤에 한 번 더 터진다.
+     *
+     *   0ms    화면 번쩍 + 사진 자리에서 사방으로 폭발 + 화면 흔들림
+     *   60ms   사진이 작게 튀어나와 통통 튀며 커진다. 뒤에서 햇살이 돈다
+     *   140ms  "찾았어요!" 가 크게 쾅 내려앉고, 이후 계속 숨쉬듯 커졌다 작아진다
+     *   350ms  사진 둘레 반짝이
+     *   1100ms 양옆 대포 + 반짝이 한 번 더
+     */
+    private fun playCelebration() {
+        val b = binding
+        val img = b.celebrateImage
+        val title = b.celebrateTitle
+        val d = resources.displayMetrics.density
+
+        // 사진 가운데 (사진이 없으면 화면 가운데)
+        val loc = IntArray(2)
+        val root = IntArray(2)
+        b.celebration.getLocationInWindow(root)
+        val (cx, cy) = if (img.visibility == View.VISIBLE && img.width > 0) {
+            img.getLocationInWindow(loc)
+            (loc[0] - root[0] + img.width / 2f) to (loc[1] - root[1] + img.height / 2f)
+        } else {
+            b.celebration.width / 2f to b.celebration.height / 2f
+        }
+
+        // 번쩍
+        b.flash.alpha = 0.9f
+        b.flash.animate().alpha(0f).setDuration(320)
+            .setInterpolator(android.view.animation.DecelerateInterpolator()).start()
+
+        // 햇살
+        b.rays.setCenter(cx, cy)
+        b.rays.alpha = 0f
+        b.rays.start()
+        b.rays.animate().alpha(1f).setDuration(500).start()
+
+        // 폭발
+        b.confetti.burstCenter(cx, cy)
+
+        // 흔들림
+        android.animation.ObjectAnimator.ofFloat(
+            b.celebrateContent, View.TRANSLATION_X,
+            0f, -14 * d, 12 * d, -9 * d, 6 * d, -3 * d, 0f,
+        ).apply { duration = 380; start() }.also { celebrationAnims += it }
+
+        // 사진 — 작게 튀어나와 통통
+        img.scaleX = 0.25f; img.scaleY = 0.25f; img.rotation = -14f; img.alpha = 0f
+        img.animate().scaleX(1f).scaleY(1f).rotation(0f).alpha(1f)
+            .setStartDelay(60).setDuration(560)
+            .setInterpolator(android.view.animation.OvershootInterpolator(2.6f)).start()
+
+        // 제목 — 크게 쾅 내려앉기
+        title.scaleX = 2.6f; title.scaleY = 2.6f; title.alpha = 0f
+        title.animate().scaleX(1f).scaleY(1f).alpha(1f)
+            .setStartDelay(140).setDuration(460)
+            .setInterpolator(android.view.animation.OvershootInterpolator(3f))
+            .withEndAction {
+                // 이후 계속 숨쉬기
+                val pulse = android.animation.ObjectAnimator.ofPropertyValuesHolder(
+                    title,
+                    android.animation.PropertyValuesHolder.ofFloat(View.SCALE_X, 1f, 1.08f),
+                    android.animation.PropertyValuesHolder.ofFloat(View.SCALE_Y, 1f, 1.08f),
+                ).apply {
+                    duration = 520
+                    repeatCount = android.animation.ValueAnimator.INFINITE
+                    repeatMode = android.animation.ValueAnimator.REVERSE
+                    interpolator = android.view.animation.AccelerateDecelerateInterpolator()
+                    start()
+                }
+                celebrationAnims += pulse
+            }.start()
+
+        val r = (if (img.visibility == View.VISIBLE) maxOf(img.width, img.height) / 2f
+                 else b.celebration.width * 0.3f).coerceAtLeast(80 * d)
+        uiHandler.postDelayed({ if (celebrating) b.confetti.sparkle(cx, cy, r) }, 350)
+        uiHandler.postDelayed({
+            if (!celebrating) return@postDelayed
+            b.confetti.burstSides()
+            b.confetti.sparkle(cx, cy, r, 12)
+        }, 1100)
+    }
+
+    private fun stopCelebration() {
+        celebrationAnims.forEach { it.cancel() }
+        celebrationAnims.clear()
+        val b = binding
+        listOf(b.celebrateTitle, b.celebrateImage, b.flash, b.rays).forEach { it.animate().cancel() }
+        b.rays.stop()
+        b.rays.alpha = 0f
+        b.flash.alpha = 0f
+        b.confetti.clear()
+        b.celebrateContent.translationX = 0f
+        b.celebrateTitle.apply { scaleX = 1f; scaleY = 1f; alpha = 1f }
+        b.celebrateImage.apply { scaleX = 1f; scaleY = 1f; rotation = 0f; alpha = 1f }
     }
 
     // ── 모델 ────────────────────────────────────────────────────────────────
@@ -954,6 +1053,6 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         )
 
         /** 축하 화면을 보여준 뒤 광고로 넘어가기까지 */
-        private const val CELEBRATE_MS = 2800L
+        private const val CELEBRATE_MS = 3000L
     }
 }
