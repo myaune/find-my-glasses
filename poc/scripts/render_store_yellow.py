@@ -28,9 +28,12 @@ TILES = [
 ]
 N = len(TILES)
 PHONE_H = 1300
-PHONE_Y = 1140
+PHONE_Y = 1152
 TEXT_Y = (175, 280)
 ORNAMENT_Y = 400
+# 스토어가 스크린샷 사이에 두는 간격 (1080 폭 기준). 정확한 값은 공개된 문서에서 못 찾았다.
+# 애플 가이드의 약 5% (1125 폭에 56px) 를 따라 48px 로 둔다. 이 간격에 걸린 그림은 버려진다.
+GAP = 48
 PHOTO_FADE = (330, 820)   # 1장: 이 높이 사이에서 노랑 → 사진으로 스르륵 바뀐다
 
 random.seed(8)
@@ -78,8 +81,13 @@ def blurry_room(w: int, h: int) -> Image.Image:
     return big.filter(ImageFilter.GaussianBlur(45 * SS))
 
 
+def tile_x(i: int) -> int:
+    """i 번째 장의 왼쪽 끝 (디자인 판 좌표, SS 배율 전). 장 사이에 스토어 간격만큼 빈 틈을 둔다."""
+    return i * (W + GAP)
+
+
 def main() -> None:
-    PW, PH = W * N * SS, H * SS
+    PW, PH = (W * N + GAP * (N - 1)) * SS, H * SS
     canvas = Image.new("RGBA", (PW, PH), YELLOW + (255,))
 
     # 1장: 흐린 사진을 깔고, 위쪽은 노랑에서 사진으로 부드럽게 넘어간다
@@ -94,55 +102,64 @@ def main() -> None:
     room.putalpha(fade)
     canvas.alpha_composite(room, (0, top))
 
-    # 폰은 따로 그려 두고, 폰 자리를 경계 안경이 피하게 한다
     phones = Image.new("RGBA", (PW, PH), (0, 0, 0, 0))
     for i, (name, _, ang) in enumerate(TILES):
         if name:
-            place(phones, phone(screen(name), PHONE_H * SS), (i * W + W // 2) * SS, PHONE_Y * SS, ang)
-    busy = phones.split()[3].point(lambda a: 255 if a > 20 else 0).filter(ImageFilter.MaxFilter(41))
+            place(phones, phone(screen(name), PHONE_H * SS), (tile_x(i) + W // 2) * SS, PHONE_Y * SS, ang)
 
-    # 2·3장 배경 안경 패턴 — 들쭉날쭉한 격자에 크고 작은 안경. 큰 것은 살짝 흐리게.
-    # 1장(흐린 방)으로는 넘어가지 않는다. 제목 자리는 비운다.
-    cell = 300 * SS
-    x_start = W * SS
+    # 2·3장 배경 안경 — 개수는 적게, 크기 차이는 크게 (아주 큰 것 / 중간 / 작은 것).
+    # 서로 너무 붙지 않게 놓는다. 1장으로는 넘어가지 않고, 제목 자리는 비운다.
+    # 2|3 사이 간격에 걸친 안경은 간격 부분이 버려져서, 스토어에서 나란히 보면 이어져 보인다.
+    x_lo = (tile_x(1) + 30) * SS
+    x_hi = PW
+    sizes = [("huge", 3), ("mid", 4), ("small", 7)]
     pattern = Image.new("RGBA", (PW, PH), (0, 0, 0, 0))
-    for row in range(PH // cell + 1):
-        for col in range((PW - x_start) // cell + 1):
-            big = random.random() < 0.35
-            gw = int((random.uniform(260, 360) if big else random.uniform(110, 170)) * SS)
-            ang = random.uniform(-30, 30)
-            spr = glasses_sprite(gw, INK + (45 if big else 60,)).rotate(ang, resample=Image.BICUBIC, expand=True)
-            if big:
-                spr = spr.filter(ImageFilter.GaussianBlur(4 * SS))
-            ox = (cell // 2) * (row % 2)                      # 줄마다 반 칸 어긋나게
-            cx = x_start + col * cell + ox + random.randint(-50, 50) * SS
-            cy = row * cell + cell // 2 + random.randint(-50, 50) * SS
-            x, y = cx - spr.width // 2, cy - spr.height // 2
-            if x < x_start + 20 * SS or cy < 470 * SS:        # 1장 쪽, 제목 자리
-                continue
-            pattern.alpha_composite(spr, (max(0, x), max(0, y)))
+    placed = []
+    for kind, count in sizes:
+        for _ in range(count):
+            for _try in range(300):
+                if kind == "huge":
+                    gw, alpha, blur = random.uniform(560, 760), 36, 9
+                elif kind == "mid":
+                    gw, alpha, blur = random.uniform(260, 360), 48, 4
+                else:
+                    gw, alpha, blur = random.uniform(90, 140), 70, 0
+                gw = int(gw * SS)
+                spr = glasses_sprite(gw, INK + (alpha,)).rotate(random.uniform(-30, 30),
+                                                                resample=Image.BICUBIC, expand=True)
+                if blur:
+                    spr = spr.filter(ImageFilter.GaussianBlur(blur * SS))
+                r = max(spr.width, spr.height) / 2
+                cx = random.uniform(x_lo + r * 0.6, x_hi - r * 0.3)
+                cy = random.uniform(470 * SS + r * 0.5, PH - r * 0.2)
+                if cx - spr.width / 2 < x_lo:
+                    continue
+                if any((cx - px) ** 2 + (cy - py) ** 2 < ((r + pr) * 0.75) ** 2 for px, py, pr in placed):
+                    continue
+                pattern.alpha_composite(spr, (int(cx - spr.width / 2), int(cy - spr.height / 2))
+                                        if cy - spr.height / 2 >= 0 else (int(cx - spr.width / 2), 0))
+                placed.append((cx, cy, r))
+                break
     canvas.alpha_composite(pattern)
-
     canvas.alpha_composite(phones)
 
     f = ImageFont.truetype(FB, 80 * SS)
     d = ImageDraw.Draw(canvas)
-    orn_ink = glasses_sprite(130 * SS, INK + (170,))
-    orn_white = glasses_sprite(130 * SS, (255, 255, 255, 220))
+    orn = glasses_sprite(130 * SS, INK + (170,))
     for i, (name, (l1, l2), _) in enumerate(TILES):
-        cx = (i * W + W // 2) * SS
-        col = INK
-        d.text((cx, TEXT_Y[0] * SS), l1, font=f, fill=col, anchor="mm")
-        d.text((cx, TEXT_Y[1] * SS), l2, font=f, fill=col, anchor="mm")
+        cx = (tile_x(i) + W // 2) * SS
+        d.text((cx, TEXT_Y[0] * SS), l1, font=f, fill=INK, anchor="mm")
+        d.text((cx, TEXT_Y[1] * SS), l2, font=f, fill=INK, anchor="mm")
         if name is not None:
-            canvas.alpha_composite(orn_ink, (cx - orn_ink.width // 2, ORNAMENT_Y * SS - orn_ink.height // 2))
+            canvas.alpha_composite(orn, (cx - orn.width // 2, ORNAMENT_Y * SS - orn.height // 2))
 
-    full = canvas.convert("RGB").resize((W * N, H), Image.LANCZOS)
+    full = canvas.convert("RGB").resize((PW // SS, H), Image.LANCZOS)
     full.save(REL / "store-yellow-spread.png")
     for i in range(N):
         p = REL / f"store-yellow-{i + 1}.png"
-        full.crop((i * W, 0, (i + 1) * W, H)).save(p)
+        full.crop((tile_x(i), 0, tile_x(i) + W, H)).save(p)
         print(p)
+    print("glasses:", len(placed))
 
 
 if __name__ == "__main__":
