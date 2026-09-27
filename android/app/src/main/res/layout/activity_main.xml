@@ -171,9 +171,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <!-- 사진 뒤로 도는 햇살 -->
-        <com.myaune.findglasses.RaysView
-            android:id="@+id/rays"
+        <!-- 사진 뒤로 숨쉬는 빛 -->
+        <com.myaune.findglasses.GlowView
+            android:id="@+id/glow"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:alpha="0" />
@@ -188,17 +188,16 @@
             android:clipToPadding="false"
             android:padding="32dp">
 
-            <TextView
+            <!-- 찾았어요! — 글자를 한 자씩 떨어뜨리려고 칸만 둔다. 글자는 코드에서 채운다. -->
+            <LinearLayout
                 android:id="@+id/celebrateTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="24dp"
-                android:textSize="44sp"
-                android:textStyle="bold"
-                android:textColor="#FFFFFFFF"
-                android:shadowColor="@color/accent"
-                android:shadowRadius="28"
-                android:text="@string/celebrate" />
+                android:orientation="horizontal"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:contentDescription="@string/celebrate" />
 
             <ImageView
                 android:id="@+id/celebrateImage"

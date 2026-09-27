@@ -123,6 +123,9 @@ class Feedback(private val context: Context) {
         vibrate(longArrayOf(0, 100, 90, 100, 90, 220), intArrayOf(0, 200, 0, 200, 0, 255))
     }
 
+    /** 축하 화면에서 불꽃이 터질 때 짧게 톡 */
+    fun pop() = vibrate(longArrayOf(0, 28), intArrayOf(0, 170))
+
     fun reset() {
         lastTier = null
         lostSinceMs = 0L

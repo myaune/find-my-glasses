@@ -448,19 +448,26 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
     private val celebrationAnims = ArrayList<android.animation.Animator>()
 
     /**
-     * 찾았어요 연출. 0.1초 안에 "팡" 하고, 1초 뒤에 한 번 더 터진다.
+     * 찾았어요 연출. 찾는 순간 "팡", 이후 광고 전까지 계속 뭔가 터진다.
      *
-     *   0ms    화면 번쩍 + 사진 자리에서 사방으로 폭발 + 화면 흔들림
-     *   60ms   사진이 작게 튀어나와 통통 튀며 커진다. 뒤에서 햇살이 돈다
-     *   140ms  "찾았어요!" 가 크게 쾅 내려앉고, 이후 계속 숨쉬듯 커졌다 작아진다
-     *   350ms  사진 둘레 반짝이
-     *   1100ms 양옆 대포 + 반짝이 한 번 더
+     *   0ms     화면 번쩍 + 충격파 링 두 겹 + 사진 자리 폭발 + 화면 "쿵"(흔들림·살짝 커짐)
+     *   60ms    사진이 작게 튀어나와 통통 튀며 커진다. 뒤에서 빛이 숨쉰다
+     *   140ms~  "찾았어요!" 가 한 글자씩 떨어져 튕기고, 이후 파도타기처럼 출렁인다
+     *   350ms   사진 둘레 반짝이
+     *   600ms   불꽃 1발 (왼쪽)          터질 때마다 폰이 톡
+     *   1100ms  양옆 대포 + 충격파 + 반짝이
+     *   1300ms  불꽃 2발 (오른쪽)
+     *   1500ms~ 위에서 색종이 비
+     *   1900ms  불꽃 3발 (가운데)
+     *
+     * 방사형 줄무늬(햇살)는 쓰지 않는다. 욱일기를 떠올리게 한다.
      */
     private fun playCelebration() {
         val b = binding
         val img = b.celebrateImage
-        val title = b.celebrateTitle
         val d = resources.displayMetrics.density
+        val w = b.celebration.width.toFloat()
+        val h = b.celebration.height.toFloat()
 
         // 사진 가운데 (사진이 없으면 화면 가운데)
         val loc = IntArray(2)
@@ -470,28 +477,36 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
             img.getLocationInWindow(loc)
             (loc[0] - root[0] + img.width / 2f) to (loc[1] - root[1] + img.height / 2f)
         } else {
-            b.celebration.width / 2f to b.celebration.height / 2f
+            w / 2f to h / 2f
         }
+
+        b.confetti.onPop = { feedback.pop() }
 
         // 번쩍
         b.flash.alpha = 0.9f
         b.flash.animate().alpha(0f).setDuration(320)
             .setInterpolator(android.view.animation.DecelerateInterpolator()).start()
 
-        // 햇살
-        b.rays.setCenter(cx, cy)
-        b.rays.alpha = 0f
-        b.rays.start()
-        b.rays.animate().alpha(1f).setDuration(500).start()
+        // 뒤에서 숨쉬는 빛
+        b.glow.setCenter(cx, cy)
+        b.glow.alpha = 0f
+        b.glow.start()
+        b.glow.animate().alpha(1f).setDuration(400).start()
 
-        // 폭발
+        // 충격파 두 겹 + 폭발
+        b.confetti.ring(cx, cy, android.graphics.Color.WHITE)
+        uiHandler.postDelayed({ if (celebrating) b.confetti.ring(cx, cy, getColor(R.color.accent), 0.6f) }, 120)
         b.confetti.burstCenter(cx, cy)
 
-        // 흔들림
+        // 쿵 — 좌우로 흔들리며 살짝 커졌다 돌아온다
+        val content = b.celebrateContent
         android.animation.ObjectAnimator.ofFloat(
-            b.celebrateContent, View.TRANSLATION_X,
+            content, View.TRANSLATION_X,
             0f, -14 * d, 12 * d, -9 * d, 6 * d, -3 * d, 0f,
         ).apply { duration = 380; start() }.also { celebrationAnims += it }
+        content.scaleX = 1.07f; content.scaleY = 1.07f
+        content.animate().scaleX(1f).scaleY(1f).setDuration(420)
+            .setInterpolator(android.view.animation.OvershootInterpolator(4f)).start()
 
         // 사진 — 작게 튀어나와 통통
         img.scaleX = 0.25f; img.scaleY = 0.25f; img.rotation = -14f; img.alpha = 0f
@@ -499,48 +514,105 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
             .setStartDelay(60).setDuration(560)
             .setInterpolator(android.view.animation.OvershootInterpolator(2.6f)).start()
 
-        // 제목 — 크게 쾅 내려앉기
-        title.scaleX = 2.6f; title.scaleY = 2.6f; title.alpha = 0f
-        title.animate().scaleX(1f).scaleY(1f).alpha(1f)
-            .setStartDelay(140).setDuration(460)
-            .setInterpolator(android.view.animation.OvershootInterpolator(3f))
-            .withEndAction {
-                // 이후 계속 숨쉬기
-                val pulse = android.animation.ObjectAnimator.ofPropertyValuesHolder(
-                    title,
-                    android.animation.PropertyValuesHolder.ofFloat(View.SCALE_X, 1f, 1.08f),
-                    android.animation.PropertyValuesHolder.ofFloat(View.SCALE_Y, 1f, 1.08f),
-                ).apply {
-                    duration = 520
-                    repeatCount = android.animation.ValueAnimator.INFINITE
-                    repeatMode = android.animation.ValueAnimator.REVERSE
-                    interpolator = android.view.animation.AccelerateDecelerateInterpolator()
-                    start()
-                }
-                celebrationAnims += pulse
-            }.start()
+        dropTitleLetters(d)
 
         val r = (if (img.visibility == View.VISIBLE) maxOf(img.width, img.height) / 2f
-                 else b.celebration.width * 0.3f).coerceAtLeast(80 * d)
-        uiHandler.postDelayed({ if (celebrating) b.confetti.sparkle(cx, cy, r) }, 350)
-        uiHandler.postDelayed({
-            if (!celebrating) return@postDelayed
+                 else w * 0.3f).coerceAtLeast(80 * d)
+        fun later(ms: Long, block: () -> Unit) =
+            uiHandler.postDelayed({ if (celebrating) block() }, ms)
+        later(350) { b.confetti.sparkle(cx, cy, r) }
+        later(600) { b.confetti.firework(w * 0.24f, h * 0.2f) }
+        later(1100) {
             b.confetti.burstSides()
+            b.confetti.ring(cx, cy, getColor(R.color.accent))
             b.confetti.sparkle(cx, cy, r, 12)
-        }, 1100)
+        }
+        later(1300) { b.confetti.firework(w * 0.78f, h * 0.16f) }
+        later(1500) { b.confetti.rain(CELEBRATE_MS - 1500) }
+        later(1900) { b.confetti.firework(w * 0.45f, h * 0.12f) }
+    }
+
+    /**
+     * "찾았어요!" 를 한 글자씩 위에서 떨어뜨리고, 다 내려앉으면 파도타기처럼 출렁이게 한다.
+     *
+     * 아랍어·힌디어·태국어는 글자를 떼면 모양이 깨진다 (이어 쓰거나 겹쳐 쓰는 글자라서).
+     * 그 언어들은 통째로 하나의 글자처럼 다룬다.
+     */
+    private fun dropTitleLetters(d: Float) {
+        val row = binding.celebrateTitle
+        row.removeAllViews()
+        val text = getString(R.string.celebrate)
+        val joined = text.any { it in '\u0600'..'\u06FF' || it in '\u0900'..'\u097F' || it in '\u0E00'..'\u0E7F' }
+        val parts = if (joined) listOf(text) else {
+            val it = java.text.BreakIterator.getCharacterInstance()
+            it.setText(text)
+            val out = ArrayList<String>()
+            var start = it.first()
+            var end = it.next()
+            while (end != java.text.BreakIterator.DONE) {
+                out += text.substring(start, end)
+                start = end
+                end = it.next()
+            }
+            out
+        }
+
+        val letters = parts.map { part ->
+            android.widget.TextView(this).apply {
+                this.text = part
+                textSize = 46f
+                setTypeface(typeface, android.graphics.Typeface.BOLD)
+                setTextColor(android.graphics.Color.WHITE)
+                setShadowLayer(28f, 0f, 0f, getColor(R.color.accent))
+                includeFontPadding = false
+                row.addView(this)
+            }
+        }
+
+        val stagger = if (letters.size > 8) 45L else 70L
+        letters.forEachIndexed { i, v ->
+            v.alpha = 0f
+            v.translationY = -140 * d
+            v.scaleX = 0.2f; v.scaleY = 0.2f
+            v.rotation = if (i % 2 == 0) -25f else 25f
+            v.animate().alpha(1f).translationY(0f).scaleX(1f).scaleY(1f).rotation(0f)
+                .setStartDelay(140 + i * stagger).setDuration(420)
+                .setInterpolator(android.view.animation.OvershootInterpolator(3.2f)).start()
+        }
+
+        // 다 내려앉으면 파도타기 — 글자마다 위상을 밀어 한 글자씩 출렁인다
+        val wave = android.animation.ValueAnimator.ofFloat(0f, (Math.PI * 2).toFloat()).apply {
+            duration = 900
+            repeatCount = android.animation.ValueAnimator.INFINITE
+            interpolator = android.view.animation.LinearInterpolator()
+            startDelay = 140 + letters.size * stagger + 420
+            addUpdateListener { a ->
+                val t = a.animatedValue as Float
+                letters.forEachIndexed { i, v ->
+                    val k = kotlin.math.sin(t - i * 0.6f).coerceAtLeast(0f)
+                    v.translationY = -10 * d * k
+                    val sc = 1f + 0.12f * k
+                    v.scaleX = sc; v.scaleY = sc
+                }
+            }
+            start()
+        }
+        celebrationAnims += wave
     }
 
     private fun stopCelebration() {
         celebrationAnims.forEach { it.cancel() }
         celebrationAnims.clear()
         val b = binding
-        listOf(b.celebrateTitle, b.celebrateImage, b.flash, b.rays).forEach { it.animate().cancel() }
-        b.rays.stop()
-        b.rays.alpha = 0f
+        listOf(b.celebrateImage, b.flash, b.glow, b.celebrateContent).forEach { it.animate().cancel() }
+        for (i in 0 until b.celebrateTitle.childCount) b.celebrateTitle.getChildAt(i).animate().cancel()
+        b.celebrateTitle.removeAllViews()
+        b.glow.stop()
+        b.glow.alpha = 0f
         b.flash.alpha = 0f
         b.confetti.clear()
-        b.celebrateContent.translationX = 0f
-        b.celebrateTitle.apply { scaleX = 1f; scaleY = 1f; alpha = 1f }
+        b.confetti.onPop = null
+        b.celebrateContent.apply { translationX = 0f; scaleX = 1f; scaleY = 1f }
         b.celebrateImage.apply { scaleX = 1f; scaleY = 1f; rotation = 0f; alpha = 1f }
     }
 
@@ -1053,6 +1125,6 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         )
 
         /** 축하 화면을 보여준 뒤 광고로 넘어가기까지 */
-        private const val CELEBRATE_MS = 3000L
+        private const val CELEBRATE_MS = 3200L
     }
 }
