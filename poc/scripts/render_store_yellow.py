@@ -107,39 +107,54 @@ def main() -> None:
         if name:
             place(phones, phone(screen(name), PHONE_H * SS), (tile_x(i) + W // 2) * SS, PHONE_Y * SS, ang)
 
-    # 2·3장 배경 안경 — 개수는 적게, 크기 차이는 크게 (아주 큰 것 / 중간 / 작은 것).
-    # 서로 너무 붙지 않게 놓는다. 1장으로는 넘어가지 않고, 제목 자리는 비운다.
+    # 2·3장 배경 안경 — 개수는 적게, 크기 차이는 크게. 안경마다 흐림·진하기를 다르게 준다.
+    # 1장으로는 넘어가지 않고, 제목 자리는 비운다.
     # 2|3 사이 간격에 걸친 안경은 간격 부분이 버려져서, 스토어에서 나란히 보면 이어져 보인다.
     x_lo = (tile_x(1) + 30) * SS
     x_hi = PW
-    sizes = [("huge", 3), ("mid", 4), ("small", 7)]
     pattern = Image.new("RGBA", (PW, PH), (0, 0, 0, 0))
     placed = []
-    for kind, count in sizes:
+
+    def sprite(gw_px: float, ang: float) -> Image.Image:
+        alpha = int(random.uniform(28, 95))                     # 진하기 (회색 정도)
+        blur = random.choice((0, 0, 2, 4, 7, 11))               # 흐림
+        spr = glasses_sprite(int(gw_px * SS), INK + (alpha,)).rotate(ang, resample=Image.BICUBIC, expand=True)
+        return spr.filter(ImageFilter.GaussianBlur(blur * SS)) if blur else spr
+
+    def put(spr: Image.Image, cx: float, cy: float) -> None:
+        pattern.alpha_composite(spr, (int(cx - spr.width / 2), max(0, int(cy - spr.height / 2))))
+        placed.append((cx, cy, max(spr.width, spr.height) / 2))
+
+    def free(cx: float, cy: float, r: float) -> bool:
+        return all((cx - px) ** 2 + (cy - py) ** 2 >= ((r + pr) * 0.75) ** 2 for px, py, pr in placed)
+
+    # 1) 2|3 경계에 걸친 큰 안경 — 많이 기울여서
+    for cy in (random.uniform(820, 1000), random.uniform(1480, 1620)):
+        spr = sprite(random.uniform(560, 720), random.uniform(35, 60) * random.choice((1, -1)))
+        put(spr, (tile_x(2) - GAP / 2) * SS, cy * SS)
+
+    # 2) 2장 왼쪽 빈 띠에 작은·중간 안경 몇 개
+    for cy in (620, 1080, 1560):
+        for _try in range(100):
+            spr = sprite(random.uniform(90, 220), random.uniform(-35, 35))
+            r = max(spr.width, spr.height) / 2
+            cx = random.uniform(x_lo + spr.width / 2, (tile_x(1) + 230) * SS)
+            y = (cy + random.uniform(-120, 120)) * SS
+            if free(cx, y, r):
+                put(spr, cx, y)
+                break
+
+    # 3) 나머지 — 아주 큰 것 / 중간 / 작은 것을 흩어서
+    for lo, hi, count in ((560, 760, 2), (260, 360, 3), (90, 140, 5)):
         for _ in range(count):
             for _try in range(300):
-                if kind == "huge":
-                    gw, alpha, blur = random.uniform(560, 760), 36, 9
-                elif kind == "mid":
-                    gw, alpha, blur = random.uniform(260, 360), 48, 4
-                else:
-                    gw, alpha, blur = random.uniform(90, 140), 70, 0
-                gw = int(gw * SS)
-                spr = glasses_sprite(gw, INK + (alpha,)).rotate(random.uniform(-30, 30),
-                                                                resample=Image.BICUBIC, expand=True)
-                if blur:
-                    spr = spr.filter(ImageFilter.GaussianBlur(blur * SS))
+                spr = sprite(random.uniform(lo, hi), random.uniform(-30, 30))
                 r = max(spr.width, spr.height) / 2
-                cx = random.uniform(x_lo + r * 0.6, x_hi - r * 0.3)
+                cx = random.uniform(x_lo + spr.width / 2, x_hi - r * 0.3)
                 cy = random.uniform(470 * SS + r * 0.5, PH - r * 0.2)
-                if cx - spr.width / 2 < x_lo:
-                    continue
-                if any((cx - px) ** 2 + (cy - py) ** 2 < ((r + pr) * 0.75) ** 2 for px, py, pr in placed):
-                    continue
-                pattern.alpha_composite(spr, (int(cx - spr.width / 2), int(cy - spr.height / 2))
-                                        if cy - spr.height / 2 >= 0 else (int(cx - spr.width / 2), 0))
-                placed.append((cx, cy, r))
-                break
+                if free(cx, cy, r):
+                    put(spr, cx, cy)
+                    break
     canvas.alpha_composite(pattern)
     canvas.alpha_composite(phones)
 
