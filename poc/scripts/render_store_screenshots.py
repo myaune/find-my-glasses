@@ -1,8 +1,8 @@
 """스토어 스크린샷 두 장을 만든다 (폰에서 찍은 예전 버전 화면 → 지금 버전 모양으로).
 
 - 상태바, 내비게이션바, 하단 테스트 광고 줄을 잘라낸다 (900x1696, Play 의 2:1 제한 안).
-- 찾는 화면: 찾았어요 버튼을 강조색(연파랑)으로, "다른 물건" 버튼을 지금 자리(가운데 아래)로,
-  "이거 아니에요" 를 버튼 위에 넣는다. 예전 "다른 물건" 자리는 주변 배경으로 메운다.
+- 찾는 화면: 찾았어요 버튼을 제자리에서 강조색(연파랑)으로 바꾸고 "이거 아니에요" 를 위에 얹는다.
+  사진(카메라 화면)은 원본 그대로 둔다 — 옮기거나 메우지 않는다.
 - 찾았어요 화면: 노란 제목·테두리를 지금 색(흰 글자+파란 빛, 파란 테두리)으로 바꾸고
   지금 버전의 연출(숨쉬는 빛, 충격파, 불꽃, 반짝이, 색종이)을 합성한다.
 
@@ -58,57 +58,17 @@ def search_screen(src: Path) -> Image.Image:
     inside = np.asarray(bmask) > 0
     new = remap(btn, (208, 188, 252), (55, 32, 112), ACCENT, ON_ACCENT)
     btn[inside] = new[inside]
-    button = Image.fromarray(btn.copy())
 
-    # ── 비는 자리를 주변 배경을 거울처럼 비춰서 메운다 (번지지 않고 무늬가 이어진다).
-    # 버튼 모양 안쪽만 메우고 가장자리는 부드럽게 섞는다. 네모로 메우면 경계가 보인다.
-    orig = np.asarray(Image.open(src).convert("RGB"))
-    H0, W0 = orig.shape[:2]
-
-    def pill_mask(x0, y0, x1, y1, grow):
-        m = Image.new("L", (W0, H0), 0)
-        ImageDraw.Draw(m).rounded_rectangle(
-            [x0 - grow, y0 - grow, x1 + grow, y1 + grow], radius=(y1 - y0) / 2 + grow, fill=255)
-        return np.asarray(m.filter(ImageFilter.GaussianBlur(2))).astype(float)[..., None] / 255
-
-    # 옮기는 찾았어요 버튼 자리 — 버튼 바로 아래 배경을 위아래로 비춘다
-    seam = by1 + 4
-    ys_ = np.arange(H0)
-    src_y = np.clip(2 * seam - ys_, 0, H0 - 1)
-    mirror_v = orig[src_y]
-    m1 = pill_mask(bx0, by0, bx1, by1, 5)
-    # 예전 "다른 물건" (오른쪽 아래, x 635~880, y 1682~1757) — 왼쪽 배경을 좌우로 비춘다
-    ox0 = 628
-    src_x = np.clip(2 * ox0 - np.arange(W0), 0, W0 - 1)
-    mirror_h = orig[:, src_x]
-    m2 = pill_mask(636, 1682, 878, 1757, 6)
-    a = (a * (1 - m1) + mirror_v * m1).astype(np.uint8)
-    a = (a * (1 - m2) + mirror_h * m2).astype(np.uint8)
-
+    # 사진은 원본 그대로 둔다. 버튼을 옮기거나 지우고 빈 자리를 배경으로 메우면
+    # 바닥이 우글우글하게 늘어나 보인다. 버튼은 제자리에서 색만 바꾸고,
+    # "다른 물건" 도 찍힌 자리(오른쪽 아래)에 그대로 둔다.
     img = Image.fromarray(a)
     d = ImageDraw.Draw(img, "RGBA")
-
-    # ── 지금 배치: 아래에서부터 [다른 물건] 12dp 위 → [찾았어요] 16dp 위 → [이거 아니에요]
     W = img.width
-    pill_h = int(44 * DP)
-    pill_bottom = BOTTOM - int(12 * DP)
-    pill_top = pill_bottom - pill_h
-    f_other = ImageFont.truetype(FONT_SB, int(16 * DP * 0.95))
-    tw = d.textlength("Other items", font=f_other)
-    pill_w = int(tw + 2 * 20 * DP + 8 * DP)    # paddingStart/End 20dp + 배경 padding
-    px0 = (W - pill_w) // 2
-    d.rounded_rectangle([px0, pill_top, px0 + pill_w, pill_bottom], radius=int(22 * DP),
-                        fill=(0, 0, 0, 136), outline=(255, 255, 255, 170), width=int(2 * DP))
-    d.text((W / 2, (pill_top + pill_bottom) / 2), "Other items", font=f_other,
-           fill=(255, 255, 255, 255), anchor="mm")
-
-    found_bottom = pill_top - int(16 * DP)
-    found_top = found_bottom - button.height
-    img.paste(button, (bx0, found_top), bmask)
-
+    # 지금 버전에 있는 "이거 아니에요" 만 버튼 위에 글자로 얹는다 (배경은 건드리지 않는다)
     f_not = ImageFont.truetype(FONT_SB, int(15 * DP * 0.95))
-    not_cy = found_top - int(2 * DP) - int(24 * DP)
-    d.text((W / 2, not_cy), "Not this one", font=f_not, fill=(255, 255, 255, 216), anchor="mm")
+    d.text((W / 2, by0 - int(2 * DP) - int(20 * DP)), "Not this one", font=f_not,
+           fill=(255, 255, 255, 216), anchor="mm")
 
     return img.crop((0, TOP, W, BOTTOM))
 
