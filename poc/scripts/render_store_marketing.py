@@ -71,14 +71,18 @@ def phone(scr: Image.Image, height: int) -> Image.Image:
 
 def place(canvas: Image.Image, ph: Image.Image, cx: int, cy: int, angle: float):
     rot = ph.rotate(angle, resample=Image.BICUBIC, expand=True)
-    # 그림자 — 아래로 조금 내려 흐리게
-    shadow = Image.new("RGBA", rot.size, (0, 0, 0, 0))
-    shadow.putalpha(rot.split()[3].point(lambda a: int(a * 0.55)))
-    shadow = shadow.filter(ImageFilter.GaussianBlur(40 * SS))
+    # 그림자 — 아래로 조금 내려 흐리게. 흐림이 잘려 네모 자국이 남지 않게 여백을 두고 흐린다.
+    pad = 160 * SS
+    shadow = Image.new("RGBA", (rot.width + 2 * pad, rot.height + 2 * pad), (0, 0, 0, 0))
+    a = Image.new("L", shadow.size, 0)
+    a.paste(rot.split()[3].point(lambda v: int(v * 0.55)), (pad, pad))
+    shadow.putalpha(a.filter(ImageFilter.GaussianBlur(40 * SS)))
     x = cx - rot.width // 2
     y = cy - rot.height // 2
-    canvas.alpha_composite(shadow, (x + 10 * SS, y + 40 * SS))
-    canvas.alpha_composite(rot, (x, y))
+    # 캔버스 밖으로 나가는 부분은 잘라서 붙인다 (alpha_composite 는 음수 좌표를 못 받는다)
+    for layer, (lx, ly) in ((shadow, (x - pad + 10 * SS, y - pad + 40 * SS)), (rot, (x, y))):
+        l0, t0 = max(0, -lx), max(0, -ly)
+        canvas.alpha_composite(layer.crop((l0, t0, layer.width, layer.height)), (lx + l0, ly + t0))
 
 
 def star(d, cx, cy, r, points, inner, fill):
