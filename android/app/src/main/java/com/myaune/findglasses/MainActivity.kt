@@ -299,6 +299,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         v.spLanguage.setSelection(currentIndex)
 
         bindSupportCard(v)
+        v.versionLabel.text = "${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})"
 
         v.btnPrivacyPolicy.setOnClickListener {
             startActivity(Intent(Intent.ACTION_VIEW, android.net.Uri.parse(PRIVACY_POLICY_URL)))
