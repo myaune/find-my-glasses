@@ -27,10 +27,10 @@ plugins {
     id("org.jetbrains.kotlin.android")
 }
 
-// 출시 파일 이름에 버전을 넣는다 (예: FindMyGlasses-1.0.5-vc7-release.aab). 덮어쓰지 않게.
+// 출시 파일 이름에 버전을 넣는다 (예: FindMyGlasses-1.0.6-vc8-release.aab). 덮어쓰지 않게.
 // versionCode / versionName 을 올리면 여기도 같이 바꾼다.
 base {
-    archivesName.set("FindMyGlasses-1.0.5-vc7")
+    archivesName.set("FindMyGlasses-1.0.6-vc8")
 }
 
 android {
@@ -42,8 +42,8 @@ android {
         minSdk = 26
         // 2026-08-31 부터 새 앱은 API 36 이상을 타깃해야 Play 에 올라간다
         targetSdk = 36
-        versionCode = 7
-        versionName = "1.0.5"
+        versionCode = 8
+        versionName = "1.0.6"
 
         // 어느 빌드를 설치했는지 화면에서 확인할 수 있게 시각을 박는다.
         // "빌드가 된 거 맞아?" 를 눌러보고 알 수 있어야 한다.
@@ -143,14 +143,16 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.4")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1")
 
-    val camerax = "1.3.4"
+    val camerax = "1.4.2"
     implementation("androidx.camera:camera-core:$camerax")
     implementation("androidx.camera:camera-camera2:$camerax")
     implementation("androidx.camera:camera-lifecycle:$camerax")
     implementation("androidx.camera:camera-view:$camerax")
 
-    // ONNX Runtime — NNAPI 실행 프로바이더 포함 빌드
-    implementation("com.microsoft.onnxruntime:onnxruntime-android:1.19.2")
+    // ONNX Runtime — NNAPI 실행 프로바이더 포함 빌드.
+    // 16KB 페이지 지원: 1.22.0 부터 libonnxruntime.so 와 libonnxruntime4j_jni.so 가 둘 다 16KB 정렬이다
+    // (1.20·1.21 은 JNI 쪽이 4KB). CameraX 도 같은 이유로 1.4.x 이상이어야 한다.
+    implementation("com.microsoft.onnxruntime:onnxruntime-android:1.22.0")
 
     // 광고 (기획서 14절). 실제 ID 는 local.properties — 위 설명 참고.
     implementation("com.google.android.gms:play-services-ads:23.3.0")
