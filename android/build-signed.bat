@@ -1,5 +1,6 @@
 @echo off
 rem Signed release build (AAB) for Play Console upload.
+rem No clean step: it used to wipe app/build, including test APKs built just before.
 rem Gradle opens the signing file only when FINDGLASSES_SIGNING_FILE is set (only here).
 rem The signing file and the full log stay in D:\AppCompany\keys (outside the repo).
 
@@ -19,7 +20,7 @@ if not exist "%FINDGLASSES_SIGNING_FILE%" (
 )
 
 cd /d "%~dp0"
-call .\gradlew.bat :app:clean :app:bundleRelease --console=plain > "%KEYS%\build-signed.log" 2>&1
+call .\gradlew.bat :app:bundleRelease --console=plain > "%KEYS%\build-signed.log" 2>&1
 set EXITCODE=%ERRORLEVEL%
 
 if "%EXITCODE%"=="0" (
