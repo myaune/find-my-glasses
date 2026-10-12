@@ -27,10 +27,10 @@ plugins {
     id("org.jetbrains.kotlin.android")
 }
 
-// 출시 파일 이름에 버전을 넣는다 (예: FindMyGlasses-1.0.6-vc8-release.aab). 덮어쓰지 않게.
+// 출시 파일 이름에 버전을 넣는다 (예: FindMyGlasses-1.0.7-vc9-release.aab). 덮어쓰지 않게.
 // versionCode / versionName 을 올리면 여기도 같이 바꾼다.
 base {
-    archivesName.set("FindMyGlasses-1.0.6-vc8")
+    archivesName.set("FindMyGlasses-1.0.7-vc9")
 }
 
 android {
@@ -42,8 +42,8 @@ android {
         minSdk = 26
         // 2026-08-31 부터 새 앱은 API 36 이상을 타깃해야 Play 에 올라간다
         targetSdk = 36
-        versionCode = 8
-        versionName = "1.0.6"
+        versionCode = 9
+        versionName = "1.0.7"
 
         // 어느 빌드를 설치했는지 화면에서 확인할 수 있게 시각을 박는다.
         // "빌드가 된 거 맞아?" 를 눌러보고 알 수 있어야 한다.
@@ -92,7 +92,11 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            // R8 로 코드를 줄이고 이름을 바꾼다 (Play Console 의 DEX 최적화 기준).
+            // 지켜야 하는 이름은 proguard-rules.pro 에 있다.
+            isMinifyEnabled = true
+            isShrinkResources = true
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
             if (signingFile != null) {
                 signingConfig = signingConfigs.getByName("release")
             }
@@ -105,6 +109,19 @@ android {
                 "\"${localProps.getProperty("admob.bannerId") ?: AdmobTest.BANNER}\"")
             buildConfigField("String", "ADMOB_INTERSTITIAL",
                 "\"${localProps.getProperty("admob.interstitialId") ?: AdmobTest.INTERSTITIAL}\"")
+        }
+        /**
+         * 출시 빌드와 똑같이 R8 을 거치되, 디버그 키로 서명하고 테스트 광고를 쓰는 확인용 빌드.
+         * 난독화 때문에 실행 중에 깨지는 게 없는지 폰에 깔아 볼 때 쓴다.
+         *   gradlew :app:assembleMinified
+         */
+        create("minified") {
+            initWith(getByName("release"))
+            signingConfig = signingConfigs.getByName("debug")
+            matchingFallbacks += listOf("release")
+            manifestPlaceholders["admobAppId"] = AdmobTest.APP
+            buildConfigField("String", "ADMOB_BANNER", "\"${AdmobTest.BANNER}\"")
+            buildConfigField("String", "ADMOB_INTERSTITIAL", "\"${AdmobTest.INTERSTITIAL}\"")
         }
         debug {
             isMinifyEnabled = false
