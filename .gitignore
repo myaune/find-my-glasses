@@ -70,3 +70,4 @@ xcuserdata/
 
 # 출시 파일 모음 (android/build-signed.bat 이 복사)
 android/releases/
+android/test-builds/
